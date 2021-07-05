@@ -10,7 +10,39 @@ services:
             - 01_mern_data_container:/data/db
         networks:
             - service_bridge    
+        profiles: ["backend"]            
 
+    backend:
+        build: ./server
+        environment:
+            PORT: 3000
+            MONGO_URI: mongodb://user:userpassword@mongodb:27017/myFirstDatabase?retryWrites=true&w=majority            
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://0.0.0.0:3000/ping"]
+            interval: 10s
+            timeout: 5s
+            retries: 5     
+            start_period: 5s 
+        ports:
+            - 3000:3000
+        networks:
+            - service_bridge
+        depends_on:
+            - mongodb                                      
+        profiles: ["backend"]            
+
+    frontend:
+        build: ./client
+        environment:
+            PORT: 3001
+        ports:
+            - 3001:3001            
+        networks:
+            - service_bridge    
+        depends_on:
+            - backend                                   
+        profiles: ["frontend"]            
+    
     # client:
     #     image: "ubuntu:21.04"
     #     command: [ "/bin/sh", "-c", "sleep infinity" ]  
