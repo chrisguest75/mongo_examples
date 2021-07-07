@@ -10,7 +10,7 @@ services:
             - 01_mern_data_container:/data/db
         networks:
             - service_bridge    
-        profiles: ["backend"]            
+        profiles: [backend]            
 
     backend:
         build: ./server
@@ -29,19 +29,19 @@ services:
             - service_bridge
         depends_on:
             - mongodb                                      
-        profiles: ["backend"]            
+        profiles: [backend]            
 
-    frontend:
-        build: ./client
-        environment:
-            PORT: 3001
-        ports:
-            - 3001:3001            
-        networks:
-            - service_bridge    
-        depends_on:
-            - backend                                   
-        profiles: ["frontend"]            
+    # frontend:
+    #     build: ./client
+    #     environment:
+    #         PORT: 3001
+    #     ports:
+    #         - 3001:3001            
+    #     networks:
+    #         - service_bridge    
+    #     depends_on:
+    #         - backend                                   
+    #     profiles: [frontend]            
     
     # client:
     #     image: "ubuntu:21.04"

@@ -3,8 +3,10 @@ Demonstrate an example of using MERN stack
 
 TODO:
 * Create the user and db - create a basic init container example in docker compose.
+* Compose profiles don't work
+* React image is not working 
 
-
+## docker compose app
 ```sh
 # start mongo (profiles not working at the mo')
 docker compose --profile backend up -d 
@@ -15,6 +17,10 @@ Open a `1st terminal`
 ```sh
 # start mongo
 docker compose up -d 
+
+curl http://0.0.0.0:3000/ping 
+docker logs $(docker ps --filter name=01_mern_mongodb_1 -q)
+docker logs $(docker ps --filter name=01_mern_backend_1 -q) 
 ```
 
 ```sh
@@ -62,3 +68,10 @@ docker volume rm 01_mern_01_mern_data_container
 * mern-stack-tutorial [here](https://blog.logrocket.com/mern-stack-tutorial/)  
 * official mern-stack-tutorial [here](https://www.mongodb.com/languages/mern-stack-tutorial) 
 * connection strings [here[(https://docs.mongodb.com/manual/reference/connection-string/)  
+
+--volumes
+https://docs.docker.com/engine/reference/commandline/compose_down/
+
+--scale
+https://docs.docker.com/engine/reference/commandline/compose_up/
+
