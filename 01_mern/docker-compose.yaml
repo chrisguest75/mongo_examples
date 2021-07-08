@@ -4,10 +4,12 @@ services:
         environment:
             MONGO_INITDB_ROOT_USERNAME: root
             MONGO_INITDB_ROOT_PASSWORD: rootpassword
+            MONGO_INITDB_DATABASE: mernExample
         ports:
             - 27017:27017
         volumes:
             - 01_mern_data_container:/data/db
+            - ./mongo/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
         networks:
             - service_bridge    
         profiles: [backend]            
@@ -16,7 +18,8 @@ services:
         build: ./server
         environment:
             PORT: 3000
-            MONGO_URI: mongodb://user:userpassword@mongodb:27017/myFirstDatabase?retryWrites=true&w=majority            
+            MONGO_URI: mongodb://user:userpassword@mongodb:27017/mernExample?retryWrites=true&w=majority            
+            MONGO_DB_NAME: mernExample
         healthcheck:
             test: ["CMD", "curl", "-f", "http://0.0.0.0:3000/ping"]
             interval: 10s
@@ -31,17 +34,17 @@ services:
             - mongodb                                      
         profiles: [backend]            
 
-    # frontend:
-    #     build: ./client
-    #     environment:
-    #         PORT: 3001
-    #     ports:
-    #         - 3001:3001            
-    #     networks:
-    #         - service_bridge    
-    #     depends_on:
-    #         - backend                                   
-    #     profiles: [frontend]            
+    frontend:
+        build: ./client
+        environment:
+            PORT: 3001
+        ports:
+            - 3001:3001            
+        networks:
+            - service_bridge    
+        depends_on:
+            - backend                                   
+        profiles: [frontend]            
     
     # client:
     #     image: "ubuntu:21.04"

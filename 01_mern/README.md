@@ -3,16 +3,36 @@ Demonstrate an example of using MERN stack
 
 TODO:
 * Create the user and db - create a basic init container example in docker compose.
-* Compose profiles don't work
 * React image is not working 
+* Make the ping endppoint check connectivity
 
-## docker compose app
+## Docker Compose App
 ```sh
 # start mongo (profiles not working at the mo')
 docker compose --profile backend up -d 
+
+# use the old command for profiles support.  
+docker-compose --profile backend up -d 
+
+# quick test
+curl http://0.0.0.0:3000/ping 
+docker logs $(docker ps --filter name=01_mern_mongodb_1 -q)
+docker logs $(docker ps --filter name=01_mern_backend_1 -q) 
 ```
 
-## Usage
+### Cleanup
+```sh
+# bring it down and delete the volume
+docker-compose --profile backend down --volumes
+```
+
+### Rebuild backend and run
+```sh
+# if changes are made to backend rerun
+docker-compose --profile backend up -d --build
+```
+
+## Creating
 Open a `1st terminal`
 ```sh
 # start mongo
@@ -28,16 +48,6 @@ docker exec -it $(docker ps --filter name=01_mern_mongodb_1 -q) /bin/bash
 mongo -u root -p rootpassword
 ```
 
-```js
-use myFirstDatabase
-db.createUser(
-  {
-    user: "user",
-    pwd: "userpassword",
-    roles: [ { role: "readWrite", db: "myFirstDatabase" } ]
-  }
-)
-```
 
 Open a `2nd terminal`
 ```sh
