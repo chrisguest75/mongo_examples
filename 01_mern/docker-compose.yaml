@@ -37,22 +37,14 @@ services:
     frontend:
         build: ./client
         environment:
-            PORT: 3001
+            PORT: 8080
         ports:
-            - 3001:3001            
+            - 8080:80            
         networks:
             - service_bridge    
         depends_on:
             - backend                                   
         profiles: [frontend]            
-    
-    # client:
-    #     image: "ubuntu:21.04"
-    #     command: [ "/bin/sh", "-c", "sleep infinity" ]  
-    #     networks:
-    #         - service_bridge            
-    #     volumes:
-    #         - ./scans:/scans
     
 volumes:
     01_mern_data_container:

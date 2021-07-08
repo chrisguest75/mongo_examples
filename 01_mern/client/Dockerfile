@@ -1,4 +1,4 @@
-FROM node:14.17.1 as prod
+FROM node:14.17.1 as build
 
 ARG USERID=1001
 ARG GROUPID=1001
@@ -10,10 +10,9 @@ COPY package.json package-lock.json ./
 COPY public public
 COPY src src 
 
-RUN npm ci --only=production && npm cache clean --force
-USER nodeuser
-ENV PORT 3001
-ENV NODE_ENV production
-EXPOSE 3001 
-CMD [ "npm", "start" ]
+RUN npm install
+RUN npm run build
+
+FROM nginx:1.21.0 as prod
+COPY --from=build /scratch/build /usr/share/nginx/html
 
