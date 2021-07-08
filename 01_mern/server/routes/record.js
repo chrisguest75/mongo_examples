@@ -8,6 +8,26 @@ const recordRoutes = express.Router();
 //This will help us connect to the database
 const dbo = require("../db/conn");
 
+recordRoutes.route("/ping").get(function (req, res) {
+  res.statusCode = 200
+  found = false
+  if (req.headers["accept"] != undefined) {
+    accept = req.headers["accept"].split(",")
+    for (accepttype in accept) {
+      if (accept[accepttype] == "application/json") {
+        res.setHeader("Content-Type", "application/json");
+        res.json({ message: 'pong' })
+        found = true
+        break
+      }
+    }
+  }
+  if (found == false) {
+    res.setHeader("Content-Type", "text/html");
+    res.send("pong")
+  }
+});
+
 // This section will help you get a list of all the records.
 recordRoutes.route("/record").get(function (req, res) {
   let db_connect = dbo.getDb("employees");
