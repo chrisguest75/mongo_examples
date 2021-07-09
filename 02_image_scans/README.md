@@ -1,6 +1,12 @@
 # README
 Demonstrate an example of using mongodb to store image scans 
 
+TODO:
+* dataload the scans into mongo
+    * create a container that just does a dataload and exits.
+* write a basic api to pull results. 
+* create a frontend to render the results.  
+
 ## Docker Compose App
 ```sh
 # list profiles

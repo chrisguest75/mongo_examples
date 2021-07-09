@@ -1,0 +1,2607 @@
+{
+  "vulnerabilities": [
+    {
+      "title": "Integer Overflow or Wraparound",
+      "credit": [
+        ""
+      ],
+      "packageName": "apt",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `apt` package. </i>\n<i> See `Remediation` section below for `Ubuntu:20.04` relevant versions. </i>\n\nAPT had several integer overflows and underflows while parsing .deb packages, aka GHSL-2020-168 GHSL-2020-169, in files apt-pkg/contrib/extracttar.cc, apt-pkg/deb/debfile.cc, and apt-pkg/contrib/arfile.cc. This issue affects: apt 1.2.32ubuntu0 versions prior to 1.2.32ubuntu0.2; 1.6.12ubuntu0 versions prior to 1.6.12ubuntu0.2; 2.0.2ubuntu0 versions prior to 2.0.2ubuntu0.2; 2.1.10ubuntu0 versions prior to 2.1.10ubuntu0.1;\n## Remediation\nUpgrade `Ubuntu:20.04` `apt` to version 2.0.2ubuntu0.2 or higher.\n## References\n- [ADVISORY](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2020-27350)\n- [CONFIRM](https://bugs.launchpad.net/bugs/1899193)\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20210108-0005/)\n- [DEBIAN](https://www.debian.org/security/2020/dsa-4808)\n- [UBUNTU](https://usn.ubuntu.com/usn/usn-4667-1)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2020-27350"
+        ],
+        "CWE": [
+          "CWE-190"
+        ]
+      },
+      "severity": "medium",
+      "severityWithCritical": "medium",
+      "socialTrendAlert": false,
+      "cvssScore": 5.7,
+      "CVSSv3": "CVSS:3.1/AV:L/AC:L/PR:H/UI:N/S:C/C:L/I:L/A:L",
+      "patches": [],
+      "references": [
+        {
+          "title": "ADVISORY",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2020-27350"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://bugs.launchpad.net/bugs/1899193"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20210108-0005/"
+        },
+        {
+          "title": "DEBIAN",
+          "url": "https://www.debian.org/security/2020/dsa-4808"
+        },
+        {
+          "title": "UBUNTU",
+          "url": "https://usn.ubuntu.com/usn/usn-4667-1"
+        }
+      ],
+      "creationTime": "2020-12-10T03:30:24.759593Z",
+      "modificationTime": "2021-06-05T03:32:19.127646Z",
+      "publicationTime": "2020-12-10T03:30:24.766962Z",
+      "disclosureTime": "2020-12-10T04:15:00Z",
+      "id": "SNYK-UBUNTU2004-APT-1050038",
+      "nvdSeverity": "medium",
+      "relativeImportance": "medium",
+      "semver": {
+        "vulnerable": [
+          "<2.0.2ubuntu0.2"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "apt@2.0.2ubuntu0.1"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "apt@2.0.2ubuntu0.1",
+          "apt/libapt-pkg6.0@2.0.2ubuntu0.1"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "apt/libapt-pkg6.0@2.0.2ubuntu0.1"
+        ]
+      ],
+      "upgradePath": [
+        false,
+        "apt@2.0.2ubuntu0.2"
+      ],
+      "isUpgradable": true,
+      "isPatchable": false,
+      "name": [
+        "apt",
+        "apt/libapt-pkg6.0",
+        "apt/libapt-pkg6.0"
+      ],
+      "version": "2.0.2ubuntu0.1",
+      "nearestFixedInVersion": "2.0.2ubuntu0.2"
+    },
+    {
+      "title": "Improper Check for Dropped Privileges",
+      "credit": [
+        ""
+      ],
+      "packageName": "bash",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `bash` package. </i>\n\nAn issue was discovered in disable_priv_mode in shell.c in GNU Bash through 5.0 patch 11. By default, if Bash is run with its effective UID not equal to its real UID, it will drop privileges by setting its effective UID to its real UID. However, it does so incorrectly. On Linux and other systems that support &#34;saved UID&#34; functionality, the saved UID is not dropped. An attacker with command execution in the shell can use &#34;enable -f&#34; for runtime loading of a new builtin, which can be a shared object that calls setuid() and therefore regains privileges. However, binaries running with an effective UID of 0 are unaffected.\n## Remediation\nThere is no fixed version for `Ubuntu:20.04` `bash`.\n## References\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20200430-0003/)\n- [Debian Security Tracker](https://security-tracker.debian.org/tracker/CVE-2019-18276)\n- [GENTOO](https://security.gentoo.org/glsa/202105-34)\n- [GitHub Commit](https://github.com/bminor/bash/commit/951bdaad7a18cc0dc1036bba86b18b90874d39ff)\n- [MISC](http://packetstormsecurity.com/files/155498/Bash-5.0-Patch-11-Privilege-Escalation.html)\n- [MISC](https://www.youtube.com/watch?v=-wGtxJ8opa8)\n- [MLIST](https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772@%3Cdev.mina.apache.org%3E)\n- [Ubuntu CVE Tracker](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2019-18276)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2019-18276"
+        ],
+        "CWE": [
+          "CWE-273"
+        ]
+      },
+      "severity": "low",
+      "severityWithCritical": "low",
+      "socialTrendAlert": false,
+      "cvssScore": 7.8,
+      "CVSSv3": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H/E:F",
+      "patches": [],
+      "references": [
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20200430-0003/"
+        },
+        {
+          "title": "Debian Security Tracker",
+          "url": "https://security-tracker.debian.org/tracker/CVE-2019-18276"
+        },
+        {
+          "title": "GENTOO",
+          "url": "https://security.gentoo.org/glsa/202105-34"
+        },
+        {
+          "title": "GitHub Commit",
+          "url": "https://github.com/bminor/bash/commit/951bdaad7a18cc0dc1036bba86b18b90874d39ff"
+        },
+        {
+          "title": "MISC",
+          "url": "http://packetstormsecurity.com/files/155498/Bash-5.0-Patch-11-Privilege-Escalation.html"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.youtube.com/watch?v=-wGtxJ8opa8"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772@%3Cdev.mina.apache.org%3E"
+        },
+        {
+          "title": "Ubuntu CVE Tracker",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2019-18276"
+        }
+      ],
+      "creationTime": "2020-09-10T10:04:12.367829Z",
+      "modificationTime": "2021-05-25T15:38:44.534981Z",
+      "publicationTime": "2019-11-28T21:36:14.482365Z",
+      "disclosureTime": "2019-11-28T01:15:00Z",
+      "id": "SNYK-UBUNTU2004-BASH-581100",
+      "nvdSeverity": "high",
+      "relativeImportance": "low",
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "exploit": "Functional",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "bash@5.0-6ubuntu1.1"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "bash"
+      ],
+      "version": "5.0-6ubuntu1.1"
+    },
+    {
+      "title": "Improper Input Validation",
+      "credit": [
+        ""
+      ],
+      "packageName": "coreutils",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `coreutils` package. </i>\n\nchroot in GNU coreutils, when used with --userspec, allows local users to escape to the parent session via a crafted TIOCSTI ioctl call, which pushes characters to the terminal&#39;s input buffer.\n## Remediation\nThere is no fixed version for `Ubuntu:20.04` `coreutils`.\n## References\n- [Debian Security Tracker](https://security-tracker.debian.org/tracker/CVE-2016-2781)\n- [MLIST](https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772@%3Cdev.mina.apache.org%3E)\n- [OSS security Advisory](http://www.openwall.com/lists/oss-security/2016/02/28/2)\n- [OSS security Advisory](http://www.openwall.com/lists/oss-security/2016/02/28/3)\n- [Ubuntu CVE Tracker](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2016-2781)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2016-2781"
+        ],
+        "CWE": [
+          "CWE-20"
+        ]
+      },
+      "severity": "low",
+      "severityWithCritical": "low",
+      "socialTrendAlert": false,
+      "cvssScore": 6.5,
+      "CVSSv3": "CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:C/C:N/I:H/A:N",
+      "patches": [],
+      "references": [
+        {
+          "title": "Debian Security Tracker",
+          "url": "https://security-tracker.debian.org/tracker/CVE-2016-2781"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772@%3Cdev.mina.apache.org%3E"
+        },
+        {
+          "title": "OSS security Advisory",
+          "url": "http://www.openwall.com/lists/oss-security/2016/02/28/2"
+        },
+        {
+          "title": "OSS security Advisory",
+          "url": "http://www.openwall.com/lists/oss-security/2016/02/28/3"
+        },
+        {
+          "title": "Ubuntu CVE Tracker",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2016-2781"
+        }
+      ],
+      "creationTime": "2020-09-10T09:58:46.780840Z",
+      "modificationTime": "2021-05-25T15:45:28.624196Z",
+      "publicationTime": "2017-02-07T15:59:00Z",
+      "disclosureTime": "2017-02-07T15:59:00Z",
+      "id": "SNYK-UBUNTU2004-COREUTILS-583876",
+      "nvdSeverity": "medium",
+      "relativeImportance": "low",
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "coreutils@8.30-3ubuntu2"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "coreutils"
+      ],
+      "version": "8.30-3ubuntu2"
+    },
+    {
+      "title": "Reachable Assertion",
+      "credit": [
+        ""
+      ],
+      "packageName": "glibc",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `glibc` package. </i>\n\nThe iconv function in the GNU C Library (aka glibc or libc6) 2.30 to 2.32, when converting UCS4 text containing an irreversible character, fails an assertion in the code path and aborts the program, potentially resulting in a denial of service.\n## Remediation\nThere is no fixed version for `Ubuntu:20.04` `glibc`.\n## References\n- [ADVISORY](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2020-29562)\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20210122-0004/)\n- [FEDORA](https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/TVCUNLQ3HXGS4VPUQKWTJGRAW2KTFGXS/)\n- [GENTOO](https://security.gentoo.org/glsa/202101-20)\n- [MISC](https://sourceware.org/bugzilla/show_bug.cgi?id=26923)\n- [MLIST](https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772@%3Cdev.mina.apache.org%3E)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2020-29562"
+        ],
+        "CWE": [
+          "CWE-617"
+        ]
+      },
+      "severity": "low",
+      "severityWithCritical": "low",
+      "socialTrendAlert": false,
+      "cvssScore": 4.8,
+      "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:N/I:N/A:H",
+      "patches": [],
+      "references": [
+        {
+          "title": "ADVISORY",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2020-29562"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20210122-0004/"
+        },
+        {
+          "title": "FEDORA",
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/TVCUNLQ3HXGS4VPUQKWTJGRAW2KTFGXS/"
+        },
+        {
+          "title": "GENTOO",
+          "url": "https://security.gentoo.org/glsa/202101-20"
+        },
+        {
+          "title": "MISC",
+          "url": "https://sourceware.org/bugzilla/show_bug.cgi?id=26923"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772@%3Cdev.mina.apache.org%3E"
+        }
+      ],
+      "creationTime": "2020-12-05T03:30:04.218824Z",
+      "modificationTime": "2021-05-09T12:30:27.173616Z",
+      "publicationTime": "2020-12-05T03:30:04.223598Z",
+      "disclosureTime": "2020-12-04T07:15:00Z",
+      "id": "SNYK-UBUNTU2004-GLIBC-1048386",
+      "nvdSeverity": "medium",
+      "relativeImportance": "low",
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "meta-common-packages@meta",
+          "glibc/libc6@2.31-0ubuntu9.1"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "glibc/libc-bin@2.31-0ubuntu9.1"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "glibc/libc6",
+        "glibc/libc-bin"
+      ],
+      "version": "2.31-0ubuntu9.1"
+    },
+    {
+      "title": "Loop with Unreachable Exit Condition ('Infinite Loop')",
+      "credit": [
+        ""
+      ],
+      "packageName": "glibc",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `glibc` package. </i>\n\nThe iconv function in the GNU C Library (aka glibc or libc6) 2.32 and earlier, when processing invalid multi-byte input sequences in IBM1364, IBM1371, IBM1388, IBM1390, and IBM1399 encodings, fails to advance the input state, which could lead to an infinite loop in applications, resulting in a denial of service, a different vulnerability from CVE-2016-10228.\n## Remediation\nThere is no fixed version for `Ubuntu:20.04` `glibc`.\n## References\n- [ADVISORY](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2020-27618)\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20210401-0006/)\n- [MISC](https://sourceware.org/bugzilla/show_bug.cgi?id=19519#c21)\n- [MISC](https://sourceware.org/bugzilla/show_bug.cgi?id=26224)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2020-27618"
+        ],
+        "CWE": [
+          "CWE-835"
+        ]
+      },
+      "severity": "low",
+      "severityWithCritical": "low",
+      "socialTrendAlert": false,
+      "cvssScore": 5.5,
+      "CVSSv3": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+      "patches": [],
+      "references": [
+        {
+          "title": "ADVISORY",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2020-27618"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20210401-0006/"
+        },
+        {
+          "title": "MISC",
+          "url": "https://sourceware.org/bugzilla/show_bug.cgi?id=19519%23c21"
+        },
+        {
+          "title": "MISC",
+          "url": "https://sourceware.org/bugzilla/show_bug.cgi?id=26224"
+        }
+      ],
+      "creationTime": "2021-01-06T03:30:08.365521Z",
+      "modificationTime": "2021-07-07T14:37:39.295557Z",
+      "publicationTime": "2021-01-06T03:30:08.369124Z",
+      "disclosureTime": "2021-02-26T23:15:00Z",
+      "id": "SNYK-UBUNTU2004-GLIBC-1055780",
+      "nvdSeverity": "medium",
+      "relativeImportance": "low",
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "meta-common-packages@meta",
+          "glibc/libc6@2.31-0ubuntu9.1"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "glibc/libc-bin@2.31-0ubuntu9.1"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "glibc/libc6",
+        "glibc/libc-bin"
+      ],
+      "version": "2.31-0ubuntu9.1"
+    },
+    {
+      "title": "Out-of-bounds Read",
+      "credit": [
+        ""
+      ],
+      "packageName": "glibc",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `glibc` package. </i>\n\nThe iconv feature in the GNU C Library (aka glibc or libc6) through 2.32, when processing invalid multi-byte input sequences in the EUC-KR encoding, may have a buffer over-read.\n## Remediation\nThere is no fixed version for `Ubuntu:20.04` `glibc`.\n## References\n- [ADVISORY](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2019-25013)\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20210205-0004/)\n- [FEDORA](https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/4Y6TX47P47KABSFOL26FLDNVCWXDKDEZ/)\n- [FEDORA](https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/TVCUNLQ3HXGS4VPUQKWTJGRAW2KTFGXS/)\n- [MISC](https://sourceware.org/bugzilla/show_bug.cgi?id=24973)\n- [MISC](https://sourceware.org/git/?p=glibc.git;a=commit;h=ee7a3144c9922808181009b7b3e50e852fb4999b)\n- [MLIST](https://lists.apache.org/thread.html/r32d767ac804e9b8aad4355bb85960a6a1385eab7afff549a5e98660f@%3Cjira.kafka.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/r448bb851cc8e6e3f93f3c28c70032b37062625d81214744474ac49e7@%3Cdev.kafka.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/r4806a391091e082bdea17266452ca656ebc176e51bb3932733b3a0a2@%3Cjira.kafka.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/r499e4f96d0b5109ef083f2feccd33c51650c1b7d7068aa3bd47efca9@%3Cjira.kafka.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/r5af4430421bb6f9973294691a7904bbd260937e9eef96b20556f43ff@%3Cjira.kafka.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/r750eee18542bc02bd8350861c424ee60a9b9b225568fa09436a37ece@%3Cissues.zookeeper.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/r7a2e94adfe0a2f0a1d42e4927e8c32ecac97d37db9cb68095fe9ddbc@%3Cdev.zookeeper.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/rd2354f9ccce41e494fbadcbc5ad87218de6ec0fff8a7b54c8462226c@%3Cissues.zookeeper.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772@%3Cdev.mina.apache.org%3E)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2019-25013"
+        ],
+        "CWE": [
+          "CWE-125"
+        ]
+      },
+      "severity": "low",
+      "severityWithCritical": "low",
+      "socialTrendAlert": false,
+      "cvssScore": 5.9,
+      "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "patches": [],
+      "references": [
+        {
+          "title": "ADVISORY",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2019-25013"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20210205-0004/"
+        },
+        {
+          "title": "FEDORA",
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/4Y6TX47P47KABSFOL26FLDNVCWXDKDEZ/"
+        },
+        {
+          "title": "FEDORA",
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/TVCUNLQ3HXGS4VPUQKWTJGRAW2KTFGXS/"
+        },
+        {
+          "title": "MISC",
+          "url": "https://sourceware.org/bugzilla/show_bug.cgi?id=24973"
+        },
+        {
+          "title": "MISC",
+          "url": "https://sourceware.org/git/?p=glibc.git%3Ba=commit%3Bh=ee7a3144c9922808181009b7b3e50e852fb4999b"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r32d767ac804e9b8aad4355bb85960a6a1385eab7afff549a5e98660f@%3Cjira.kafka.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r448bb851cc8e6e3f93f3c28c70032b37062625d81214744474ac49e7@%3Cdev.kafka.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r4806a391091e082bdea17266452ca656ebc176e51bb3932733b3a0a2@%3Cjira.kafka.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r499e4f96d0b5109ef083f2feccd33c51650c1b7d7068aa3bd47efca9@%3Cjira.kafka.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r5af4430421bb6f9973294691a7904bbd260937e9eef96b20556f43ff@%3Cjira.kafka.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r750eee18542bc02bd8350861c424ee60a9b9b225568fa09436a37ece@%3Cissues.zookeeper.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r7a2e94adfe0a2f0a1d42e4927e8c32ecac97d37db9cb68095fe9ddbc@%3Cdev.zookeeper.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rd2354f9ccce41e494fbadcbc5ad87218de6ec0fff8a7b54c8462226c@%3Cissues.zookeeper.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772@%3Cdev.mina.apache.org%3E"
+        }
+      ],
+      "creationTime": "2021-01-06T03:30:11.176985Z",
+      "modificationTime": "2021-05-25T15:38:41.229020Z",
+      "publicationTime": "2021-01-06T03:30:11.181511Z",
+      "disclosureTime": "2021-01-04T18:15:00Z",
+      "id": "SNYK-UBUNTU2004-GLIBC-1055790",
+      "nvdSeverity": "medium",
+      "relativeImportance": "low",
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "meta-common-packages@meta",
+          "glibc/libc6@2.31-0ubuntu9.1"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "glibc/libc-bin@2.31-0ubuntu9.1"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "glibc/libc6",
+        "glibc/libc-bin"
+      ],
+      "version": "2.31-0ubuntu9.1"
+    },
+    {
+      "title": "Reachable Assertion",
+      "credit": [
+        ""
+      ],
+      "packageName": "glibc",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `glibc` package. </i>\n\nThe iconv function in the GNU C Library (aka glibc or libc6) 2.32 and earlier, when processing invalid input sequences in the ISO-2022-JP-3 encoding, fails an assertion in the code path and aborts the program, potentially resulting in a denial of service.\n## Remediation\nThere is no fixed version for `Ubuntu:20.04` `glibc`.\n## References\n- [ADVISORY](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2021-3326)\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20210304-0007/)\n- [MISC](https://sourceware.org/bugzilla/show_bug.cgi?id=27256)\n- [MISC](https://sourceware.org/git/?p=glibc.git;a=commit;h=7d88c6142c6efc160c0ee5e4f85cde382c072888)\n- [MLIST](http://www.openwall.com/lists/oss-security/2021/01/28/2)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2021-3326"
+        ],
+        "CWE": [
+          "CWE-617"
+        ]
+      },
+      "severity": "low",
+      "severityWithCritical": "low",
+      "socialTrendAlert": false,
+      "cvssScore": 7.5,
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "patches": [],
+      "references": [
+        {
+          "title": "ADVISORY",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2021-3326"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20210304-0007/"
+        },
+        {
+          "title": "MISC",
+          "url": "https://sourceware.org/bugzilla/show_bug.cgi?id=27256"
+        },
+        {
+          "title": "MISC",
+          "url": "https://sourceware.org/git/?p=glibc.git%3Ba=commit%3Bh=7d88c6142c6efc160c0ee5e4f85cde382c072888"
+        },
+        {
+          "title": "MLIST",
+          "url": "http://www.openwall.com/lists/oss-security/2021/01/28/2"
+        }
+      ],
+      "creationTime": "2021-04-06T17:04:15.387008Z",
+      "modificationTime": "2021-07-02T14:35:04.129933Z",
+      "publicationTime": "2021-07-02T14:35:04.134000Z",
+      "disclosureTime": "2021-01-27T20:15:00Z",
+      "id": "SNYK-UBUNTU2004-GLIBC-1122573",
+      "nvdSeverity": "high",
+      "relativeImportance": "low",
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "meta-common-packages@meta",
+          "glibc/libc6@2.31-0ubuntu9.1"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "glibc/libc-bin@2.31-0ubuntu9.1"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "glibc/libc6",
+        "glibc/libc-bin"
+      ],
+      "version": "2.31-0ubuntu9.1"
+    },
+    {
+      "title": "Double Free",
+      "credit": [
+        ""
+      ],
+      "packageName": "glibc",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `glibc` package. </i>\n\nThe nameserver caching daemon (nscd) in the GNU C Library (aka glibc or libc6) 2.29 through 2.33, when processing a request for netgroup lookup, may crash due to a double-free, potentially resulting in degraded service or Denial of Service on the local system. This is related to netgroupcache.c.\n## Remediation\nThere is no fixed version for `Ubuntu:20.04` `glibc`.\n## References\n- [ADVISORY](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2021-27645)\n- [FEDORA](https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/7LZNT6KTMCCWPWXEOGSHD3YLYZKUGMH5/)\n- [FEDORA](https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/I7TS26LIZSOBLGJEZMJX4PXT5BQDE2WS/)\n- [MISC](https://sourceware.org/bugzilla/show_bug.cgi?id=27462)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2021-27645"
+        ],
+        "CWE": [
+          "CWE-415"
+        ]
+      },
+      "severity": "low",
+      "severityWithCritical": "low",
+      "socialTrendAlert": false,
+      "cvssScore": 2.5,
+      "CVSSv3": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:N/I:N/A:L",
+      "patches": [],
+      "references": [
+        {
+          "title": "ADVISORY",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2021-27645"
+        },
+        {
+          "title": "FEDORA",
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/7LZNT6KTMCCWPWXEOGSHD3YLYZKUGMH5/"
+        },
+        {
+          "title": "FEDORA",
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/I7TS26LIZSOBLGJEZMJX4PXT5BQDE2WS/"
+        },
+        {
+          "title": "MISC",
+          "url": "https://sourceware.org/bugzilla/show_bug.cgi?id=27462"
+        }
+      ],
+      "creationTime": "2021-04-06T17:05:24.113709Z",
+      "modificationTime": "2021-05-09T12:30:27.173616Z",
+      "publicationTime": "2021-05-06T03:31:09.174552Z",
+      "disclosureTime": "2021-02-24T15:15:00Z",
+      "id": "SNYK-UBUNTU2004-GLIBC-1123084",
+      "nvdSeverity": "low",
+      "relativeImportance": "low",
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "meta-common-packages@meta",
+          "glibc/libc6@2.31-0ubuntu9.1"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "glibc/libc-bin@2.31-0ubuntu9.1"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "glibc/libc6",
+        "glibc/libc-bin"
+      ],
+      "version": "2.31-0ubuntu9.1"
+    },
+    {
+      "title": "Improper Input Validation",
+      "credit": [
+        ""
+      ],
+      "packageName": "glibc",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `glibc` package. </i>\n\nThe iconv program in the GNU C Library (aka glibc or libc6) 2.31 and earlier, when invoked with multiple suffixes in the destination encoding (TRANSLATE or IGNORE) along with the -c option, enters an infinite loop when processing invalid multi-byte input sequences, leading to a denial of service.\n## Remediation\nThere is no fixed version for `Ubuntu:20.04` `glibc`.\n## References\n- [CONFIRM](https://sourceware.org/bugzilla/show_bug.cgi?id=19519#c21)\n- [CONFIRM](https://sourceware.org/bugzilla/show_bug.cgi?id=26224)\n- [Debian Security Tracker](https://security-tracker.debian.org/tracker/CVE-2016-10228)\n- [GENTOO](https://security.gentoo.org/glsa/202101-20)\n- [https://sourceware.org/bugzilla/show_bug.cgi?id=19519](https://sourceware.org/bugzilla/show_bug.cgi?id=19519)\n- [MLIST](https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772@%3Cdev.mina.apache.org%3E)\n- [OSS security Advisory](http://openwall.com/lists/oss-security/2017/03/01/10)\n- [Security Focus](http://www.securityfocus.com/bid/96525)\n- [Ubuntu CVE Tracker](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2016-10228)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2016-10228"
+        ],
+        "CWE": [
+          "CWE-20"
+        ]
+      },
+      "severity": "low",
+      "severityWithCritical": "low",
+      "socialTrendAlert": false,
+      "cvssScore": 5.9,
+      "CVSSv3": "CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "patches": [],
+      "references": [
+        {
+          "title": "CONFIRM",
+          "url": "https://sourceware.org/bugzilla/show_bug.cgi?id=19519%23c21"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://sourceware.org/bugzilla/show_bug.cgi?id=26224"
+        },
+        {
+          "title": "Debian Security Tracker",
+          "url": "https://security-tracker.debian.org/tracker/CVE-2016-10228"
+        },
+        {
+          "title": "GENTOO",
+          "url": "https://security.gentoo.org/glsa/202101-20"
+        },
+        {
+          "title": "https://sourceware.org/bugzilla/show_bug.cgi?id=19519",
+          "url": "https://sourceware.org/bugzilla/show_bug.cgi?id=19519"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772@%3Cdev.mina.apache.org%3E"
+        },
+        {
+          "title": "OSS security Advisory",
+          "url": "http://openwall.com/lists/oss-security/2017/03/01/10"
+        },
+        {
+          "title": "Security Focus",
+          "url": "http://www.securityfocus.com/bid/96525"
+        },
+        {
+          "title": "Ubuntu CVE Tracker",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2016-10228"
+        }
+      ],
+      "creationTime": "2020-09-10T09:59:06.544292Z",
+      "modificationTime": "2021-05-25T15:46:04.839231Z",
+      "publicationTime": "2017-03-02T01:59:00Z",
+      "disclosureTime": "2017-03-02T01:59:00Z",
+      "id": "SNYK-UBUNTU2004-GLIBC-576349",
+      "nvdSeverity": "medium",
+      "relativeImportance": "negligible",
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "meta-common-packages@meta",
+          "glibc/libc6@2.31-0ubuntu9.1"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "glibc/libc-bin@2.31-0ubuntu9.1"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "glibc/libc6",
+        "glibc/libc-bin"
+      ],
+      "version": "2.31-0ubuntu9.1"
+    },
+    {
+      "title": "Integer Underflow",
+      "credit": [
+        ""
+      ],
+      "packageName": "glibc",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `glibc` package. </i>\n\nAn exploitable signed comparison vulnerability exists in the ARMv7 memcpy() implementation of GNU glibc 2.30.9000. Calling memcpy() (on ARMv7 targets that utilize the GNU glibc implementation) with a negative value for the &#39;num&#39; parameter results in a signed comparison vulnerability. If an attacker underflows the &#39;num&#39; parameter to memcpy(), this vulnerability could lead to undefined behavior such as writing to out-of-bounds memory and potentially remote code execution. Furthermore, this memcpy() implementation allows for program execution to continue in scenarios where a segmentation fault or crash should have occurred. The dangers occur in that subsequent execution and iterations of this code will be executed with this corrupted data.\n## Remediation\nThere is no fixed version for `Ubuntu:20.04` `glibc`.\n## References\n- [ADVISORY](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2020-6096)\n- [Debian Security Tracker](https://security-tracker.debian.org/tracker/CVE-2020-6096)\n- [FEDORA](https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/SPYXTDOOB4PQGTYAMZAZNJIB3FF6YQXI/)\n- [FEDORA](https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/URXOIA2LDUKHQXK4BE55BQBRI6ZZG3Y6/)\n- [GENTOO](https://security.gentoo.org/glsa/202101-20)\n- [MISC](https://sourceware.org/bugzilla/show_bug.cgi?id=25620)\n- [MISC](https://www.talosintelligence.com/vulnerability_reports/TALOS-2020-1019)\n- [MLIST](https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772@%3Cdev.mina.apache.org%3E)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2020-6096"
+        ],
+        "CWE": [
+          "CWE-191"
+        ]
+      },
+      "severity": "low",
+      "severityWithCritical": "low",
+      "socialTrendAlert": false,
+      "cvssScore": 8.1,
+      "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "patches": [],
+      "references": [
+        {
+          "title": "ADVISORY",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2020-6096"
+        },
+        {
+          "title": "Debian Security Tracker",
+          "url": "https://security-tracker.debian.org/tracker/CVE-2020-6096"
+        },
+        {
+          "title": "FEDORA",
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/SPYXTDOOB4PQGTYAMZAZNJIB3FF6YQXI/"
+        },
+        {
+          "title": "FEDORA",
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/URXOIA2LDUKHQXK4BE55BQBRI6ZZG3Y6/"
+        },
+        {
+          "title": "GENTOO",
+          "url": "https://security.gentoo.org/glsa/202101-20"
+        },
+        {
+          "title": "MISC",
+          "url": "https://sourceware.org/bugzilla/show_bug.cgi?id=25620"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.talosintelligence.com/vulnerability_reports/TALOS-2020-1019"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772@%3Cdev.mina.apache.org%3E"
+        }
+      ],
+      "creationTime": "2020-09-10T10:04:22.946041Z",
+      "modificationTime": "2021-06-05T16:25:13.485067Z",
+      "publicationTime": "2020-04-02T10:24:04.497109Z",
+      "disclosureTime": "2020-04-01T22:15:00Z",
+      "id": "SNYK-UBUNTU2004-GLIBC-576428",
+      "nvdSeverity": "high",
+      "relativeImportance": "low",
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "meta-common-packages@meta",
+          "glibc/libc6@2.31-0ubuntu9.1"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "glibc/libc-bin@2.31-0ubuntu9.1"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "glibc/libc6",
+        "glibc/libc-bin"
+      ],
+      "version": "2.31-0ubuntu9.1"
+    },
+    {
+      "title": "Use After Free",
+      "credit": [
+        ""
+      ],
+      "packageName": "gnutls28",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `gnutls28` package. </i>\n\nA flaw was found in gnutls. A use after free issue in client sending key_share extension may lead to memory corruption and other consequences.\n## Remediation\nThere is no fixed version for `Ubuntu:20.04` `gnutls28`.\n## References\n- [ADVISORY](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2021-20231)\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20210416-0005/)\n- [FEDORA](https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/OSLAE6PP33A7VYRYMYMUVB3U6B26GZER/)\n- [MISC](https://bugzilla.redhat.com/show_bug.cgi?id=1922276)\n- [MISC](https://www.gnutls.org/security-new.html#GNUTLS-SA-2021-03-10)\n- [MLIST](https://lists.apache.org/thread.html/r50661d6f0082709aad9a584431b59ec364f9974b63b07e0800230168@%3Cissues.spark.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/r5d4001031e7790d8c6396c499522b4ed2aab782da87b1a14184793bb@%3Cissues.spark.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/r5f88bed447742fcc5c47bf1c7be965ef450131914a6e1f85feba2779@%3Cissues.spark.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/r6ac143ba6dd98bd4bf6bf010d46e56e254056459721ba18822d611f7@%3Cissues.spark.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/r9cbc69e57276413788e90a6ee16c7c034ea4258d31935b70db2bd158@%3Cissues.spark.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/rcd70a4c88a47a75fd2d5f3ffb7cee8c2a18c713320bd90fdcb57495f@%3Cissues.spark.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/rf5e1256d870193def4a82ad89ab95e63943a313b5ff0d81aa87e4532@%3Cissues.spark.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/rfd5273d72d244178441e6904a2f2b41a3268f569e8092ea0b3b2bb20@%3Cissues.spark.apache.org%3E)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2021-20231"
+        ],
+        "CWE": [
+          "CWE-416"
+        ]
+      },
+      "severity": "low",
+      "severityWithCritical": "low",
+      "socialTrendAlert": false,
+      "cvssScore": 9.8,
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "patches": [],
+      "references": [
+        {
+          "title": "ADVISORY",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2021-20231"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20210416-0005/"
+        },
+        {
+          "title": "FEDORA",
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/OSLAE6PP33A7VYRYMYMUVB3U6B26GZER/"
+        },
+        {
+          "title": "MISC",
+          "url": "https://bugzilla.redhat.com/show_bug.cgi?id=1922276"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.gnutls.org/security-new.html%23GNUTLS-SA-2021-03-10"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r50661d6f0082709aad9a584431b59ec364f9974b63b07e0800230168@%3Cissues.spark.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r5d4001031e7790d8c6396c499522b4ed2aab782da87b1a14184793bb@%3Cissues.spark.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r5f88bed447742fcc5c47bf1c7be965ef450131914a6e1f85feba2779@%3Cissues.spark.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r6ac143ba6dd98bd4bf6bf010d46e56e254056459721ba18822d611f7@%3Cissues.spark.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r9cbc69e57276413788e90a6ee16c7c034ea4258d31935b70db2bd158@%3Cissues.spark.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rcd70a4c88a47a75fd2d5f3ffb7cee8c2a18c713320bd90fdcb57495f@%3Cissues.spark.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rf5e1256d870193def4a82ad89ab95e63943a313b5ff0d81aa87e4532@%3Cissues.spark.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rfd5273d72d244178441e6904a2f2b41a3268f569e8092ea0b3b2bb20@%3Cissues.spark.apache.org%3E"
+        }
+      ],
+      "creationTime": "2021-03-13T03:30:12.361376Z",
+      "modificationTime": "2021-05-09T12:30:27.173616Z",
+      "publicationTime": "2021-03-13T03:30:12.410205Z",
+      "disclosureTime": "2021-03-12T19:15:00Z",
+      "id": "SNYK-UBUNTU2004-GNUTLS28-1085477",
+      "nvdSeverity": "critical",
+      "relativeImportance": "low",
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "apt@2.0.2ubuntu0.1",
+          "gnutls28/libgnutls30@3.6.13-2ubuntu1.3"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "gnutls28/libgnutls30@3.6.13-2ubuntu1.3"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "gnutls28/libgnutls30",
+        "gnutls28/libgnutls30"
+      ],
+      "version": "3.6.13-2ubuntu1.3"
+    },
+    {
+      "title": "Use After Free",
+      "credit": [
+        ""
+      ],
+      "packageName": "gnutls28",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `gnutls28` package. </i>\n\nA flaw was found in gnutls. A use after free issue in client_send_params in lib/ext/pre_shared_key.c may lead to memory corruption and other potential consequences.\n## Remediation\nThere is no fixed version for `Ubuntu:20.04` `gnutls28`.\n## References\n- [ADVISORY](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2021-20232)\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20210416-0005/)\n- [FEDORA](https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/OSLAE6PP33A7VYRYMYMUVB3U6B26GZER/)\n- [MISC](https://bugzilla.redhat.com/show_bug.cgi?id=1922275)\n- [MISC](https://www.gnutls.org/security-new.html#GNUTLS-SA-2021-03-10)\n- [MLIST](https://lists.apache.org/thread.html/r50661d6f0082709aad9a584431b59ec364f9974b63b07e0800230168@%3Cissues.spark.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/r5d4001031e7790d8c6396c499522b4ed2aab782da87b1a14184793bb@%3Cissues.spark.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/r5f88bed447742fcc5c47bf1c7be965ef450131914a6e1f85feba2779@%3Cissues.spark.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/r6ac143ba6dd98bd4bf6bf010d46e56e254056459721ba18822d611f7@%3Cissues.spark.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/r9cbc69e57276413788e90a6ee16c7c034ea4258d31935b70db2bd158@%3Cissues.spark.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/rcd70a4c88a47a75fd2d5f3ffb7cee8c2a18c713320bd90fdcb57495f@%3Cissues.spark.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/rf5e1256d870193def4a82ad89ab95e63943a313b5ff0d81aa87e4532@%3Cissues.spark.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/rfd5273d72d244178441e6904a2f2b41a3268f569e8092ea0b3b2bb20@%3Cissues.spark.apache.org%3E)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2021-20232"
+        ],
+        "CWE": [
+          "CWE-416"
+        ]
+      },
+      "severity": "low",
+      "severityWithCritical": "low",
+      "socialTrendAlert": false,
+      "cvssScore": 9.8,
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "patches": [],
+      "references": [
+        {
+          "title": "ADVISORY",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2021-20232"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20210416-0005/"
+        },
+        {
+          "title": "FEDORA",
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/OSLAE6PP33A7VYRYMYMUVB3U6B26GZER/"
+        },
+        {
+          "title": "MISC",
+          "url": "https://bugzilla.redhat.com/show_bug.cgi?id=1922275"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.gnutls.org/security-new.html%23GNUTLS-SA-2021-03-10"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r50661d6f0082709aad9a584431b59ec364f9974b63b07e0800230168@%3Cissues.spark.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r5d4001031e7790d8c6396c499522b4ed2aab782da87b1a14184793bb@%3Cissues.spark.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r5f88bed447742fcc5c47bf1c7be965ef450131914a6e1f85feba2779@%3Cissues.spark.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r6ac143ba6dd98bd4bf6bf010d46e56e254056459721ba18822d611f7@%3Cissues.spark.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r9cbc69e57276413788e90a6ee16c7c034ea4258d31935b70db2bd158@%3Cissues.spark.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rcd70a4c88a47a75fd2d5f3ffb7cee8c2a18c713320bd90fdcb57495f@%3Cissues.spark.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rf5e1256d870193def4a82ad89ab95e63943a313b5ff0d81aa87e4532@%3Cissues.spark.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rfd5273d72d244178441e6904a2f2b41a3268f569e8092ea0b3b2bb20@%3Cissues.spark.apache.org%3E"
+        }
+      ],
+      "creationTime": "2021-03-13T03:30:18.562501Z",
+      "modificationTime": "2021-05-09T12:30:27.173616Z",
+      "publicationTime": "2021-03-13T03:30:18.567004Z",
+      "disclosureTime": "2021-03-12T19:15:00Z",
+      "id": "SNYK-UBUNTU2004-GNUTLS28-1085499",
+      "nvdSeverity": "critical",
+      "relativeImportance": "low",
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "apt@2.0.2ubuntu0.1",
+          "gnutls28/libgnutls30@3.6.13-2ubuntu1.3"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "gnutls28/libgnutls30@3.6.13-2ubuntu1.3"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "gnutls28/libgnutls30",
+        "gnutls28/libgnutls30"
+      ],
+      "version": "3.6.13-2ubuntu1.3"
+    },
+    {
+      "title": "Information Exposure",
+      "credit": [
+        ""
+      ],
+      "packageName": "libgcrypt20",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `libgcrypt20` package. </i>\n\nLibgcrypt before 1.8.8 and 1.9.x before 1.9.3 mishandles ElGamal encryption because it lacks exponent blinding to address a side-channel attack against mpi_powm, and the window size is not chosen appropriately. (There is also an interoperability problem because the selection of the k integer value does not properly consider the differences between basic ElGamal encryption and generalized ElGamal encryption.) This, for example, affects use of ElGamal in OpenPGP.\n## Remediation\nThere is no fixed version for `Ubuntu:20.04` `libgcrypt20`.\n## References\n- [ADVISORY](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2021-33560)\n- [FEDORA](https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/R7OAPCUGPF3VLA7QAJUQSL255D4ITVTL/)\n- [MISC](https://dev.gnupg.org/rCe8b7f10be275bcedb5fc05ed4837a89bfd605c61)\n- [MISC](https://dev.gnupg.org/T5305)\n- [MISC](https://dev.gnupg.org/T5328)\n- [MISC](https://dev.gnupg.org/T5466)\n- [MLIST](https://lists.debian.org/debian-lts-announce/2021/06/msg00021.html)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2021-33560"
+        ],
+        "CWE": [
+          "CWE-203"
+        ]
+      },
+      "severity": "low",
+      "severityWithCritical": "low",
+      "socialTrendAlert": false,
+      "cvssScore": 7.5,
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+      "patches": [],
+      "references": [
+        {
+          "title": "ADVISORY",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2021-33560"
+        },
+        {
+          "title": "FEDORA",
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/R7OAPCUGPF3VLA7QAJUQSL255D4ITVTL/"
+        },
+        {
+          "title": "MISC",
+          "url": "https://dev.gnupg.org/rCe8b7f10be275bcedb5fc05ed4837a89bfd605c61"
+        },
+        {
+          "title": "MISC",
+          "url": "https://dev.gnupg.org/T5305"
+        },
+        {
+          "title": "MISC",
+          "url": "https://dev.gnupg.org/T5328"
+        },
+        {
+          "title": "MISC",
+          "url": "https://dev.gnupg.org/T5466"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.debian.org/debian-lts-announce/2021/06/msg00021.html"
+        }
+      ],
+      "creationTime": "2021-05-29T03:31:13.251254Z",
+      "modificationTime": "2021-06-23T14:38:12.896906Z",
+      "publicationTime": "2021-06-01T03:31:05.677383Z",
+      "disclosureTime": "2021-06-08T11:15:00Z",
+      "id": "SNYK-UBUNTU2004-LIBGCRYPT20-1297919",
+      "nvdSeverity": "high",
+      "relativeImportance": "low",
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "apt@2.0.2ubuntu0.1",
+          "apt/libapt-pkg6.0@2.0.2ubuntu0.1",
+          "systemd/libsystemd0@245.4-4ubuntu3.3",
+          "libgcrypt20@1.8.5-5ubuntu1"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "apt@2.0.2ubuntu0.1",
+          "gnupg2/gpgv@2.2.19-3ubuntu2",
+          "libgcrypt20@1.8.5-5ubuntu1"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "apt@2.0.2ubuntu0.1",
+          "apt/libapt-pkg6.0@2.0.2ubuntu0.1",
+          "libgcrypt20@1.8.5-5ubuntu1"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "libgcrypt20@1.8.5-5ubuntu1"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "libgcrypt20",
+        "libgcrypt20",
+        "libgcrypt20",
+        "libgcrypt20"
+      ],
+      "version": "1.8.5-5ubuntu1"
+    },
+    {
+      "title": "Resource Management Errors",
+      "credit": [
+        ""
+      ],
+      "packageName": "libtasn1-6",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `libtasn1-6` package. </i>\n\nGNU Libtasn1-4.13 libtasn1-4.13 version libtasn1-4.13, libtasn1-4.12 contains a DoS, specifically CPU usage will reach 100% when running asn1Paser against the POC due to an issue in _asn1_expand_object_id(p_tree), after a long time, the program will be killed. This attack appears to be exploitable via parsing a crafted file.\n## Remediation\nThere is no fixed version for `Ubuntu:20.04` `libtasn1-6`.\n## References\n- [CONFIRM](https://gitlab.com/gnutls/libtasn1/issues/4)\n- [CVE Details](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1000654)\n- [Debian Security Tracker](https://security-tracker.debian.org/tracker/CVE-2018-1000654)\n- [MLIST](https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772@%3Cdev.mina.apache.org%3E)\n- [OpenSuse Security Announcement](http://lists.opensuse.org/opensuse-security-announce/2019-06/msg00009.html)\n- [OpenSuse Security Announcement](http://lists.opensuse.org/opensuse-security-announce/2019-06/msg00018.html)\n- [Security Focus](http://www.securityfocus.com/bid/105151)\n- [Ubuntu CVE Tracker](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2018-1000654)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2018-1000654"
+        ],
+        "CWE": []
+      },
+      "severity": "low",
+      "severityWithCritical": "low",
+      "socialTrendAlert": false,
+      "cvssScore": 5.5,
+      "CVSSv3": "CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H",
+      "patches": [],
+      "references": [
+        {
+          "title": "CONFIRM",
+          "url": "https://gitlab.com/gnutls/libtasn1/issues/4"
+        },
+        {
+          "title": "CVE Details",
+          "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1000654"
+        },
+        {
+          "title": "Debian Security Tracker",
+          "url": "https://security-tracker.debian.org/tracker/CVE-2018-1000654"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772@%3Cdev.mina.apache.org%3E"
+        },
+        {
+          "title": "OpenSuse Security Announcement",
+          "url": "http://lists.opensuse.org/opensuse-security-announce/2019-06/msg00009.html"
+        },
+        {
+          "title": "OpenSuse Security Announcement",
+          "url": "http://lists.opensuse.org/opensuse-security-announce/2019-06/msg00018.html"
+        },
+        {
+          "title": "Security Focus",
+          "url": "http://www.securityfocus.com/bid/105151"
+        },
+        {
+          "title": "Ubuntu CVE Tracker",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2018-1000654"
+        }
+      ],
+      "creationTime": "2020-09-10T10:03:06.210928Z",
+      "modificationTime": "2021-05-25T15:41:38.813077Z",
+      "publicationTime": "2018-08-22T13:40:59.009029Z",
+      "disclosureTime": "2018-08-20T19:31:00Z",
+      "id": "SNYK-UBUNTU2004-LIBTASN16-578037",
+      "nvdSeverity": "medium",
+      "relativeImportance": "negligible",
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "apt@2.0.2ubuntu0.1",
+          "gnutls28/libgnutls30@3.6.13-2ubuntu1.3",
+          "libtasn1-6@4.16.0-2"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "libtasn1-6@4.16.0-2"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "libtasn1-6",
+        "libtasn1-6"
+      ],
+      "version": "4.16.0-2"
+    },
+    {
+      "title": "Incorrect Default Permissions",
+      "credit": [
+        ""
+      ],
+      "packageName": "libzstd",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `libzstd` package. </i>\n<i> See `Remediation` section below for `Ubuntu:20.04` relevant versions. </i>\n\nIn the Zstandard command-line utility prior to v1.4.1, output files were created with default permissions. Correct file permissions (matching the input) would only be set at completion time. Output files could therefore be readable or writable to unintended parties.\n## Remediation\nUpgrade `Ubuntu:20.04` `libzstd` to version 1.4.4+dfsg-3ubuntu0.1 or higher.\n## References\n- [ADVISORY](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2021-24031)\n- [MISC](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=981404)\n- [MISC](https://github.com/facebook/zstd/issues/1630)\n- [MISC](https://www.facebook.com/security/advisories/cve-2021-24031)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2021-24031"
+        ],
+        "CWE": [
+          "CWE-276"
+        ]
+      },
+      "severity": "medium",
+      "severityWithCritical": "medium",
+      "socialTrendAlert": false,
+      "cvssScore": 5.5,
+      "CVSSv3": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+      "patches": [],
+      "references": [
+        {
+          "title": "ADVISORY",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2021-24031"
+        },
+        {
+          "title": "MISC",
+          "url": "https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=981404"
+        },
+        {
+          "title": "MISC",
+          "url": "https://github.com/facebook/zstd/issues/1630"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.facebook.com/security/advisories/cve-2021-24031"
+        }
+      ],
+      "creationTime": "2021-03-04T03:30:07.178866Z",
+      "modificationTime": "2021-06-05T16:18:06.918115Z",
+      "publicationTime": "2021-03-04T03:30:07.185499Z",
+      "disclosureTime": "2021-03-04T21:15:00Z",
+      "id": "SNYK-UBUNTU2004-LIBZSTD-1082292",
+      "nvdSeverity": "medium",
+      "relativeImportance": "medium",
+      "semver": {
+        "vulnerable": [
+          "<1.4.4+dfsg-3ubuntu0.1"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "meta-common-packages@meta",
+          "libzstd/libzstd1@1.4.4+dfsg-3"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "libzstd/libzstd1"
+      ],
+      "version": "1.4.4+dfsg-3",
+      "nearestFixedInVersion": "1.4.4+dfsg-3ubuntu0.1"
+    },
+    {
+      "title": "Incorrect Default Permissions",
+      "credit": [
+        ""
+      ],
+      "packageName": "libzstd",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `libzstd` package. </i>\n<i> See `Remediation` section below for `Ubuntu:20.04` relevant versions. </i>\n\nBeginning in v1.4.1 and prior to v1.4.9, due to an incomplete fix for CVE-2021-24031, the Zstandard command-line utility created output files with default permissions and restricted those permissions immediately afterwards. Output files could therefore momentarily be readable or writable to unintended parties.\n## Remediation\nUpgrade `Ubuntu:20.04` `libzstd` to version 1.4.4+dfsg-3ubuntu0.1 or higher.\n## References\n- [ADVISORY](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2021-24032)\n- [MISC](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=982519)\n- [MISC](https://github.com/facebook/zstd/issues/2491)\n- [MISC](https://www.facebook.com/security/advisories/cve-2021-24032)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2021-24032"
+        ],
+        "CWE": [
+          "CWE-276"
+        ]
+      },
+      "severity": "medium",
+      "severityWithCritical": "medium",
+      "socialTrendAlert": false,
+      "cvssScore": 4.7,
+      "CVSSv3": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:N/A:N",
+      "patches": [],
+      "references": [
+        {
+          "title": "ADVISORY",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2021-24032"
+        },
+        {
+          "title": "MISC",
+          "url": "https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=982519"
+        },
+        {
+          "title": "MISC",
+          "url": "https://github.com/facebook/zstd/issues/2491"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.facebook.com/security/advisories/cve-2021-24032"
+        }
+      ],
+      "creationTime": "2021-03-04T03:30:07.537922Z",
+      "modificationTime": "2021-06-05T16:18:06.652471Z",
+      "publicationTime": "2021-03-04T03:30:07.543639Z",
+      "disclosureTime": "2021-03-04T21:15:00Z",
+      "id": "SNYK-UBUNTU2004-LIBZSTD-1082296",
+      "nvdSeverity": "medium",
+      "relativeImportance": "medium",
+      "semver": {
+        "vulnerable": [
+          "<1.4.4+dfsg-3ubuntu0.1"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "meta-common-packages@meta",
+          "libzstd/libzstd1@1.4.4+dfsg-3"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "libzstd/libzstd1"
+      ],
+      "version": "1.4.4+dfsg-3",
+      "nearestFixedInVersion": "1.4.4+dfsg-3ubuntu0.1"
+    },
+    {
+      "title": "Out-of-bounds Write",
+      "credit": [
+        ""
+      ],
+      "packageName": "lz4",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `lz4` package. </i>\n<i> See `Remediation` section below for `Ubuntu:20.04` relevant versions. </i>\n\nThere&#39;s a flaw in lz4. An attacker who submits a crafted file to an application linked with lz4 may be able to trigger an integer overflow, leading to calling of memmove() on a negative size argument, causing an out-of-bounds write and/or a crash. The greatest impact of this flaw is to availability, with some potential impact to confidentiality and integrity as well.\n## Remediation\nUpgrade `Ubuntu:20.04` `lz4` to version 1.9.2-2ubuntu0.20.04.1 or higher.\n## References\n- [ADVISORY](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2021-3520)\n- [MISC](https://bugzilla.redhat.com/show_bug.cgi?id=1954559)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2021-3520"
+        ],
+        "CWE": [
+          "CWE-190",
+          "CWE-787"
+        ]
+      },
+      "severity": "medium",
+      "severityWithCritical": "medium",
+      "socialTrendAlert": false,
+      "cvssScore": 9.8,
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "patches": [],
+      "references": [
+        {
+          "title": "ADVISORY",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2021-3520"
+        },
+        {
+          "title": "MISC",
+          "url": "https://bugzilla.redhat.com/show_bug.cgi?id=1954559"
+        }
+      ],
+      "creationTime": "2021-05-02T15:34:43.824981Z",
+      "modificationTime": "2021-06-23T14:36:37.601692Z",
+      "publicationTime": "2021-05-21T03:31:03.032643Z",
+      "disclosureTime": "2021-06-02T13:15:00Z",
+      "id": "SNYK-UBUNTU2004-LZ4-1278678",
+      "nvdSeverity": "critical",
+      "relativeImportance": "medium",
+      "semver": {
+        "vulnerable": [
+          "<1.9.2-2ubuntu0.20.04.1"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "apt@2.0.2ubuntu0.1",
+          "apt/libapt-pkg6.0@2.0.2ubuntu0.1",
+          "systemd/libsystemd0@245.4-4ubuntu3.3",
+          "lz4/liblz4-1@1.9.2-2"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "apt@2.0.2ubuntu0.1",
+          "apt/libapt-pkg6.0@2.0.2ubuntu0.1",
+          "lz4/liblz4-1@1.9.2-2"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "lz4/liblz4-1@1.9.2-2"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "lz4/liblz4-1",
+        "lz4/liblz4-1",
+        "lz4/liblz4-1"
+      ],
+      "version": "1.9.2-2",
+      "nearestFixedInVersion": "1.9.2-2ubuntu0.20.04.1"
+    },
+    {
+      "title": "Use of a Broken or Risky Cryptographic Algorithm",
+      "credit": [
+        ""
+      ],
+      "packageName": "nettle",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `nettle` package. </i>\n<i> See `Remediation` section below for `Ubuntu:20.04` relevant versions. </i>\n\nA flaw was found in Nettle in versions before 3.7.2, where several Nettle signature verification functions (GOST DSA, EDDSA &amp; ECDSA) result in the Elliptic Curve Cryptography point (ECC) multiply function being called with out-of-range scalers, possibly resulting in incorrect results. This flaw allows an attacker to force an invalid signature, causing an assertion failure or possible validation. The highest threat to this vulnerability is to confidentiality, integrity, as well as system availability.\n## Remediation\nUpgrade `Ubuntu:20.04` `nettle` to version 3.5.1+really3.5.1-2ubuntu0.1 or higher.\n## References\n- [ADVISORY](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2021-20305)\n- [DEBIAN](https://www.debian.org/security/2021/dsa-4933)\n- [FEDORA](https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/MQKWVVMAIDAJ7YAA3VVO32BHLDOH2E63/)\n- [GENTOO](https://security.gentoo.org/glsa/202105-31)\n- [MISC](https://bugzilla.redhat.com/show_bug.cgi?id=1942533)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2021-20305"
+        ],
+        "CWE": [
+          "CWE-327"
+        ]
+      },
+      "severity": "medium",
+      "severityWithCritical": "medium",
+      "socialTrendAlert": false,
+      "cvssScore": 8.1,
+      "CVSSv3": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "patches": [],
+      "references": [
+        {
+          "title": "ADVISORY",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2021-20305"
+        },
+        {
+          "title": "DEBIAN",
+          "url": "https://www.debian.org/security/2021/dsa-4933"
+        },
+        {
+          "title": "FEDORA",
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/MQKWVVMAIDAJ7YAA3VVO32BHLDOH2E63/"
+        },
+        {
+          "title": "GENTOO",
+          "url": "https://security.gentoo.org/glsa/202105-31"
+        },
+        {
+          "title": "MISC",
+          "url": "https://bugzilla.redhat.com/show_bug.cgi?id=1942533"
+        }
+      ],
+      "creationTime": "2021-04-06T15:30:36.283605Z",
+      "modificationTime": "2021-06-05T16:23:03.333443Z",
+      "publicationTime": "2021-04-07T15:30:28.862815Z",
+      "disclosureTime": "2021-04-05T22:15:00Z",
+      "id": "SNYK-UBUNTU2004-NETTLE-1090728",
+      "nvdSeverity": "high",
+      "relativeImportance": "medium",
+      "semver": {
+        "vulnerable": [
+          "<3.5.1+really3.5.1-2ubuntu0.1"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "apt@2.0.2ubuntu0.1",
+          "gnutls28/libgnutls30@3.6.13-2ubuntu1.3",
+          "nettle/libhogweed5@3.5.1+really3.5.1-2"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "nettle/libhogweed5@3.5.1+really3.5.1-2"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "apt@2.0.2ubuntu0.1",
+          "gnutls28/libgnutls30@3.6.13-2ubuntu1.3",
+          "nettle/libhogweed5@3.5.1+really3.5.1-2",
+          "nettle/libnettle7@3.5.1+really3.5.1-2"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "apt@2.0.2ubuntu0.1",
+          "gnutls28/libgnutls30@3.6.13-2ubuntu1.3",
+          "nettle/libnettle7@3.5.1+really3.5.1-2"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "nettle/libnettle7@3.5.1+really3.5.1-2"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "nettle/libhogweed5",
+        "nettle/libhogweed5",
+        "nettle/libnettle7",
+        "nettle/libnettle7",
+        "nettle/libnettle7"
+      ],
+      "version": "3.5.1+really3.5.1-2",
+      "nearestFixedInVersion": "3.5.1+really3.5.1-2ubuntu0.1"
+    },
+    {
+      "title": "CVE-2021-3580",
+      "credit": [
+        ""
+      ],
+      "packageName": "nettle",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `nettle` package. </i>\n<i> See `Remediation` section below for `Ubuntu:20.04` relevant versions. </i>\n\nRemote crash in RSA decryption via manipulated ciphertext\n## Remediation\nUpgrade `Ubuntu:20.04` `nettle` to version 3.5.1+really3.5.1-2ubuntu0.2 or higher.\n## References\n- [ADVISORY](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2021-3580)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2021-3580"
+        ],
+        "CWE": []
+      },
+      "severity": "medium",
+      "severityWithCritical": "medium",
+      "socialTrendAlert": false,
+      "cvssScore": null,
+      "CVSSv3": null,
+      "patches": [],
+      "references": [
+        {
+          "title": "ADVISORY",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2021-3580"
+        }
+      ],
+      "creationTime": "2021-06-11T03:31:36.763821Z",
+      "modificationTime": "2021-06-17T15:43:26.437788Z",
+      "publicationTime": "2021-06-14T15:31:03.362946Z",
+      "disclosureTime": null,
+      "id": "SNYK-UBUNTU2004-NETTLE-1303240",
+      "nvdSeverity": "low",
+      "relativeImportance": "medium",
+      "semver": {
+        "vulnerable": [
+          "<3.5.1+really3.5.1-2ubuntu0.2"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "apt@2.0.2ubuntu0.1",
+          "gnutls28/libgnutls30@3.6.13-2ubuntu1.3",
+          "nettle/libhogweed5@3.5.1+really3.5.1-2"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "nettle/libhogweed5@3.5.1+really3.5.1-2"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "apt@2.0.2ubuntu0.1",
+          "gnutls28/libgnutls30@3.6.13-2ubuntu1.3",
+          "nettle/libhogweed5@3.5.1+really3.5.1-2",
+          "nettle/libnettle7@3.5.1+really3.5.1-2"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "apt@2.0.2ubuntu0.1",
+          "gnutls28/libgnutls30@3.6.13-2ubuntu1.3",
+          "nettle/libnettle7@3.5.1+really3.5.1-2"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "nettle/libnettle7@3.5.1+really3.5.1-2"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "nettle/libhogweed5",
+        "nettle/libhogweed5",
+        "nettle/libnettle7",
+        "nettle/libnettle7",
+        "nettle/libnettle7"
+      ],
+      "version": "3.5.1+really3.5.1-2",
+      "nearestFixedInVersion": "3.5.1+really3.5.1-2ubuntu0.2"
+    },
+    {
+      "title": "Out-of-bounds Read",
+      "credit": [
+        ""
+      ],
+      "packageName": "p11-kit",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `p11-kit` package. </i>\n<i> See `Remediation` section below for `Ubuntu:20.04` relevant versions. </i>\n\nAn issue was discovered in p11-kit 0.21.1 through 0.23.21. A heap-based buffer over-read has been discovered in the RPC protocol used by thep11-kit server/remote commands and the client library. When the remote entity supplies a byte array through a serialized PKCS#11 function call, the receiving entity may allow the reading of up to 4 bytes of memory past the heap allocation.\n## Remediation\nUpgrade `Ubuntu:20.04` `p11-kit` to version 0.23.20-1ubuntu0.1 or higher.\n## References\n- [ADVISORY](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2020-29362)\n- [DEBIAN](https://www.debian.org/security/2021/dsa-4822)\n- [MISC](https://github.com/p11-glue/p11-kit/releases)\n- [MISC](https://github.com/p11-glue/p11-kit/security/advisories/GHSA-5wpq-43j2-6qwc)\n- [MLIST](https://lists.debian.org/debian-lts-announce/2021/01/msg00002.html)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2020-29362"
+        ],
+        "CWE": [
+          "CWE-125"
+        ]
+      },
+      "severity": "medium",
+      "severityWithCritical": "medium",
+      "socialTrendAlert": false,
+      "cvssScore": 5.3,
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+      "patches": [],
+      "references": [
+        {
+          "title": "ADVISORY",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2020-29362"
+        },
+        {
+          "title": "DEBIAN",
+          "url": "https://www.debian.org/security/2021/dsa-4822"
+        },
+        {
+          "title": "MISC",
+          "url": "https://github.com/p11-glue/p11-kit/releases"
+        },
+        {
+          "title": "MISC",
+          "url": "https://github.com/p11-glue/p11-kit/security/advisories/GHSA-5wpq-43j2-6qwc"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.debian.org/debian-lts-announce/2021/01/msg00002.html"
+        }
+      ],
+      "creationTime": "2020-12-19T03:30:07.765419Z",
+      "modificationTime": "2021-06-29T14:37:45.454223Z",
+      "publicationTime": "2020-12-19T03:30:07.769192Z",
+      "disclosureTime": "2020-12-16T14:15:00Z",
+      "id": "SNYK-UBUNTU2004-P11KIT-1052982",
+      "nvdSeverity": "medium",
+      "relativeImportance": "medium",
+      "semver": {
+        "vulnerable": [
+          "<0.23.20-1ubuntu0.1"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "apt@2.0.2ubuntu0.1",
+          "gnutls28/libgnutls30@3.6.13-2ubuntu1.3",
+          "p11-kit/libp11-kit0@0.23.20-1build1"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "p11-kit/libp11-kit0@0.23.20-1build1"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "p11-kit/libp11-kit0",
+        "p11-kit/libp11-kit0"
+      ],
+      "version": "0.23.20-1build1",
+      "nearestFixedInVersion": "0.23.20-1ubuntu0.1"
+    },
+    {
+      "title": "Out-of-bounds Write",
+      "credit": [
+        ""
+      ],
+      "packageName": "p11-kit",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `p11-kit` package. </i>\n<i> See `Remediation` section below for `Ubuntu:20.04` relevant versions. </i>\n\nAn issue was discovered in p11-kit 0.23.6 through 0.23.21. A heap-based buffer overflow has been discovered in the RPC protocol used by p11-kit server/remote commands and the client library. When the remote entity supplies a serialized byte array in a CK_ATTRIBUTE, the receiving entity may not allocate sufficient length for the buffer to store the deserialized value.\n## Remediation\nUpgrade `Ubuntu:20.04` `p11-kit` to version 0.23.20-1ubuntu0.1 or higher.\n## References\n- [ADVISORY](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2020-29363)\n- [DEBIAN](https://www.debian.org/security/2021/dsa-4822)\n- [MISC](https://github.com/p11-glue/p11-kit/releases)\n- [MISC](https://github.com/p11-glue/p11-kit/security/advisories/GHSA-5j67-fw89-fp6x)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2020-29363"
+        ],
+        "CWE": [
+          "CWE-787"
+        ]
+      },
+      "severity": "medium",
+      "severityWithCritical": "medium",
+      "socialTrendAlert": false,
+      "cvssScore": 7.5,
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "patches": [],
+      "references": [
+        {
+          "title": "ADVISORY",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2020-29363"
+        },
+        {
+          "title": "DEBIAN",
+          "url": "https://www.debian.org/security/2021/dsa-4822"
+        },
+        {
+          "title": "MISC",
+          "url": "https://github.com/p11-glue/p11-kit/releases"
+        },
+        {
+          "title": "MISC",
+          "url": "https://github.com/p11-glue/p11-kit/security/advisories/GHSA-5j67-fw89-fp6x"
+        }
+      ],
+      "creationTime": "2020-12-19T03:30:08.386501Z",
+      "modificationTime": "2021-06-05T03:32:04.845647Z",
+      "publicationTime": "2020-12-19T03:30:08.389890Z",
+      "disclosureTime": "2020-12-16T14:15:00Z",
+      "id": "SNYK-UBUNTU2004-P11KIT-1052991",
+      "nvdSeverity": "high",
+      "relativeImportance": "medium",
+      "semver": {
+        "vulnerable": [
+          "<0.23.20-1ubuntu0.1"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "apt@2.0.2ubuntu0.1",
+          "gnutls28/libgnutls30@3.6.13-2ubuntu1.3",
+          "p11-kit/libp11-kit0@0.23.20-1build1"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "p11-kit/libp11-kit0@0.23.20-1build1"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "p11-kit/libp11-kit0",
+        "p11-kit/libp11-kit0"
+      ],
+      "version": "0.23.20-1build1",
+      "nearestFixedInVersion": "0.23.20-1ubuntu0.1"
+    },
+    {
+      "title": "Integer Overflow or Wraparound",
+      "credit": [
+        ""
+      ],
+      "packageName": "p11-kit",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `p11-kit` package. </i>\n<i> See `Remediation` section below for `Ubuntu:20.04` relevant versions. </i>\n\nAn issue was discovered in p11-kit 0.21.1 through 0.23.21. Multiple integer overflows have been discovered in the array allocations in the p11-kit library and the p11-kit list command, where overflow checks are missing before calling realloc or calloc.\n## Remediation\nUpgrade `Ubuntu:20.04` `p11-kit` to version 0.23.20-1ubuntu0.1 or higher.\n## References\n- [ADVISORY](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2020-29361)\n- [DEBIAN](https://www.debian.org/security/2021/dsa-4822)\n- [MISC](https://github.com/p11-glue/p11-kit/releases)\n- [MISC](https://github.com/p11-glue/p11-kit/security/advisories/GHSA-q4r3-hm6m-mvc2)\n- [MLIST](https://lists.apache.org/thread.html/r58af02e294bd07f487e2c64ffc0a29b837db5600e33b6e698b9d696b@%3Cissues.bookkeeper.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/rf4c02775860db415b4955778a131c2795223f61cb8c6a450893651e4@%3Cissues.bookkeeper.apache.org%3E)\n- [MLIST](https://lists.debian.org/debian-lts-announce/2021/01/msg00002.html)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2020-29361"
+        ],
+        "CWE": [
+          "CWE-190"
+        ]
+      },
+      "severity": "medium",
+      "severityWithCritical": "medium",
+      "socialTrendAlert": false,
+      "cvssScore": 7.5,
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "patches": [],
+      "references": [
+        {
+          "title": "ADVISORY",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2020-29361"
+        },
+        {
+          "title": "DEBIAN",
+          "url": "https://www.debian.org/security/2021/dsa-4822"
+        },
+        {
+          "title": "MISC",
+          "url": "https://github.com/p11-glue/p11-kit/releases"
+        },
+        {
+          "title": "MISC",
+          "url": "https://github.com/p11-glue/p11-kit/security/advisories/GHSA-q4r3-hm6m-mvc2"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r58af02e294bd07f487e2c64ffc0a29b837db5600e33b6e698b9d696b@%3Cissues.bookkeeper.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rf4c02775860db415b4955778a131c2795223f61cb8c6a450893651e4@%3Cissues.bookkeeper.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.debian.org/debian-lts-announce/2021/01/msg00002.html"
+        }
+      ],
+      "creationTime": "2020-12-19T03:30:08.746449Z",
+      "modificationTime": "2021-06-05T03:32:05.732519Z",
+      "publicationTime": "2020-12-19T03:30:08.749993Z",
+      "disclosureTime": "2020-12-16T14:15:00Z",
+      "id": "SNYK-UBUNTU2004-P11KIT-1052996",
+      "nvdSeverity": "high",
+      "relativeImportance": "medium",
+      "semver": {
+        "vulnerable": [
+          "<0.23.20-1ubuntu0.1"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "apt@2.0.2ubuntu0.1",
+          "gnutls28/libgnutls30@3.6.13-2ubuntu1.3",
+          "p11-kit/libp11-kit0@0.23.20-1build1"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "p11-kit/libp11-kit0@0.23.20-1build1"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "p11-kit/libp11-kit0",
+        "p11-kit/libp11-kit0"
+      ],
+      "version": "0.23.20-1build1",
+      "nearestFixedInVersion": "0.23.20-1ubuntu0.1"
+    },
+    {
+      "title": "Uncontrolled Recursion",
+      "credit": [
+        ""
+      ],
+      "packageName": "pcre3",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `pcre3` package. </i>\n\nIn PCRE 8.41, the OP_KETRMAX feature in the match function in pcre_exec.c allows stack exhaustion (uncontrolled recursion) when processing a crafted regular expression.\n## Remediation\nThere is no fixed version for `Ubuntu:20.04` `pcre3`.\n## References\n- [CVE Details](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-11164)\n- [Debian Security Tracker](https://security-tracker.debian.org/tracker/CVE-2017-11164)\n- [MLIST](https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772@%3Cdev.mina.apache.org%3E)\n- [OSS security Advisory](http://openwall.com/lists/oss-security/2017/07/11/3)\n- [Security Focus](http://www.securityfocus.com/bid/99575)\n- [Ubuntu CVE Tracker](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2017-11164)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2017-11164"
+        ],
+        "CWE": [
+          "CWE-674"
+        ]
+      },
+      "severity": "low",
+      "severityWithCritical": "low",
+      "socialTrendAlert": false,
+      "cvssScore": 7.5,
+      "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "patches": [],
+      "references": [
+        {
+          "title": "CVE Details",
+          "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-11164"
+        },
+        {
+          "title": "Debian Security Tracker",
+          "url": "https://security-tracker.debian.org/tracker/CVE-2017-11164"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772@%3Cdev.mina.apache.org%3E"
+        },
+        {
+          "title": "OSS security Advisory",
+          "url": "http://openwall.com/lists/oss-security/2017/07/11/3"
+        },
+        {
+          "title": "Security Focus",
+          "url": "http://www.securityfocus.com/bid/99575"
+        },
+        {
+          "title": "Ubuntu CVE Tracker",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2017-11164"
+        }
+      ],
+      "creationTime": "2020-09-10T10:01:16.779956Z",
+      "modificationTime": "2021-05-25T15:43:38.597770Z",
+      "publicationTime": "2017-07-11T03:29:00Z",
+      "disclosureTime": "2017-07-11T03:29:00Z",
+      "id": "SNYK-UBUNTU2004-PCRE3-580031",
+      "nvdSeverity": "high",
+      "relativeImportance": "negligible",
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "grep@3.4-1",
+          "pcre3/libpcre3@2:8.39-12build1"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "pcre3/libpcre3@2:8.39-12build1"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "pcre3/libpcre3",
+        "pcre3/libpcre3"
+      ],
+      "version": "2:8.39-12build1"
+    },
+    {
+      "title": "Out-of-bounds Read",
+      "credit": [
+        ""
+      ],
+      "packageName": "pcre3",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `pcre3` package. </i>\n\nlibpcre in PCRE before 8.43 allows a subject buffer over-read in JIT when UTF is disabled, and \\X or \\R has more than one fixed quantifier, a related issue to CVE-2019-20454.\n## Remediation\nThere is no fixed version for `Ubuntu:20.04` `pcre3`.\n## References\n- [ADVISORY](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2019-20838)\n- [ADVISORY](https://security-tracker.debian.org/tracker/CVE-2019-20838)\n- [CONFIRM](https://support.apple.com/kb/HT211931)\n- [CONFIRM](https://support.apple.com/kb/HT212147)\n- [FULLDISC](http://seclists.org/fulldisclosure/2020/Dec/32)\n- [FULLDISC](http://seclists.org/fulldisclosure/2021/Feb/14)\n- [MISC](https://bugs.gentoo.org/717920)\n- [MISC](https://www.pcre.org/original/changelog.txt)\n- [MLIST](https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772@%3Cdev.mina.apache.org%3E)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2019-20838"
+        ],
+        "CWE": [
+          "CWE-125"
+        ]
+      },
+      "severity": "low",
+      "severityWithCritical": "low",
+      "socialTrendAlert": false,
+      "cvssScore": 7.5,
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "patches": [],
+      "references": [
+        {
+          "title": "ADVISORY",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2019-20838"
+        },
+        {
+          "title": "ADVISORY",
+          "url": "https://security-tracker.debian.org/tracker/CVE-2019-20838"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://support.apple.com/kb/HT211931"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://support.apple.com/kb/HT212147"
+        },
+        {
+          "title": "FULLDISC",
+          "url": "http://seclists.org/fulldisclosure/2020/Dec/32"
+        },
+        {
+          "title": "FULLDISC",
+          "url": "http://seclists.org/fulldisclosure/2021/Feb/14"
+        },
+        {
+          "title": "MISC",
+          "url": "https://bugs.gentoo.org/717920"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.pcre.org/original/changelog.txt"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772@%3Cdev.mina.apache.org%3E"
+        }
+      ],
+      "creationTime": "2020-09-10T10:04:30.382131Z",
+      "modificationTime": "2021-05-25T15:38:41.868098Z",
+      "publicationTime": "2020-06-15T21:59:34.458267Z",
+      "disclosureTime": "2020-06-15T17:15:00Z",
+      "id": "SNYK-UBUNTU2004-PCRE3-581164",
+      "nvdSeverity": "high",
+      "relativeImportance": "low",
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "grep@3.4-1",
+          "pcre3/libpcre3@2:8.39-12build1"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "pcre3/libpcre3@2:8.39-12build1"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "pcre3/libpcre3",
+        "pcre3/libpcre3"
+      ],
+      "version": "2:8.39-12build1"
+    },
+    {
+      "title": "Integer Overflow or Wraparound",
+      "credit": [
+        ""
+      ],
+      "packageName": "pcre3",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `pcre3` package. </i>\n\nlibpcre in PCRE before 8.44 allows an integer overflow via a large number after a (?C substring.\n## Remediation\nThere is no fixed version for `Ubuntu:20.04` `pcre3`.\n## References\n- [ADVISORY](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2020-14155)\n- [ADVISORY](https://security-tracker.debian.org/tracker/CVE-2020-14155)\n- [CONFIRM](https://about.gitlab.com/releases/2020/07/01/security-release-13-1-2-release/)\n- [CONFIRM](https://support.apple.com/kb/HT211931)\n- [CONFIRM](https://support.apple.com/kb/HT212147)\n- [FULLDISC](http://seclists.org/fulldisclosure/2020/Dec/32)\n- [FULLDISC](http://seclists.org/fulldisclosure/2021/Feb/14)\n- [MISC](https://bugs.gentoo.org/717920)\n- [MISC](https://www.pcre.org/original/changelog.txt)\n- [MLIST](https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772@%3Cdev.mina.apache.org%3E)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2020-14155"
+        ],
+        "CWE": [
+          "CWE-190"
+        ]
+      },
+      "severity": "low",
+      "severityWithCritical": "low",
+      "socialTrendAlert": false,
+      "cvssScore": 5.3,
+      "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+      "patches": [],
+      "references": [
+        {
+          "title": "ADVISORY",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2020-14155"
+        },
+        {
+          "title": "ADVISORY",
+          "url": "https://security-tracker.debian.org/tracker/CVE-2020-14155"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://about.gitlab.com/releases/2020/07/01/security-release-13-1-2-release/"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://support.apple.com/kb/HT211931"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://support.apple.com/kb/HT212147"
+        },
+        {
+          "title": "FULLDISC",
+          "url": "http://seclists.org/fulldisclosure/2020/Dec/32"
+        },
+        {
+          "title": "FULLDISC",
+          "url": "http://seclists.org/fulldisclosure/2021/Feb/14"
+        },
+        {
+          "title": "MISC",
+          "url": "https://bugs.gentoo.org/717920"
+        },
+        {
+          "title": "MISC",
+          "url": "https://www.pcre.org/original/changelog.txt"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772@%3Cdev.mina.apache.org%3E"
+        }
+      ],
+      "creationTime": "2020-09-10T10:04:30.411547Z",
+      "modificationTime": "2021-05-25T15:37:49.300488Z",
+      "publicationTime": "2020-06-15T21:59:36.389860Z",
+      "disclosureTime": "2020-06-15T17:15:00Z",
+      "id": "SNYK-UBUNTU2004-PCRE3-583594",
+      "nvdSeverity": "medium",
+      "relativeImportance": "negligible",
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "grep@3.4-1",
+          "pcre3/libpcre3@2:8.39-12build1"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "pcre3/libpcre3@2:8.39-12build1"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "pcre3/libpcre3",
+        "pcre3/libpcre3"
+      ],
+      "version": "2:8.39-12build1"
+    },
+    {
+      "title": "Time-of-check Time-of-use (TOCTOU)",
+      "credit": [
+        ""
+      ],
+      "packageName": "shadow",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `shadow` package. </i>\n\nshadow: TOCTOU (time-of-check time-of-use) race condition when copying and removing directory trees\n## Remediation\nThere is no fixed version for `Ubuntu:20.04` `shadow`.\n## References\n- [Debian Security Tracker](https://security-tracker.debian.org/tracker/CVE-2013-4235)\n- [MLIST](https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772@%3Cdev.mina.apache.org%3E)\n- [RedHat Bugzilla Bug](https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2013-4235)\n- [RedHat CVE Database](https://access.redhat.com/security/cve/cve-2013-4235)\n- [Ubuntu CVE Tracker](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2013-4235)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2013-4235"
+        ],
+        "CWE": [
+          "CWE-367"
+        ]
+      },
+      "severity": "low",
+      "severityWithCritical": "low",
+      "socialTrendAlert": false,
+      "cvssScore": 4.7,
+      "CVSSv3": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:N/I:H/A:N",
+      "patches": [],
+      "references": [
+        {
+          "title": "Debian Security Tracker",
+          "url": "https://security-tracker.debian.org/tracker/CVE-2013-4235"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rf9fa47ab66495c78bb4120b0754dd9531ca2ff0430f6685ac9b07772@%3Cdev.mina.apache.org%3E"
+        },
+        {
+          "title": "RedHat Bugzilla Bug",
+          "url": "https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2013-4235"
+        },
+        {
+          "title": "RedHat CVE Database",
+          "url": "https://access.redhat.com/security/cve/cve-2013-4235"
+        },
+        {
+          "title": "Ubuntu CVE Tracker",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2013-4235"
+        }
+      ],
+      "creationTime": "2020-09-10T09:59:00.726248Z",
+      "modificationTime": "2021-05-25T15:47:54.774854Z",
+      "publicationTime": "2018-06-27T16:11:53.712324Z",
+      "disclosureTime": "2019-12-03T15:15:00Z",
+      "id": "SNYK-UBUNTU2004-SHADOW-577863",
+      "nvdSeverity": "medium",
+      "relativeImportance": "low",
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "util-linux/mount@2.34-0.1ubuntu9.1",
+          "util-linux@2.34-0.1ubuntu9.1",
+          "shadow/login@1:4.8.1-1ubuntu5.20.04"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "shadow/login@1:4.8.1-1ubuntu5.20.04"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "adduser@3.118ubuntu2",
+          "shadow/passwd@1:4.8.1-1ubuntu5.20.04"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "shadow/passwd@1:4.8.1-1ubuntu5.20.04"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "shadow/login",
+        "shadow/login",
+        "shadow/passwd",
+        "shadow/passwd"
+      ],
+      "version": "1:4.8.1-1ubuntu5.20.04"
+    },
+    {
+      "title": "Authentication Bypass",
+      "credit": [
+        ""
+      ],
+      "packageName": "systemd",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `systemd` package. </i>\n\nAn exploitable denial-of-service vulnerability exists in Systemd 245. A specially crafted DHCP FORCERENEW packet can cause a server running the DHCP client to be vulnerable to a DHCP ACK spoofing attack. An attacker can forge a pair of FORCERENEW and DCHP ACK packets to reconfigure the server.\n## Remediation\nThere is no fixed version for `Ubuntu:20.04` `systemd`.\n## References\n- [ADVISORY](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2020-13529)\n- [CONFIRM](https://security.netapp.com/advisory/ntap-20210625-0005/)\n- [MISC](https://talosintelligence.com/vulnerability_reports/TALOS-2020-1142)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2020-13529"
+        ],
+        "CWE": [
+          "CWE-290"
+        ]
+      },
+      "severity": "medium",
+      "severityWithCritical": "medium",
+      "socialTrendAlert": false,
+      "cvssScore": 6.1,
+      "CVSSv3": "CVSS:3.1/AV:A/AC:H/PR:N/UI:N/S:C/C:N/I:N/A:H",
+      "patches": [],
+      "references": [
+        {
+          "title": "ADVISORY",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2020-13529"
+        },
+        {
+          "title": "CONFIRM",
+          "url": "https://security.netapp.com/advisory/ntap-20210625-0005/"
+        },
+        {
+          "title": "MISC",
+          "url": "https://talosintelligence.com/vulnerability_reports/TALOS-2020-1142"
+        }
+      ],
+      "creationTime": "2021-05-11T15:38:36.796581Z",
+      "modificationTime": "2021-06-14T15:30:56.973168Z",
+      "publicationTime": "2021-05-11T15:38:36.815857Z",
+      "disclosureTime": "2021-05-10T16:15:00Z",
+      "id": "SNYK-UBUNTU2004-SYSTEMD-1290722",
+      "nvdSeverity": "medium",
+      "relativeImportance": "medium",
+      "semver": {
+        "vulnerable": [
+          "*"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "util-linux/mount@2.34-0.1ubuntu9.1",
+          "util-linux@2.34-0.1ubuntu9.1",
+          "systemd/libudev1@245.4-4ubuntu3.3"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "apt@2.0.2ubuntu0.1",
+          "apt/libapt-pkg6.0@2.0.2ubuntu0.1",
+          "systemd/libudev1@245.4-4ubuntu3.3"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "systemd/libudev1@245.4-4ubuntu3.3"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "util-linux/mount@2.34-0.1ubuntu9.1",
+          "util-linux@2.34-0.1ubuntu9.1",
+          "systemd/libsystemd0@245.4-4ubuntu3.3"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "apt@2.0.2ubuntu0.1",
+          "apt/libapt-pkg6.0@2.0.2ubuntu0.1",
+          "systemd/libsystemd0@245.4-4ubuntu3.3"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "util-linux/bsdutils@1:2.34-0.1ubuntu9.1",
+          "systemd/libsystemd0@245.4-4ubuntu3.3"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "procps/libprocps8@2:3.3.16-1ubuntu2",
+          "systemd/libsystemd0@245.4-4ubuntu3.3"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "apt@2.0.2ubuntu0.1",
+          "systemd/libsystemd0@245.4-4ubuntu3.3"
+        ],
+        [
+          "docker-image|ubuntu@20.04",
+          "systemd/libsystemd0@245.4-4ubuntu3.3"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "systemd/libudev1",
+        "systemd/libudev1",
+        "systemd/libudev1",
+        "systemd/libsystemd0",
+        "systemd/libsystemd0",
+        "systemd/libsystemd0",
+        "systemd/libsystemd0",
+        "systemd/libsystemd0",
+        "systemd/libsystemd0"
+      ],
+      "version": "245.4-4ubuntu3.3"
+    },
+    {
+      "title": "NULL Pointer Dereference",
+      "credit": [
+        ""
+      ],
+      "packageName": "tar",
+      "language": "linux",
+      "packageManager": "ubuntu:20.04",
+      "description": "## NVD Description\n<i> **Note:** </i>\n<i> Versions mentioned in the description apply to the upstream `tar` package. </i>\n<i> See `Remediation` section below for `Ubuntu:20.04` relevant versions. </i>\n\npax_decode_header in sparse.c in GNU Tar before 1.32 had a NULL pointer dereference when parsing certain archives that have malformed extended headers.\n## Remediation\nUpgrade `Ubuntu:20.04` `tar` to version 1.30+dfsg-7ubuntu0.20.04.1 or higher.\n## References\n- [Debian Security Tracker](https://security-tracker.debian.org/tracker/CVE-2019-9923)\n- [MISC](http://git.savannah.gnu.org/cgit/tar.git/commit/?id=cb07844454d8cc9fb21f53ace75975f91185a120)\n- [MISC](http://savannah.gnu.org/bugs/?55369)\n- [MISC](https://bugs.launchpad.net/ubuntu/+source/tar/+bug/1810241)\n- [MLIST](https://lists.apache.org/thread.html/r58af02e294bd07f487e2c64ffc0a29b837db5600e33b6e698b9d696b@%3Cissues.bookkeeper.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/rf4c02775860db415b4955778a131c2795223f61cb8c6a450893651e4@%3Cissues.bookkeeper.apache.org%3E)\n- [OpenSuse Security Announcement](http://lists.opensuse.org/opensuse-security-announce/2019-04/msg00077.html)\n- [Ubuntu CVE Tracker](http://people.ubuntu.com/~ubuntu-security/cve/CVE-2019-9923)\n",
+      "identifiers": {
+        "ALTERNATIVE": [],
+        "CVE": [
+          "CVE-2019-9923"
+        ],
+        "CWE": [
+          "CWE-476"
+        ]
+      },
+      "severity": "low",
+      "severityWithCritical": "low",
+      "socialTrendAlert": false,
+      "cvssScore": 7.5,
+      "CVSSv3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "patches": [],
+      "references": [
+        {
+          "title": "Debian Security Tracker",
+          "url": "https://security-tracker.debian.org/tracker/CVE-2019-9923"
+        },
+        {
+          "title": "MISC",
+          "url": "http://git.savannah.gnu.org/cgit/tar.git/commit/?id=cb07844454d8cc9fb21f53ace75975f91185a120"
+        },
+        {
+          "title": "MISC",
+          "url": "http://savannah.gnu.org/bugs/?55369"
+        },
+        {
+          "title": "MISC",
+          "url": "https://bugs.launchpad.net/ubuntu/%2Bsource/tar/%2Bbug/1810241"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/r58af02e294bd07f487e2c64ffc0a29b837db5600e33b6e698b9d696b@%3Cissues.bookkeeper.apache.org%3E"
+        },
+        {
+          "title": "MLIST",
+          "url": "https://lists.apache.org/thread.html/rf4c02775860db415b4955778a131c2795223f61cb8c6a450893651e4@%3Cissues.bookkeeper.apache.org%3E"
+        },
+        {
+          "title": "OpenSuse Security Announcement",
+          "url": "http://lists.opensuse.org/opensuse-security-announce/2019-04/msg00077.html"
+        },
+        {
+          "title": "Ubuntu CVE Tracker",
+          "url": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2019-9923"
+        }
+      ],
+      "creationTime": "2020-09-10T10:03:36.999249Z",
+      "modificationTime": "2021-06-05T16:38:25.710749Z",
+      "publicationTime": "2019-03-22T08:29:00Z",
+      "disclosureTime": "2019-03-22T08:29:00Z",
+      "id": "SNYK-UBUNTU2004-TAR-576242",
+      "nvdSeverity": "high",
+      "relativeImportance": "low",
+      "semver": {
+        "vulnerable": [
+          "<1.30+dfsg-7ubuntu0.20.04.1"
+        ]
+      },
+      "exploit": "Not Defined",
+      "from": [
+        [
+          "docker-image|ubuntu@20.04",
+          "meta-common-packages@meta",
+          "tar@1.30+dfsg-7"
+        ]
+      ],
+      "upgradePath": [],
+      "isUpgradable": false,
+      "isPatchable": false,
+      "name": [
+        "tar"
+      ],
+      "version": "1.30+dfsg-7",
+      "nearestFixedInVersion": "1.30+dfsg-7ubuntu0.20.04.1"
+    }
+  ],
+  "ok": false,
+  "dependencyCount": 93,
+  "org": "chrisguest",
+  "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.21.5\nignore: {}\npatch: {}\n",
+  "isPrivate": true,
+  "licensesPolicy": {
+    "severities": {},
+    "orgLicenseRules": {
+      "AGPL-1.0": {
+        "licenseType": "AGPL-1.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "AGPL-3.0": {
+        "licenseType": "AGPL-3.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "Artistic-1.0": {
+        "licenseType": "Artistic-1.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "Artistic-2.0": {
+        "licenseType": "Artistic-2.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "CDDL-1.0": {
+        "licenseType": "CDDL-1.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "CPOL-1.02": {
+        "licenseType": "CPOL-1.02",
+        "severity": "high",
+        "instructions": ""
+      },
+      "EPL-1.0": {
+        "licenseType": "EPL-1.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "GPL-2.0": {
+        "licenseType": "GPL-2.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "GPL-3.0": {
+        "licenseType": "GPL-3.0",
+        "severity": "high",
+        "instructions": ""
+      },
+      "LGPL-2.0": {
+        "licenseType": "LGPL-2.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "LGPL-2.1": {
+        "licenseType": "LGPL-2.1",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "LGPL-3.0": {
+        "licenseType": "LGPL-3.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "MPL-1.1": {
+        "licenseType": "MPL-1.1",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "MPL-2.0": {
+        "licenseType": "MPL-2.0",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "MS-RL": {
+        "licenseType": "MS-RL",
+        "severity": "medium",
+        "instructions": ""
+      },
+      "SimPL-2.0": {
+        "licenseType": "SimPL-2.0",
+        "severity": "high",
+        "instructions": ""
+      }
+    }
+  },
+  "packageManager": "deb",
+  "ignoreSettings": null,
+  "docker": {},
+  "summary": "70 vulnerable dependency paths",
+  "filesystemPolicy": false,
+  "filtered": {
+    "ignore": [],
+    "patch": []
+  },
+  "uniqueCount": 28,
+  "projectName": "docker-image|ubuntu",
+  "platform": "linux/amd64",
+  "path": "ubuntu:20.04"
+}
