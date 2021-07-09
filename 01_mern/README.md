@@ -6,7 +6,11 @@ TODO:
 
 ## Docker Compose App
 ```sh
+# list profiles
+docker compose config --profiles               
+
 # start mongo (profiles not working at the mo')
+# It is working in compose: Docker Compose (Docker Inc., v2.0.0-beta.6) - Docker Desktop 3.5.2
 docker compose --profile backend up -d 
 
 # use the old command for profiles support.  
