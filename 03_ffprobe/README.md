@@ -61,6 +61,17 @@ db.getCollection('ffprobe').createIndex(
 Example queries https://github.com/chrisguest75/docker_build_examples/tree/master/45_docker_scan_process_mongo
 
 ```js
+Questions:
+* distinct resolutions
+* counts of most common number of streams (video and audio)
+* most common video and audio codecs
+* framerates 
+* sample_rates 
+* audio channels
+* captions
+
+
+
 // count all items in collection
 db.getCollection('ffprobe').count()
 
