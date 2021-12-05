@@ -7,9 +7,8 @@ import { logger } from "./logger";
 export default class Probe {
     constructor() {}
 
-    async probeStreams(file: string) {
-        let options = ["-v", "quiet", "-print_format", "json=compact=1", "-show_streams", file];
-        logger.info({ options: "jp2a " + options.join(" ") });
+    async run(file: string, options: Array<string>) {
+        logger.info({ options: "ffprobe " + options.join(" ") });
         const spawnResult = spawnSync("ffprobe", options, {
           cwd: process.cwd(),
           env: process.env,
@@ -24,8 +23,10 @@ export default class Probe {
         }
     }
 
-    async analyze(inFile: string): Promise<string> {
-        let out = await this.probeStreams(inFile);
+    async analyzeStreams(file: string): Promise<string> {
+        let options = ["-v", "quiet", "-print_format", "json=compact=1", "-show_streams", file];
+
+        let out = await this.run(file, options);
     
         let realOut = "Error";
         if (out != null) {
@@ -36,4 +37,20 @@ export default class Probe {
           resolve(realOut);
         });
       }    
+
+      async analyzeGOP(file: string): Promise<string> {
+        let options = ["-select_streams", "v", "-show_frames", "-of", "csv", "-show_entries", "frame=key_frame,pict_type,best_effort_timestamp_time", file];
+
+        let out = await this.run(file, options);
+    
+        let realOut = "Error";
+        if (out != null) {
+           realOut = out[1] || ""
+        }
+    
+        return new Promise((resolve, reject) => {
+          resolve(realOut);
+        });
+      }    
+
 }
