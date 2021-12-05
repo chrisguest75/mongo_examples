@@ -5,7 +5,6 @@ import { logger } from "./logger";
 import Find from "./find";
 import Analyse from "./analyse";
 
-
 // Main
 async function main(args: minimist.ParsedArgs): Promise<string> {
   logger.debug("enter main:" + args._);
@@ -13,12 +12,10 @@ async function main(args: minimist.ParsedArgs): Promise<string> {
   return new Promise((resolve, reject) => {
     let basePath = "";
     if (args["path"] == null) {
-      logger.error("Path parameter is missing");
       reject("Path parameter is missing");
       throw new Error("Path parameter is missing")
     }
     if (args["out"] == null) {
-      logger.error("Out parameter is missing");
       reject("Out parameter is missing");
       throw new Error("Out parameter is missing")
     }
@@ -52,6 +49,6 @@ main(args)
     process.exit(0);
   })
   .catch((e) => {
-    console.log(e);
+    logger.error(e);
     process.exit(1);
   });

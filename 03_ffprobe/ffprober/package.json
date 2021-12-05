@@ -10,7 +10,9 @@
     "test": "jest",
     "start:cmd:singlesegment": "npm run build && node ./build/src/index.js --path '/Volumes/videoshare/bigbuckbunny-hls/segment-0.ts' --out './out' --includegop",
     "start:cmd:segments": "npm run build && node ./build/src/index.js --path '/Volumes/videoshare/bigbuckbunny-hls' --out './out' --includegop",
-    "start:cmd:cosmos": "npm run build && node ./build/src/index.js --path '/Volumes/videoshare/cosmos' --out './out' --includegop"
+    "start:cmd:cosmos": "npm run build && node ./build/src/index.js --path '/Volumes/videoshare/cosmos' --out './out' --includegop",
+    "start:cmd:all": "npm run build && node ./build/src/index.js --path '/Volumes/videoshare' --out './out' --includegop",
+    "start:cmd:missing": "npm run build && node ./build/src/index.js"
   },
   "nodemonConfig": {
     "watch": [

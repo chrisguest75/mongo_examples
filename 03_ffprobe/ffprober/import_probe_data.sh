@@ -22,7 +22,6 @@ EOF
 }
 
 FOLDER=.  
-OUTPUT=  
 
 for i in "$@"
 do
@@ -35,16 +34,9 @@ case $i in
         FOLDER="${i#*=}"
         shift # past argument=value
     ;;
-    -o=*|--output=*)
-        OUTPUT="${i#*=}"
-        shift # past argument=value
-    ;;     
 esac
 done    
 
 
-find "${FOLDER}" -exec echo {} \; 
+find "${FOLDER}" -exec mongoimport -c ffprobe --file {} "mongodb://root:rootpassword@0.0.0.0:27017/ffprobe" --authenticationDatabase admin \; 
 
-#ffprobe -v quiet -print_format json=compact -show_streams -unit -count_frames  /Volumes/videoshare/sintel/sintel-x264-5.1.mp4
-
-#ffprobe -v quiet -print_format json=compact=1 -show_streams /Volumes/videoshare/sintel/sintel-x264-5.1.mp4 

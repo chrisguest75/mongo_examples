@@ -4,8 +4,6 @@ A tool to probe into streams and extract the data
 
 TODO:
 
-* Extract json document
-* extract GOP
 * Upload to mongo?
 
 ## Using Jest

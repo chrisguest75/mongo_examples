@@ -78,7 +78,7 @@ export default class Probe {
         let output = await this.analyzeStreams()
         let probedata = JSON.parse(output);
 
-        // merge gop and filename into video stream
+        // merge gop into video stream
         if (includeGOP) {
             let gop = await this.analyzeGOP()
             let video = probedata.streams.filter((stream: any) => stream.codec_type == "video")
