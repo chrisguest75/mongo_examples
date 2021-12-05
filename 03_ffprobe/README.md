@@ -38,7 +38,9 @@ mongoimport -c ffprobe --file ./ffprober/out/03e548bb050685008105484690c578d2.js
 mongosh "mongodb://root:rootpassword@0.0.0.0:27017/"
 
 > use ffprobe
+```
 
+```js
 db.getCollection('ffprobe').find({})
 db.getCollection('ffprobe').createIndex(
   {
@@ -48,10 +50,35 @@ db.getCollection('ffprobe').createIndex(
       unique: true
   }
 )
+```
 
+```sh
 # load all documents
 ./ffprober/import_probe_data.sh --path=./ffprober/out      
 ```
+
+
+Example queries https://github.com/chrisguest75/docker_build_examples/tree/master/45_docker_scan_process_mongo
+
+```js
+// count all items in collection
+db.getCollection('ffprobe').count()
+
+// count streams for each document
+db.getCollection('ffprobe').aggregate([{$project: { count: { $size:"$streams" }}}])
+
+// find items with only one stream
+db.getCollection('ffprobe').find({streams: { $size: 1 }});
+
+
+db.getCollection('ffprobe').distinct("streams.codec_type")
+db.getCollection('ffprobe').distinct("streams.width")
+db.getCollection('ffprobe').distinct("streams.height")
+db.getCollection('ffprobe').aggregate([
+  { $project: { resolution: { $concat: [ "$streams.width", " - ", "$streams.height" ] } } }
+])
+```
+
 
 
 
@@ -72,3 +99,4 @@ docker-compose --profile backend down --volumes
 ```
 
 ## Resources
+https://newbedev.com/concatenate-string-values-in-array-in-a-single-field-in-mongodb
