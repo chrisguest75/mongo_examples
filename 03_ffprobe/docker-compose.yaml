@@ -1,0 +1,23 @@
+services:
+    mongodb:
+        image: mongo:latest
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: rootpassword
+            MONGO_INITDB_DATABASE: ffprobe
+        ports:
+            - 27017:27017
+        volumes:
+            - 03_ffprobe_data_container:/data/db
+            - ./mongo/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+        networks:
+            - service_bridge    
+        profiles: [backend]            
+    
+volumes:
+    03_ffprobe_data_container:
+
+networks:
+    service_bridge:
+        driver: bridge        
+        
