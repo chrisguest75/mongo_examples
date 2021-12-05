@@ -7,18 +7,22 @@
     "build": "rimraf ./build && tsc",
     "lint": "eslint . --ext .ts",
     "start:dev": "nodemon",
-    "test": "jest"
+    "test": "jest",
+    "start:cmd:singlesegment": "npm run build && node ./build/src/index.js --path '/Volumes/videoshare/bigbuckbunny-hls/segment-0.ts' --out './out' --includegop",
+    "start:cmd:segments": "npm run build && node ./build/src/index.js --path '/Volumes/videoshare/bigbuckbunny-hls' --out './out' --includegop",
+    "start:cmd:cosmos": "npm run build && node ./build/src/index.js --path '/Volumes/videoshare/cosmos' --out './out' --includegop"
   },
   "nodemonConfig": {
     "watch": [
       "src",
       "nodemon.json",
       "tsconfig.json",
-      "package.json"
+      "package.json",
+      "package-lock.json"
     ],
     "ext": "ts",
     "ignore": [],
-    "exec": "ts-node ./src/index.ts"
+    "exec": "ts-node ./src/index.ts --path '/Volumes/videoshare/cosmos'"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +30,7 @@
   "devDependencies": {
     "@types/jest": "^27.0.3",
     "@types/md5-file": "^5.0.0",
+    "@types/minimist": "^1.2.2",
     "@types/node": "^16.11.11",
     "@types/papaparse": "^5.3.1",
     "@types/pino": "^7.0.5",
@@ -39,6 +44,7 @@
   },
   "dependencies": {
     "md5-file": "^5.0.0",
+    "minimist": "^1.2.5",
     "papaparse": "^5.3.1",
     "pino": "^7.5.1"
   }

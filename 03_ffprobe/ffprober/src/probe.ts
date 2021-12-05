@@ -71,18 +71,21 @@ export default class Probe {
         });
     }
 
-    async analyze(): Promise<string> {
+    async analyze(includeGOP: boolean = false): Promise<string> {
         this.md5 = await md5File.sync(this.file)
+        logger.info(`${this.md5} for ${this.file}`)
         this.size = await this.getFilesizeInBytes(this.file)
         let output = await this.analyzeStreams()
         let probedata = JSON.parse(output);
-        let gop = await this.analyzeGOP()
 
-        return new Promise((resolve, reject) => {
-            // merge gop and filename into video stream
+        // merge gop and filename into video stream
+        if (includeGOP) {
+            let gop = await this.analyzeGOP()
             let video = probedata.streams.filter((stream: any) => stream.codec_type == "video")
-            video[0]["gop"] = gop
-    
+            video[0]["gop"] = gop    
+        }
+
+        return new Promise((resolve, reject) => {    
             // merge md5 of the file
             let final = {
                 file: this.file,
@@ -90,7 +93,7 @@ export default class Probe {
                 size: this.size,
                 ...probedata
             }
-            console.log(final)
+            logger.info(final)
 
             resolve(JSON.stringify(final, null, "\t"));
         });

@@ -1,37 +1,57 @@
+import minimist from "minimist";
 import path = require("path");
 import fs = require("fs");
 import { logger } from "./logger";
-import Probe from "./probe";
 import Find from "./find";
-import { findSourceMap } from "module";
+import Analyse from "./analyse";
 
-async function analyse(fullPath: string): Promise<string>  {
-    return new Promise((resolve, reject) => {
-        logger.info(`Analyse ${fullPath}`)
-        const outPath = "./out"
-        let probe = new Probe(fullPath);
 
-        let output = probe.analyze().then((output) => {
-            let outFile = `${probe.md5}.json`
-            let fullOutPath = path.join(outPath, outFile)
-            
-            // write to outpath
-            if (!fs.existsSync(outPath)) {
-                fs.mkdirSync(outPath);
-            }
+// Main
+async function main(args: minimist.ParsedArgs): Promise<string> {
+  logger.debug("enter main:" + args._);
+
+  return new Promise((resolve, reject) => {
+    let basePath = "";
+    if (args["path"] == null) {
+      logger.error("Path parameter is missing");
+      reject("Path parameter is missing");
+      throw new Error("Path parameter is missing")
+    }
+    if (args["out"] == null) {
+      logger.error("Out parameter is missing");
+      reject("Out parameter is missing");
+      throw new Error("Out parameter is missing")
+    }
+  
+    basePath = args["path"];
+    let analyse = new Analyse(args["out"], args["includegop"])
     
-            fs.writeFileSync(fullOutPath, output)
-            logger.info(`Created ${fullOutPath}`);    
-            
-        })
-    });
-}
+    logger.info(`Find files in ${basePath}`);
 
-async function main() {
-    const basePath = "/Volumes/videoshare/bigbuckbunny-hls"
     let find = new Find();
-    logger.info(`Find files in ${basePath}`)
-    find.findSync(basePath, ".*", true, analyse)
+    find.findSync(basePath, ".*", true, analyse);
+  
+    logger.debug("exit main");
+    //resolve("Complete");
+  });
 }
 
-main()
+let args: minimist.ParsedArgs = minimist(process.argv.slice(2), {
+  string: ["path", "out"],
+  boolean: ["verbose", "includegop"],
+  //alias: { v: 'version' }
+});
+if (args["verbose"]) {
+  logger.level = "debug";
+} else {
+  logger.level = "info";
+}
+logger.info(args);
+main(args)
+  .then(() => {
+    process.exit(0);
+  })
+  .catch((e) => {
+    console.log(e);
+    process.exit(1);
+  });
