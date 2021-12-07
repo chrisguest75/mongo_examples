@@ -41,6 +41,9 @@ mongosh "mongodb://root:rootpassword@0.0.0.0:27017/"
 ```
 
 ```js
+// check mongodb version
+db.version()
+
 db.getCollection('ffprobe').find({})
 db.getCollection('ffprobe').createIndex(
   {
@@ -85,9 +88,18 @@ db.getCollection('ffprobe').find({streams: { $size: 1 }});
 db.getCollection('ffprobe').distinct("streams.codec_type")
 db.getCollection('ffprobe').distinct("streams.width")
 db.getCollection('ffprobe').distinct("streams.height")
+
+
 db.getCollection('ffprobe').aggregate([
-  { $project: { resolution: { $concat: [ "$streams.width", " - ", "$streams.height" ] } } }
+  { $unwind: '$streams' },
+  { $match: {'streams.codec_type': 'video'} },
+    
+    { $project: { _id: 0, file: 1, width: { $toString:"$streams.width" }, height: { $toString:"$streams.height" } } },     
+    { $project: { file: 1, resolution: { $concat: [ "$width", "x","$height" ] } } }   
+  
 ])
+
+
 ```
 
 
