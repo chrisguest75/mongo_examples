@@ -89,17 +89,72 @@ db.getCollection('ffprobe').distinct("streams.codec_type")
 db.getCollection('ffprobe').distinct("streams.width")
 db.getCollection('ffprobe').distinct("streams.height")
 
-
+// distinct resolutions
 db.getCollection('ffprobe').aggregate([
   { $unwind: '$streams' },
   { $match: {'streams.codec_type': 'video'} },
     
     { $project: { _id: 0, file: 1, width: { $toString:"$streams.width" }, height: { $toString:"$streams.height" } } },     
     { $project: { file: 1, resolution: { $concat: [ "$width", "x","$height" ] } } }   
-  
 ])
 
+// distinct codec_long_name
+db.getCollection('ffprobe').aggregate([
+  { $unwind: '$streams' },
+  { $match: {'streams.codec_type': 'video'} },
+    
+    { $project: { file: 1, width: { $toString:"$streams.width" }, height: { $toString:"$streams.height" } } },     
+    { $project: { file: 1, resolution: { $concat: [ "$width", "x","$height" ] } } },   
+  {$group: {_id: null, resolutions: {$addToSet: "$resolution"}}}
+])
 
+// most common video and audio codecs
+db.getCollection('ffprobe').aggregate([
+  { $unwind: '$streams' },
+  { $match: {'streams.codec_type': 'video'} },
+  {$group: {_id: null, uniqueValues: {$addToSet: "$streams.codec_long_name"}}}
+])
+
+// most common audio codecs
+db.getCollection('ffprobe').aggregate([
+  { $unwind: '$streams' },
+  { $match: {'streams.codec_type': 'audio'} },
+  {$group: {_id: null, uniqueValues: {$addToSet: "$streams.codec_long_name"}}}
+])
+
+// group files into audio codec type
+db.getCollection('ffprobe').aggregate([
+    { $unwind: '$streams' },
+    { $match: {'streams.codec_type': 'audio'} },
+   { $group : { _id : "$streams.codec_long_name", books: { $push: "$file" } } }
+ ])
+
+// count of the audio codec types
+ db.getCollection('ffprobe').aggregate([
+    { $unwind: '$streams' },
+    { $match: {'streams.codec_type': 'audio'} },
+   { $group : { _id : "$streams.codec_long_name", count: { $count: {} } } }
+ ])
+
+// count of the video codec types
+ db.getCollection('ffprobe').aggregate([
+    { $unwind: '$streams' },
+    { $match: {'streams.codec_type': 'video'} },
+   { $group : { _id : "$streams.codec_long_name", count: { $count: {} } } }
+ ])  
+
+  db.getCollection('ffprobe').aggregate([
+    { $unwind: '$streams' },
+    { $match: {'streams.codec_type': 'audio'} },
+   { $group : { _id : "$streams.sample_rate", count: { $count: {} } } }
+ ])  
+
+//audio sample rates
+   db.getCollection('ffprobe').aggregate([
+    { $unwind: '$streams' },
+    { $match: {'streams.codec_type': 'audio'} },
+   { $group : { _id : "$streams.sample_rate", count: { $count: {} } } }
+ ])  
 ```
 
 

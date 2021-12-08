@@ -36,14 +36,19 @@ export default class Probe {
         return new Promise((resolve, reject) => {
             let options = ["-v", "quiet", "-print_format", "json=compact=1", "-show_streams", this.file];
 
-            let out = this.run(options);
-        
-            let realOut = "Error";
-            if (out != null) {
-                realOut = out[1] || ""
+            try {
+                let out = this.run(options);
+                let realOut = "Error";
+                if (out != null) {
+                    realOut = out[1] || ""
+                }
+            
+                resolve(realOut);
+            } catch (ex) {
+                logger.error(`Failed: ${this.file}`)
+                reject(ex)    
             }
         
-            resolve(realOut);
         });
     }    
 

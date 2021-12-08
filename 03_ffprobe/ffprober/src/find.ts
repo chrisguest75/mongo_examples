@@ -48,7 +48,7 @@ export default class Find {
             }
         }
         catch (error) {
-            logger.error("Failed to list directory", error)        
+            logger.error(`Failed to list directory '${folder}'`, error)        
             throw error
         }
     }

@@ -88,6 +88,12 @@ npm run start:dev
 
 # build
 npm run build 
+
+# pass path in
+npm run start:cmd:path --path=../../../../evaluation          
+
+# to import data into mongodb
+./import_probe_data.sh
 ```
 
 ## Testing

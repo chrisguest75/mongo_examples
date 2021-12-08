@@ -12,6 +12,7 @@
     "start:cmd:segments": "npm run build && node ./build/src/index.js --path '/Volumes/videoshare/bigbuckbunny-hls' --out './out' --includegop",
     "start:cmd:cosmos": "npm run build && node ./build/src/index.js --path '/Volumes/videoshare/cosmos' --out './out' --includegop",
     "start:cmd:all": "npm run build && node ./build/src/index.js --path '/Volumes/videoshare' --out './out' --includegop",
+    "start:cmd:path": "npm run build && node ./build/src/index.js --path $npm_config_path --out './out' $npm_config_includegop",
     "start:cmd:missing": "npm run build && node ./build/src/index.js"
   },
   "nodemonConfig": {
