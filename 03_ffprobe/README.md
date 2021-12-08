@@ -155,6 +155,16 @@ db.getCollection('ffprobe').aggregate([
     { $match: {'streams.codec_type': 'audio'} },
    { $group : { _id : "$streams.sample_rate", count: { $count: {} } } }
  ])  
+
+// sorted sample rates
+ db.getCollection('ffprobe').aggregate([
+    { $unwind: '$streams' },
+    { $match: {'streams.codec_type': 'audio'} },
+   { $group : { _id : "$streams.sample_rate", count: { $count: {} } } },
+   { $project: { _id:  { $toInt:"$_id" }, count: 1}},
+    { $sort : { _id : 1 } }
+ ])  
+
 ```
 
 
