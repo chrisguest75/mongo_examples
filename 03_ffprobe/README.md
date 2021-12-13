@@ -35,6 +35,8 @@ docker-compose --profile backend up -d --build
 ```sh
 mongoimport -c ffprobe --file ./ffprober/out/03e548bb050685008105484690c578d2.json "mongodb://root:rootpassword@0.0.0.0:27017/ffprobe" --authenticationDatabase admin
 
+mongosh "mongodb://user:userpassword@/0.0.0.0:27017/"
+
 mongosh "mongodb://root:rootpassword@0.0.0.0:27017/"
 
 > use ffprobe
@@ -55,26 +57,31 @@ db.getCollection('ffprobe').createIndex(
 )
 ```
 
+## FFProber
+
+Included is a tool called `ffprober` that I've written to go through directories of media files and dump the ffprobe data out.  It also adds some useful extra fields such as an MD5, filesize, filename and GOP structure.  
+
+ffprober [readme.md](/ffprober/README.md)  
+
 ```sh
-# load all documents
+# load all ffprober documents
 ./ffprober/import_probe_data.sh --path=./ffprober/out      
 ```
 
+## Querying
 
-Example queries https://github.com/chrisguest75/docker_build_examples/tree/master/45_docker_scan_process_mongo
+When writing queries I find it useful to state the questions first.  
+
+Questions:
+
+* What are the distinct resolutions?
+* What are the counts of most common number of streams (video and audio)?
+* What are the most common video and audio codecs?
+* What are the framerates?
+* What are the sample_rates?
+* Are there any captions?
 
 ```js
-Questions:
-* distinct resolutions
-* counts of most common number of streams (video and audio)
-* most common video and audio codecs
-* framerates 
-* sample_rates 
-* audio channels
-* captions
-
-
-
 // count all items in collection
 db.getCollection('ffprobe').count()
 
@@ -164,19 +171,6 @@ db.getCollection('ffprobe').aggregate([
    { $project: { _id:  { $toInt:"$_id" }, count: 1}},
     { $sort : { _id : 1 } }
  ])  
-
-```
-
-
-
-
-
-
-
-```sh
-mongosh "mongodb://0.0.0.0:27017/test?retryWrites=true&w=majority" 
-
-mongosh "mongodb://user:userpassword@/0.0.0.0:27017/ffprobe?retryWrites=true&w=majority"
 ```
 
 ## Cleanup
@@ -187,4 +181,5 @@ docker-compose --profile backend down --volumes
 ```
 
 ## Resources
-https://newbedev.com/concatenate-string-values-in-array-in-a-single-field-in-mongodb
+
+* Concatenate string values in array in a single field in MongoDB [here](https://newbedev.com/concatenate-string-values-in-array-in-a-single-field-in-mongodb)
