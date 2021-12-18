@@ -5,6 +5,7 @@ Grafana requires Enterprise to add mongodb integration
 TODO:
 
 * Take some results from mongo and try to graph them in elasticsearch
+* 
 
 ## Startup
 
@@ -60,3 +61,6 @@ docker-compose --profile backend down --volumes
 https://gist.github.com/Tallic/9486fb03a1425398be3091f320d23a06
 
 https://levelup.gitconnected.com/docker-compose-made-easy-with-elasticsearch-and-kibana-4cb4110a80d
+
+https://techoverflow.net/2019/04/06/how-to-insert-test-data-into-elasticsearch-6-x/
+
