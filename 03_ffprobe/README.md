@@ -86,17 +86,43 @@ Questions:
 db.getCollection('ffprobe').count()
 
 // count streams for each document
-db.getCollection('ffprobe').aggregate([{$project: { count: { $size:"$streams" }}}])
+db.getCollection('ffprobe').aggregate([
+  {$project: { count: { $size:"$streams" }}
+}])
 
 // find items with only one stream
 db.getCollection('ffprobe').find({streams: { $size: 1 }});
 
 
 db.getCollection('ffprobe').distinct("streams.codec_type")
+db.getCollection('ffprobe').distinct("streams.codec_name")
 db.getCollection('ffprobe').distinct("streams.width")
 db.getCollection('ffprobe').distinct("streams.height")
 
-// distinct resolutions
+// all codecs
+db.getCollection('ffprobe').aggregate([
+  { $unwind: '$streams' },
+  { $project: { file: 1, codec: { $concat: [ "$streams.codec_type", " ","$streams.codec_name" ] } } },   
+  {$group: {_id: null, codecs: {$addToSet: "$codec"}}}
+])
+
+// codecs grouped by type
+db.getCollection('ffprobe').aggregate([
+  { $unwind: '$streams' },
+  {$group: {_id: "$streams.codec_type", codecs: {$addToSet: "$streams.codec_name" }}}
+])
+
+// sample rates and bit rates
+db.getCollection('ffprobe').aggregate([
+  { $unwind: '$streams' },
+    { $match: {'streams.codec_type': 'audio'} },
+{ $project: { _id: 0, file: 1, codec_long_name:{ $toString:"$streams.codec_long_name" }, sample_rate: { $toString:"$streams.sample_rate" }, bit_rate: { $toString:"$streams.bit_rate" } } }, 
+
+  { $project: { file: 1, codec_long_name:1, audiorate: { $concat: [ "$sample_rate", "khz - ", "$bit_rate", "bps"] } } },   
+  {$group: {_id: "$codec_long_name", audiorates: {$addToSet: "$audiorate"}}}
+])
+
+// resolution of each file
 db.getCollection('ffprobe').aggregate([
   { $unwind: '$streams' },
   { $match: {'streams.codec_type': 'video'} },
@@ -105,7 +131,7 @@ db.getCollection('ffprobe').aggregate([
     { $project: { file: 1, resolution: { $concat: [ "$width", "x","$height" ] } } }   
 ])
 
-// distinct codec_long_name
+// distinct resolution
 db.getCollection('ffprobe').aggregate([
   { $unwind: '$streams' },
   { $match: {'streams.codec_type': 'video'} },
@@ -115,62 +141,48 @@ db.getCollection('ffprobe').aggregate([
   {$group: {_id: null, resolutions: {$addToSet: "$resolution"}}}
 ])
 
-// most common video and audio codecs
+// most common audio and video codecs
 db.getCollection('ffprobe').aggregate([
   { $unwind: '$streams' },
-  { $match: {'streams.codec_type': 'video'} },
-  {$group: {_id: null, uniqueValues: {$addToSet: "$streams.codec_long_name"}}}
+  {$group: {_id: "$streams.codec_type", uniqueValues: {$addToSet: "$streams.codec_long_name"}}}
 ])
 
-// most common audio codecs
+// group files into audio and video codec type
 db.getCollection('ffprobe').aggregate([
   { $unwind: '$streams' },
-  { $match: {'streams.codec_type': 'audio'} },
-  {$group: {_id: null, uniqueValues: {$addToSet: "$streams.codec_long_name"}}}
+  { $group : { _id : "$streams.codec_long_name", files: { $push: {file: "$file", codec_long_name: "$streams.codec_type"} } }}
+ ])
+
+// count by codec types
+db.getCollection('ffprobe').aggregate([
+  { $unwind: 'streams' },
+  { $group : { _id : "$streams.codec_long_name", count: { $count: {} } } },
+  { $sort : { count : -1 } }
 ])
 
-// group files into audio codec type
+// count audio only codec
 db.getCollection('ffprobe').aggregate([
     { $unwind: '$streams' },
     { $match: {'streams.codec_type': 'audio'} },
-   { $group : { _id : "$streams.codec_long_name", books: { $push: "$file" } } }
- ])
+    { $group : { _id : "$streams.codec_long_name", count: { $count: {} } } },
+    { $sort : { count : -1 } }
+])
 
-// count of the audio codec types
- db.getCollection('ffprobe').aggregate([
-    { $unwind: '$streams' },
-    { $match: {'streams.codec_type': 'audio'} },
-   { $group : { _id : "$streams.codec_long_name", count: { $count: {} } } }
- ])
-
-// count of the video codec types
- db.getCollection('ffprobe').aggregate([
-    { $unwind: '$streams' },
-    { $match: {'streams.codec_type': 'video'} },
-   { $group : { _id : "$streams.codec_long_name", count: { $count: {} } } }
- ])  
-
+//audio sample rates
   db.getCollection('ffprobe').aggregate([
     { $unwind: '$streams' },
     { $match: {'streams.codec_type': 'audio'} },
    { $group : { _id : "$streams.sample_rate", count: { $count: {} } } }
  ])  
 
-//audio sample rates
-   db.getCollection('ffprobe').aggregate([
-    { $unwind: '$streams' },
-    { $match: {'streams.codec_type': 'audio'} },
-   { $group : { _id : "$streams.sample_rate", count: { $count: {} } } }
- ])  
-
 // sorted sample rates
- db.getCollection('ffprobe').aggregate([
-    { $unwind: '$streams' },
-    { $match: {'streams.codec_type': 'audio'} },
-   { $group : { _id : "$streams.sample_rate", count: { $count: {} } } },
-   { $project: { _id:  { $toInt:"$_id" }, count: 1}},
-    { $sort : { _id : 1 } }
- ])  
+db.getCollection('ffprobe').aggregate([
+  { $unwind: '$streams' },
+  { $match: {'streams.codec_type': 'audio'} },
+  { $group : { _id : "$streams.sample_rate", count: { $count: {} } } },
+  { $project: { _id:  { $toInt:"$_id" }, count: 1}},
+  { $sort : { _id : 1 } }
+])  
 ```
 
 ## Cleanup
