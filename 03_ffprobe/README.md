@@ -183,6 +183,33 @@ db.getCollection('ffprobe').aggregate([
   { $project: { _id:  { $toInt:"$_id" }, count: 1}},
   { $sort : { _id : 1 } }
 ])  
+
+// grouped durations
+db.getCollection('ffprobe').aggregate([
+     { $unwind: '$streams' },
+    { "$group": {
+        "_id": {
+            "$cond": [
+                { "$lt": [ { $toDouble:"$streams.duration" } , 10 ] },
+                "0-10secs",
+                    {"$cond": [
+                { "$lt": [ {$toDouble:"$streams.duration"}, 60 ] },
+                "10-60secs",
+                {"$cond": [
+                { "$lt": [ {$toDouble:"$streams.duration"}, 600 ] },
+                "60-600secs",
+                "600+secs"
+            ]}
+            ]}
+
+          ]
+        },
+        "count": { "$sum": 1 },
+        "files": { $push: {file: "$file", duration: "$streams.duration"} }
+    }}
+])    
+
+
 ```
 
 ## Cleanup
