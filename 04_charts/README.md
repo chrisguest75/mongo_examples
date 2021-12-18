@@ -11,10 +11,10 @@ docker compose config --profiles
 docker compose --profile backend up -d 
 
 # quick test
-docker logs $(docker ps --filter name=04_charts-mongodb-1 -q)
+docker logs $(docker ps --filter name=04_charts_mongodb_1 -q)
 
 # has charts connected?
-docker logs $(docker ps --filter name=04_charts-charts-1 -q)
+docker logs $(docker ps --filter name=04_charts_charts_1 -q)
 
 docker compose --profile backend down
 ```
