@@ -6,6 +6,10 @@ name = "pypi"
 [packages]
 dash = "*"
 plotly = "*"
+pymongo = "*"
+requests = "*"
+jupyter-dash = "*"
+pandas = "*"
 
 [dev-packages]
 

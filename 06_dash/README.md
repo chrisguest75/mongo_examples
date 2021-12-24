@@ -20,10 +20,17 @@ code .
 # in terminal inside vscode
 . ./.venv/bin/activate    
 
-python ./main.py      
+python ./main.py   
+python ./bubble.py       
 ```
 
 ## Resources
 
-* [pyenv](https://github.com/pyenv/pyenv)
-* [pipenv](https://pypi.org/project/pipenv/)
+* [pyenv](https://github.com/pyenv/pyenv)  
+* [pipenv](https://pypi.org/project/pipenv/)  
+* Plot Live Graphs using Python Dash and Plotly [here](https://www.geeksforgeeks.org/plot-live-graphs-using-python-dash-and-plotly/)  
+
+
+https://dash.plotly.com/installation
+https://github.com/plotly/jupyter-dash
+
