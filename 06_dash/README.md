@@ -36,7 +36,7 @@ code .
 # in terminal inside vscode
 . ./.venv/bin/activate    
 
-python ./imports_bubble.py       
+python ./imports-bubble.py       
 ```
 
 ## Resources
