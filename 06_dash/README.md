@@ -2,6 +2,10 @@
 
 Demonstrate how to connect `dash` to `mongo`
 
+TODO:
+
+* data has to be faked.  
+
 ## Build and Run
 
 To install locally you can clone the repo
@@ -21,7 +25,21 @@ code .
 . ./.venv/bin/activate    
 
 python ./main.py   
-python ./bubble.py       
+python ./imports_bubble.py       
+```
+
+
+```csv
+codec,year,month,imports,type,duration
+AAC,2020,Dec,600,Audio,900
+```
+
+```sh
+mongosh "mongodb://root:rootpassword@0.0.0.0:27017/"  
+load("./data/mongosh_imports_by_month.js");
+use ffprobe
+var out = tool.getImportsPerMonth()
+jsonsaver.saveImportsPerMonth("./data/imports_by_month.json", out)
 ```
 
 ## Resources

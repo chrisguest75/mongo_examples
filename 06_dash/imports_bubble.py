@@ -6,7 +6,7 @@ import plotly.express as px
 
 import pandas as pd
 
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv')
+df = pd.read_json('./data/imports_by_month.json')
 
 app = dash.Dash(__name__)
 
@@ -29,9 +29,9 @@ app.layout = html.Div([
 def update_figure(selected_year):
     filtered_df = df[df.year == selected_year]
 
-    fig = px.scatter(filtered_df, x="gdpPercap", y="lifeExp",
-                     size="pop", color="continent", hover_name="country",
-                     log_x=True, size_max=55)
+    fig = px.scatter(filtered_df, x="month", y="total",
+                     size="total", color="month", hover_name="month",
+                     log_x=False, size_max=55)
 
     fig.update_layout(transition_duration=500)
 
