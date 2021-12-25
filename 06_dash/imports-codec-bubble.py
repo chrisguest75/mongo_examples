@@ -8,7 +8,6 @@ import pandas as pd
 
 
 ## TODO:
-## * Select codec type and update codecs.. 
 ## * Bootstrap styling.
 
 
@@ -24,22 +23,28 @@ codecs.sort()
 app = dash.Dash(__name__)
 
 app.layout = html.Div([
+    html.H1(children='Imported Codec Popularity'),
+
+    html.Div(children='''Uses probe data to determine types of codec - you can multi-select codec types and codec used'''),
+
     html.Div([
         html.Div([
-            dcc.Dropdown(
+            html.Label([
+        "type",dcc.Dropdown(
                 id='codecs-types-filter',
                 options=[{'label': i, 'value': i} for i in codecs_type],
                 multi=True,
                 searchable=True
-            ),
+            ),]),
         ], style={'width': '48%', 'display': 'inline-block'}),
         html.Div([
-            dcc.Dropdown(
+            html.Label([
+        "codec",dcc.Dropdown(
                 id='codecs-filter',
                 options=[{'label': i, 'value': i} for i in codecs],
                 multi=True,
                 searchable=True
-            ),
+            ),]),
         ], style={'width': '48%', 'float': 'right', 'display': 'inline-block'}),
 
     ]),
@@ -54,6 +59,22 @@ app.layout = html.Div([
         step=None
     )
 ])
+
+@app.callback(
+    dash.dependencies.Output('codecs-filter', 'options'),
+    [dash.dependencies.Input('codecs-types-filter', 'value')])
+def set_codecs_options(selected_types):
+    if selected_types is not None:
+        codecs = df[pd.notnull(df.codec_long_name)]
+
+        # filter codecs on selected types
+        filtered_df = codecs.loc[(codecs['codec_type'].isin(selected_types))]
+
+        codecs = filtered_df['codec_long_name'].unique()
+        codecs.sort()
+    else:
+        codecs = []
+    return [{'label': i, 'value': i} for i in codecs]
 
 
 @app.callback(
