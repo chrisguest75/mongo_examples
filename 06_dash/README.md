@@ -38,8 +38,6 @@ var out = tool.getImportsPerMonthCodecs()
 jsonsaver.saveJsonFile("./data/imports_by_month_codecs.json", out)
 var out = tool.getImportsPerMonthDurationGroup()
 jsonsaver.saveJsonFile("./data/imports_by_month_durationgroups.json", out)
-
-# THIS TIMESOUT
 var out = tool.getImportsAudioRates()
 jsonsaver.saveJsonFile("./data/imports_audio_bitrates.json", out)
 ```
@@ -63,6 +61,9 @@ python ./imports-duration-stacked.py
 
 # use the bootstrap version of the codec bubble up
 python ./imports-codec-bubble-bootstrap.py
+
+# needs a bit of work
+python ./imports-audiobitrates-heatmap.py 
 ```
 
 ## Resources
