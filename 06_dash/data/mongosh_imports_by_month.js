@@ -90,34 +90,36 @@ var tool = (function () {
                     { $group : { _id :  { year: "$year", month: "$month", month_num:"$month_num", "duration_group": {
                         "$cond": [
                             { "$lt": [ { $toDouble:"$probe.streams.duration" } , 10 ] },
-                            "0-10secs",
+                            "(1) 0-10secs",
                                 {"$cond": [
                             { "$lt": [ {$toDouble:"$probe.streams.duration"}, 60 ] },
-                            "10-60secs",
+                            "(2) 10-60secs",
                             {"$cond": [
                             { "$lt": [ {$toDouble:"$probe.streams.duration"}, 600 ] },
-                            "60-600secs",
+                            "(3) 60-600secs",
                             {"$cond": [
                             { "$lt": [ {$toDouble:"$probe.streams.duration"}, 3600 ] },
-                            "600-3600secs",
+                            "(4) 600-3600secs",
                             {"$cond": [
                             { "$lt": [ {$toDouble:"$probe.streams.duration"}, 7200 ] },
-                            "3600-7200secs",
+                            "(5) 3600-7200secs",
                             {"$cond": [
                             { "$lt": [ {$toDouble:"$probe.streams.duration"}, 10800 ] },
-                            "7200-10800secs",
-                            "10800+secs"
+                            "(6) 7200-10800secs",
+                            "(7) 10800+secs"
                         ]}
                         ]}
                         ]}                
                         ]}
                         ]}
+            
                       ]
-                    },}, total: { $sum : 1 } }},
+                    },
+                        }, total: { $sum : 1 } }},
                 { $group : { _id :  "$_id.year", months: { $push: { month:"$_id.month", month_num:"$_id.month_num", duration_group : "$_id.duration_group", total : "$total" }}}},
                 {$unwind:"$months"},
                 {$project: {year:"$_id", month:"$months.month", month_num:"$months.month_num", duration_group : "$months.duration_group", total:"$months.total"}}, 
-                  { $sort : { year : 1, month_num: 1}},
+                  { $sort : { year : 1, month_num: 1, duration_group: 1 }},
             ]).toArray(); 
             //printjson(importsArray);
             return importsArray

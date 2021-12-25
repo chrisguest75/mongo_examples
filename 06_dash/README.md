@@ -55,6 +55,7 @@ python ./imports-duration-bubble.py
 
 * [pyenv](https://github.com/pyenv/pyenv)  
 * [pipenv](https://pypi.org/project/pipenv/)  
+* https://plotly.com/python/
 * Plot Live Graphs using Python Dash and Plotly [here](https://www.geeksforgeeks.org/plot-live-graphs-using-python-dash-and-plotly/)  
 * Dash Installation [here](https://dash.plotly.com/installation)  
 * plotly/jupyter-dash [repo](https://github.com/plotly/jupyter-dash)  
