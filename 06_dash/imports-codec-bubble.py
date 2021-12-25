@@ -6,12 +6,39 @@ import plotly.express as px
 
 import pandas as pd
 
-#df = pd.read_json('./data/imports_by_month.json')
+
+## TODO:
+## * Select codec type and update codecs.. 
+## * Bootstrap styling.
+
+
 df = pd.read_json('./data/imports_by_month_codecs.json')
+codecs_type = df[pd.notnull(df.codec_type)]
+codecs_type = codecs_type['codec_type'].unique()
+codecs = df[pd.notnull(df.codec_long_name)]
+codecs = codecs['codec_long_name'].unique()
 
 app = dash.Dash(__name__)
 
 app.layout = html.Div([
+    html.Div([
+        html.Div([
+            dcc.Dropdown(
+                id='codecs-types-filter',
+                options=[{'label': i, 'value': i} for i in codecs_type],
+                multi=True
+            ),
+        ], style={'width': '48%', 'display': 'inline-block'}),
+        html.Div([
+            dcc.Dropdown(
+                id='codecs-filter',
+                options=[{'label': i, 'value': i} for i in codecs],
+                multi=True
+            ),
+        ], style={'width': '48%', 'float': 'right', 'display': 'inline-block'}),
+
+    ]),
+
     dcc.Graph(id='graph-with-slider'),
     dcc.Slider(
         id='year-slider',
@@ -26,15 +53,17 @@ app.layout = html.Div([
 
 @app.callback(
     Output('graph-with-slider', 'figure'),
-    Input('year-slider', 'value'))
-def update_figure(selected_year):
+    Input('year-slider', 'value'),
+    Input('codecs-filter', 'value'))
+def update_figure(selected_year, codecs_filter):
     filtered_df = df[df.year == selected_year]
+    print(codecs_filter)
+    if codecs_filter is None:
+        codecs_filter = []
+    boolean_series = filtered_df.codec_long_name.isin(codecs_filter)
+    codecfiltered_df = filtered_df[boolean_series]
 
-    # fig = px.scatter(filtered_df, x="month", y="total",
-    #                  size="total", color="month", hover_name="month",
-    #                  log_x=False, size_max=55)
-
-    fig = px.scatter(filtered_df, x="month", y="total",
+    fig = px.scatter(codecfiltered_df, x="month", y="total",
                     size="total", color="codec_long_name", hover_name="total",
                     log_x=False, size_max=55)
 

@@ -124,12 +124,22 @@ var tool = (function () {
             //printjson(importsArray);
             return importsArray
         },
+        getImportsAudioRates: function () {
+            print('\nImports\n==============================');
+            var importsArray = db.getCollection('prod').aggregate([
+                { $unwind: '$probe.streams' },
+                { $match: {'probe.streams.codec_type': 'audio'} },
+                { $project: { _id: 0, codec_long_name:{ $toString:"$probe.streams.codec_long_name" }, sample_rate: "$probe.streams.sample_rate", "bit_rate": "$probe.streams.bit_rate" } },
+            ]).toArray(); 
+        //printjson(importsArray);
+            return importsArray            
+        },
     }
 })();
 
 var jsonsaver = (function () {
     return {
-        saveImportsPerMonth: function (filepath, data) {
+        saveJsonFile: function (filepath, data) {
             print("Saving " + filepath);
             var outjson = JSON.stringify(data);
             fs.writeFile(filepath, outjson, function (err) {

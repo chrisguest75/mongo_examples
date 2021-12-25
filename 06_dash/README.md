@@ -7,6 +7,11 @@ TODO:
 * data has to be faked.  
 * use tables, heatmaps, filters.. 
 
+* heatmaps for sample and bitrate - https://plotly.com/python/2D-Histogram/
+* number of audio streams in assets?
+* audio, bitrate, sample_rate, channels, codec
+
+
 ## Build and Run
 
 To install locally you can clone the repo
@@ -26,11 +31,15 @@ use ffprobe
 load("./data/mongosh_imports_by_month.js");
 
 var out = tool.getImportsPerMonth()
-jsonsaver.saveImportsPerMonth("./data/imports_by_month.json", out)
+jsonsaver.saveJsonFile("./data/imports_by_month.json", out)
 var out = tool.getImportsPerMonthCodecs()
-jsonsaver.saveImportsPerMonth("./data/imports_by_month_codecs.json", out)
+jsonsaver.saveJsonFile("./data/imports_by_month_codecs.json", out)
 var out = tool.getImportsPerMonthDurationGroup()
-jsonsaver.saveImportsPerMonth("./data/imports_by_month_durationgroups.json", out)
+jsonsaver.saveJsonFile("./data/imports_by_month_durationgroups.json", out)
+
+# THIS TIMESOUT
+var out = tool.getImportsAudioRates()
+jsonsaver.saveJsonFile("./data/imports_audio_bitrates.json", out)
 ```
 
 ## Render the dash chart
@@ -44,11 +53,11 @@ code .
 
 python ./imports-bubble.py     
 
-# THIS IS NOT WORKING
 python ./imports-codec-bubble.py       
 
 python ./imports-duration-bubble.py       
 
+python ./imports-duration-stacked.py
 ```
 
 ## Resources
