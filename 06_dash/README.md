@@ -58,6 +58,9 @@ python ./imports-codec-bubble.py
 python ./imports-duration-bubble.py       
 
 python ./imports-duration-stacked.py
+
+# use the bootstrap version of the codec bubble up
+python ./imports-codec-bubble-bootstrap.py
 ```
 
 ## Resources

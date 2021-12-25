@@ -10,6 +10,7 @@ pymongo = "*"
 requests = "*"
 jupyter-dash = "*"
 pandas = "*"
+dash-bootstrap-components = "*"
 
 [dev-packages]
 
