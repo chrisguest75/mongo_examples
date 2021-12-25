@@ -65,8 +65,63 @@ var tool = (function () {
              ]).toArray(); 
             //printjson(importsArray);
             return importsArray
-        }
-
+        },
+        getImportsPerMonthDurationGroup: function () {
+            print('\nImports\n==============================');
+            var importsArray = db.getCollection('prod').aggregate([
+                { $project : { probe: 1, created: { $ifNull: [ "$created", new Date("2000-01-01T00:00:00Z") ] } } },
+                { $project : { probe: 1, month_num : {$month : { $toDate: "$created"  }}, year : {$year :  { $toDate: "$created"  }},}},
+                { $project : { 
+                    month: {
+                        $let: {
+                            vars: {
+                                monthsInString: [, 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                            },
+                            in: {
+                                $arrayElemAt: ['$$monthsInString', '$month_num']
+                            }
+                        }
+                    }, 
+                    year: 1,
+                    month_num: 1,
+                    probe: 1,
+                } },    
+                 { $unwind: '$probe.streams' },
+                    { $group : { _id :  { year: "$year", month: "$month", month_num:"$month_num", "duration_group": {
+                        "$cond": [
+                            { "$lt": [ { $toDouble:"$probe.streams.duration" } , 10 ] },
+                            "0-10secs",
+                                {"$cond": [
+                            { "$lt": [ {$toDouble:"$probe.streams.duration"}, 60 ] },
+                            "10-60secs",
+                            {"$cond": [
+                            { "$lt": [ {$toDouble:"$probe.streams.duration"}, 600 ] },
+                            "60-600secs",
+                            {"$cond": [
+                            { "$lt": [ {$toDouble:"$probe.streams.duration"}, 3600 ] },
+                            "600-3600secs",
+                            {"$cond": [
+                            { "$lt": [ {$toDouble:"$probe.streams.duration"}, 7200 ] },
+                            "3600-7200secs",
+                            {"$cond": [
+                            { "$lt": [ {$toDouble:"$probe.streams.duration"}, 10800 ] },
+                            "7200-10800secs",
+                            "10800+secs"
+                        ]}
+                        ]}
+                        ]}                
+                        ]}
+                        ]}
+                      ]
+                    },}, total: { $sum : 1 } }},
+                { $group : { _id :  "$_id.year", months: { $push: { month:"$_id.month", month_num:"$_id.month_num", duration_group : "$_id.duration_group", total : "$total" }}}},
+                {$unwind:"$months"},
+                {$project: {year:"$_id", month:"$months.month", month_num:"$months.month_num", duration_group : "$months.duration_group", total:"$months.total"}}, 
+                  { $sort : { year : 1, month_num: 1}},
+            ]).toArray(); 
+            //printjson(importsArray);
+            return importsArray
+        },
     }
 })();
 

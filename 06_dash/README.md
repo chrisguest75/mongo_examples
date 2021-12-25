@@ -5,6 +5,7 @@ Demonstrate how to connect `dash` to `mongo`
 TODO:
 
 * data has to be faked.  
+* use tables, heatmaps, filters.. 
 
 ## Build and Run
 
@@ -20,13 +21,16 @@ pipenv install --pre --python $(pyenv which python)
 ## Export data from mongo into json
 
 ```sh
-mongosh "mongodb://root:rootpassword@0.0.0.0:27017/"  
+mongosh "mongodb://root:rootpassword@0.0.0.0:27017/"
+use ffprobe  
 load("./data/mongosh_imports_by_month.js");
-use ffprobe
+
 var out = tool.getImportsPerMonth()
 jsonsaver.saveImportsPerMonth("./data/imports_by_month.json", out)
 var out = tool.getImportsPerMonthCodecs()
 jsonsaver.saveImportsPerMonth("./data/imports_by_month_codecs.json", out)
+var out = tool.getImportsPerMonthDurationGroup()
+jsonsaver.saveImportsPerMonth("./data/imports_by_month_durationgroups.json", out)
 ```
 
 ## Render the dash chart
@@ -38,7 +42,13 @@ code .
 # in terminal inside vscode
 . ./.venv/bin/activate    
 
-python ./imports-bubble.py       
+python ./imports-bubble.py     
+
+# THIS IS NOT WORKING
+python ./imports-codec-bubble.py       
+
+python ./imports-duration-bubble.py       
+
 ```
 
 ## Resources
