@@ -7,7 +7,9 @@ TODO:
 * data has to be faked.  
 * use tables, heatmaps, filters.. 
 
-* heatmaps for sample and bitrate - https://plotly.com/python/2D-Histogram/
+* heatmaps for sample and bitrate 
+- https://plotly.com/python/2D-Histogram/
+- https://plotly.com/python/heatmaps/
 * number of audio streams in assets?
 * audio, bitrate, sample_rate, channels, codec
 
@@ -71,4 +73,5 @@ python ./imports-codec-bubble-bootstrap.py
 * Plot Live Graphs using Python Dash and Plotly [here](https://www.geeksforgeeks.org/plot-live-graphs-using-python-dash-and-plotly/)  
 * Dash Installation [here](https://dash.plotly.com/installation)  
 * plotly/jupyter-dash [repo](https://github.com/plotly/jupyter-dash)  
-* Dash Bootstrap Components [here](https://dash-bootstrap-components.opensource.faculty.ai/)
+* Dash Bootstrap Components [here](https://dash-bootstrap-components.opensource.faculty.ai/)  
+* Coding-with-Adam/Dash-by-Plotly [repo](https://github.com/Coding-with-Adam/Dash-by-Plotly)  
