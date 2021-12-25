@@ -15,8 +15,11 @@ import pandas as pd
 df = pd.read_json('./data/imports_by_month_codecs.json')
 codecs_type = df[pd.notnull(df.codec_type)]
 codecs_type = codecs_type['codec_type'].unique()
+codecs_type.sort()
 codecs = df[pd.notnull(df.codec_long_name)]
 codecs = codecs['codec_long_name'].unique()
+codecs.sort()
+
 
 app = dash.Dash(__name__)
 
@@ -26,14 +29,16 @@ app.layout = html.Div([
             dcc.Dropdown(
                 id='codecs-types-filter',
                 options=[{'label': i, 'value': i} for i in codecs_type],
-                multi=True
+                multi=True,
+                searchable=True
             ),
         ], style={'width': '48%', 'display': 'inline-block'}),
         html.Div([
             dcc.Dropdown(
                 id='codecs-filter',
                 options=[{'label': i, 'value': i} for i in codecs],
-                multi=True
+                multi=True,
+                searchable=True
             ),
         ], style={'width': '48%', 'float': 'right', 'display': 'inline-block'}),
 
