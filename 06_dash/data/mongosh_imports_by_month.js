@@ -166,8 +166,90 @@ var tool = (function () {
         //printjson(importsArray);
             return importsArray            
         },
+        getImportsAudioRatesBuckets: function () {
+            print('\nImports\n==============================');
+            var importsArray = db.getCollection('prod').aggregate([
+                { $unwind: '$probe.streams' },
+                { $match: {'probe.streams.codec_type': 'audio'} },
+                
+                { $project: { _id: 0, codec_long_name:{ $toString:"$probe.streams.codec_long_name" }, sample_rate: {
+                        "$cond": [
+                            { "$lte": [ { $toDouble:"$probe.streams.sample_rate" } , 4000 ] },
+                            "(1) <4000hz",
+                                {"$cond": [
+                            { "$lte": [ {$toDouble:"$probe.streams.sample_rate"}, 8000 ] },
+                            "(2) 4000-8000hz",
+                            {"$cond": [
+                            { "$lte": [ {$toDouble:"$probe.streams.sample_rate"}, 12000 ] },
+                            "(3) 8000-12000hz",
+                            {"$cond": [
+                            { "$lte": [ {$toDouble:"$probe.streams.sample_rate"}, 16000 ] },
+                            "(4) 12000-16000hz",
+                            {"$cond": [
+                            { "$lte": [ {$toDouble:"$probe.streams.sample_rate"}, 32000 ] },
+                            "(5) 16000-32000hz",
+                            {"$cond": [
+                            { "$lte": [ {$toDouble:"$probe.streams.sample_rate"}, 48000 ] },
+                            "(6) 320000-48000hz",
+                            "(7) >48000hz"
+                        ]}
+                        ]}
+                        ]}                
+                        ]}
+                        ]}
+                      ]
+                    },
+                 bit_rate: {
+                        "$cond": [
+                            { "$lt": [ { $toDouble:"$probe.streams.bit_rate" } , 10000 ] },
+                            "(1) <10000bps",
+                                {"$cond": [
+                            { "$lt": [ {$toDouble:"$probe.streams.bit_rate"}, 20000 ] },
+                            "(2) 10000-20000bps",
+                            {"$cond": [
+                            { "$lt": [ {$toDouble:"$probe.streams.bit_rate"}, 40000 ] },
+                            "(3) 20000-40000bps",
+                            {"$cond": [
+                            { "$lt": [ {$toDouble:"$probe.streams.bit_rate"}, 80000 ] },
+                            "(4) 40000-80000bps",
+                            {"$cond": [
+                            { "$lt": [ {$toDouble:"$probe.streams.bit_rate"}, 160000 ] },
+                            "(5) 80000-160000bps",
+                            {"$cond": [
+                            { "$lt": [ {$toDouble:"$probe.streams.bit_rate"}, 320000 ] },
+                            "(6) 160000-320000bps",
+                            "(7) >320000bps"
+                        ]}
+                        ]}
+                        ]}                
+                        ]}
+                        ]}
+                      ]
+                    },
+                    },
+                },    
+                { $group : { _id :  { codec_long_name: "$codec_long_name", sample_rate: "$sample_rate", bit_rate:"$bit_rate", }, total: { $sum : 1 } }},
+                {$project: { _id: 0, codec_long_name:"$_id.codec_long_name", sample_rate:"$_id.sample_rate", bit_rate:"$_id.bit_rate", total : "$total"}}, 
+                  { $sort : { codec_long_name : 1}},
+        ]).toArray(); 
+        //printjson(importsArray);
+            return importsArray            
+        },            
     }
 })();
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 var jsonsaver = (function () {
     return {

@@ -40,6 +40,8 @@ var out = tool.getImportsPerMonthDurationGroup()
 jsonsaver.saveJsonFile("./data/imports_by_month_durationgroups.json", out)
 var out = tool.getImportsAudioRates()
 jsonsaver.saveJsonFile("./data/imports_audio_bitrates.json", out)
+var out = tool.getImportsAudioRatesBuckets()
+jsonsaver.saveJsonFile("./data/imports_audio_bitrates_buckets.json", out)
 ```
 
 ## Render the dash chart

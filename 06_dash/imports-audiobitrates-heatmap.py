@@ -7,7 +7,8 @@ import plotly.express as px
 import pandas as pd
 import numpy as np
 
-df = pd.read_json("./data/imports_audio_bitrates.json")
+#df = pd.read_json("./data/imports_audio_bitrates.json")
+df = pd.read_json("./data/imports_audio_bitrates_buckets.json")
 bitrates = df[pd.notnull(df.bit_rate)]
 bitrates = bitrates['bit_rate'].unique()
 bitrates.sort()
@@ -32,8 +33,6 @@ for index, row in df.iterrows():
 
 print(data)
 
-#data=[[1, 25, 30, 50, 1], [20, 1, 60, 80, 30], [30, 60, 1, 5, 20]]
-
 app = dash.Dash(__name__)
 
 app.layout = html.Div([
@@ -55,10 +54,10 @@ app.layout = html.Div([
 def update_figure(selected_year):
 
     fig = px.imshow(data,
-                    labels=dict(x="Bitrates", y="Samplerates", color="Productivity"),
+                    labels=dict(x="Bitrates", y="Samplerates", color="total"),
                     x=bitrates,
                     y=samplerates,
-                    text_auto=True
+                    text_auto=True, aspect="auto"
                 )
     fig.update_xaxes(side="top")
 
