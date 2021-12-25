@@ -67,7 +67,8 @@ python ./imports-codec-bubble-bootstrap.py
 
 * [pyenv](https://github.com/pyenv/pyenv)  
 * [pipenv](https://pypi.org/project/pipenv/)  
-* https://plotly.com/python/
+* Plotly Python Open Source Graphing Library [here](https://plotly.com/python/)
 * Plot Live Graphs using Python Dash and Plotly [here](https://www.geeksforgeeks.org/plot-live-graphs-using-python-dash-and-plotly/)  
 * Dash Installation [here](https://dash.plotly.com/installation)  
 * plotly/jupyter-dash [repo](https://github.com/plotly/jupyter-dash)  
+* Dash Bootstrap Components [here](https://dash-bootstrap-components.opensource.faculty.ai/)
