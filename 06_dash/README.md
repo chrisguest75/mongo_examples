@@ -25,6 +25,8 @@ load("./data/mongosh_imports_by_month.js");
 use ffprobe
 var out = tool.getImportsPerMonth()
 jsonsaver.saveImportsPerMonth("./data/imports_by_month.json", out)
+var out = tool.getImportsPerMonthCodecs()
+jsonsaver.saveImportsPerMonth("./data/imports_by_month_codecs.json", out)
 ```
 
 ## Render the dash chart
