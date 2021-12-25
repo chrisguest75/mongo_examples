@@ -4,6 +4,10 @@ Demonstrate how to connect `dash` to `mongo`
 
 TODO:
 
+* Script to automatically run the queries and write files.  
+* Add an index with a few different dashboards.  
+* Add a date split to the heatmap.  
+
 * data has to be faked.  
 * use tables, heatmaps, filters.. 
 
@@ -11,7 +15,6 @@ TODO:
 - https://plotly.com/python/2D-Histogram/
 - https://plotly.com/python/heatmaps/
 * number of audio streams in assets?
-* audio, bitrate, sample_rate, channels, codec
 
 
 ## Build and Run
