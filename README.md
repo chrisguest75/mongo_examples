@@ -2,6 +2,13 @@
 
 A repository for showing examples of working with Mongo
 
+TODO:
+
+* performance monitoring
+* multi node mongo cluster
+* transaction example
+* analysis size of documents 
+
 ## Example 1 - MERN
 
 Demonstrate an example of using MERN stack  

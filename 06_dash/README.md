@@ -3,8 +3,7 @@
 Demonstrate how to connect `dash` to `mongo`
 
 TODO:
-
-* Script to automatically run the queries and write files.  
+ 
 * Add an index with a few different dashboards.  
 * Add a month select split to the heatmap.  
 

@@ -26,15 +26,25 @@ print(bitrates)
 app = dash.Dash(__name__)
 
 app.layout = html.Div([
-    dcc.Graph(id='graph-with-slider'),
-    dcc.Slider(
-        id='year-slider',
-        min=df['year'].min(),
-        max=df['year'].max(),
-        value=df['year'].min(),
-        marks={str(year): str(year) for year in df['year'].unique()},
-        step=None
-    )
+    html.H1(children='Bitrates Heatmap (grouped - logplot)'),
+
+    html.Div(children='''Show most common bitrates and samplerates (log plot)'''),
+
+    html.Div([
+        html.Div([
+            dcc.Graph(id='graph-with-slider'),
+        ]),
+            html.Div([
+                dcc.Slider(
+                    id='year-slider',
+                    min=df['year'].min(),
+                    max=df['year'].max(),
+                    value=df['year'].max(),
+                    marks={str(year): str(year) for year in df['year'].unique()},
+                    step=None
+                )
+        ])
+    ])    
 ])
 
 

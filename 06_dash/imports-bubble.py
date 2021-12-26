@@ -1,6 +1,6 @@
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 from dash.dependencies import Input, Output
 import plotly.express as px
 
@@ -12,15 +12,25 @@ df = pd.read_json('./data/imports_by_month.json')
 app = dash.Dash(__name__)
 
 app.layout = html.Div([
-    dcc.Graph(id='graph-with-slider'),
-    dcc.Slider(
-        id='year-slider',
-        min=df['year'].min(),
-        max=df['year'].max(),
-        value=df['year'].min(),
-        marks={str(year): str(year) for year in df['year'].unique()},
-        step=None
-    )
+    html.H1(children='Imported files'),
+
+    html.Div(children='''Counts of raw imports month-by-month.  Use `slider` to select year'''),
+
+    html.Div([
+        html.Div([
+            dcc.Graph(id='graph-with-slider'),
+        ]),
+            html.Div([
+            dcc.Slider(
+                id='year-slider',
+                min=df['year'].min(),
+                max=df['year'].max(),
+                value=df['year'].max(),
+                marks={str(year): str(year) for year in df['year'].unique()},
+                step=None
+            )
+        ])
+    ])
 ])
 
 

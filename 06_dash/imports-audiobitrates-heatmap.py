@@ -39,15 +39,24 @@ print(data)
 app = dash.Dash(__name__)
 
 app.layout = html.Div([
-    dcc.Graph(id='graph-with-slider'),
-    dcc.Slider(
-    id='year-slider',
-    min=0,
-    max=10,
-    value=5,
-    marks={str(year): str(year) for year in range(0,10)},
-    step=None
-)
+    html.H1(children='Bitrates Heatmap (grouped - logplot)'),
+
+    html.Div(children='''Show most common bitrates and samplerates (log plot)'''),
+
+    html.Div([
+        html.Div([
+            dcc.Graph(id='graph-with-slider'),
+        ]),
+            html.Div([
+            dcc.Slider(
+                id='year-slider',
+                min=0,
+                max=10,
+                value=5,
+                marks={str(year): str(year) for year in range(0,10)},                step=None
+            )
+        ])
+    ])
 ])
 
 
