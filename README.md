@@ -7,6 +7,11 @@ A repository for showing examples of working with Mongo
 Demonstrate an example of using MERN stack  
 Steps [README.md](./01_mern/README.md)  
 
+## Example 2 - Mongosh
+
+Demonstrate management commands through `mongosh`  
+Steps [README.md](./02_mongosh/README.md)  
+
 ## Example 3 - ffprobe
 
 Create a small application that can be used to query ffprobe data  
