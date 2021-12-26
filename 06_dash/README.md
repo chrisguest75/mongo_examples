@@ -81,3 +81,5 @@ python ./imports-audiobitrates-heatmap.py
 * plotly/jupyter-dash [repo](https://github.com/plotly/jupyter-dash)  
 * Dash Bootstrap Components [here](https://dash-bootstrap-components.opensource.faculty.ai/)  
 * Coding-with-Adam/Dash-by-Plotly [repo](https://github.com/Coding-with-Adam/Dash-by-Plotly)  
+
+https://stackoverflow.com/questions/68368745/logarithmic-heatmap-in-plotly

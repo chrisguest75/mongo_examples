@@ -11,29 +11,29 @@ viridis = px.colors.sequential.Viridis
 
 #df = pd.read_json("./data/imports_audio_bitrates.json")
 df = pd.read_json("./data/imports_audio_bitrates_buckets.json")
-# bitrates = df[pd.notnull(df.bit_rate)]
-# bitrates = bitrates['bit_rate'].unique()
-# bitrates.sort()
-# samplerates = df[pd.notnull(df.sample_rate)]
-# samplerates = samplerates['sample_rate'].unique()
-# samplerates.sort()
+bitrates = df[pd.notnull(df.bit_rate)]
+bitrates = bitrates['bit_rate'].unique()
+bitrates.sort()
+samplerates = df[pd.notnull(df.sample_rate)]
+samplerates = samplerates['sample_rate'].unique()
+samplerates.sort()
 
-# print(samplerates)
-# print(bitrates)
+print(samplerates)
+print(bitrates)
 
-# data=[]
-# for y in range(0, len(samplerates)):
-#     row = []
-#     for x in range(0, len(bitrates)):
-#         row.append(0)
-#     data.append(row)
+data=[]
+for y in range(0, len(samplerates)):
+    row = []
+    for x in range(0, len(bitrates)):
+        row.append(0)
+    data.append(row)
 
-# for index, row in df.iterrows():
-#     x = np.where(bitrates == row['bit_rate'])[0].min()
-#     y = np.where(samplerates == row['sample_rate'])[0].min()
-#     data[y][x] += int(row['total'])
+for index, row in df.iterrows():
+    x = np.where(bitrates == row['bit_rate'])[0].min()
+    y = np.where(samplerates == row['sample_rate'])[0].min()
+    data[y][x] += int(row['total'])
 
-# print(data)
+print(data)
 # zdata = { 'z': data }
 
 app = dash.Dash(__name__)
@@ -62,15 +62,16 @@ def update_figure(selected_year):
             [1./100, viridis[7]],
             [1., viridis[9]],
     ]
-    fig = px.density_heatmap(x=df['bit_rate'], y=df['sample_rate'],z=df['total'], color_continuous_scale=colorscale)
+    # fig = px.density_heatmap(x=df['bit_rate'], y=df['sample_rate'],z=df['total'], color_continuous_scale=colorscale)
 
-    # fig = px.imshow(data,
-    #                 labels=dict(x="Bitrates", y="Samplerates", color="total"),
-    #                 x=bitrates,
-    #                 y=samplerates,
-    #                 text_auto=True, aspect="auto"
-    #             )
-    # fig.update_xaxes(side="top")
+    fig = px.imshow(data,
+                    labels=dict(x="Bitrates", y="Samplerates", color="total"),
+                    x=bitrates,
+                    y=samplerates,
+                    color_continuous_scale=colorscale,
+                    text_auto=True, aspect="auto"
+                )
+    fig.update_xaxes(side="top")
 
     return fig
 
