@@ -6,7 +6,7 @@ TODO:
 
 * Script to automatically run the queries and write files.  
 * Add an index with a few different dashboards.  
-* Add a date split to the heatmap.  
+* Add a month select split to the heatmap.  
 
 * data has to be faked.  
 * use tables, heatmaps, filters.. 
@@ -45,6 +45,8 @@ var out = tool.getImportsAudioRates()
 jsonsaver.saveJsonFile("./data/imports_audio_bitrates.json", out)
 var out = tool.getImportsAudioRatesBuckets()
 jsonsaver.saveJsonFile("./data/imports_audio_bitrates_buckets.json", out)
+var out = tool.getImportsAudioRatesBucketsYear()
+jsonsaver.saveJsonFile("./data/imports_audio_bitrates_buckets_year.json", out)
 ```
 
 ## Render the dash chart
