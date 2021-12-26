@@ -3,13 +3,11 @@
 Demonstrate how to connect `dash` to `mongo`
 
 TODO:
- 
-* Add an index with a few different dashboards.  
+
 * Add a month select split to the heatmap.  
 * data has to be faked.  
-* use tables, heatmaps, filters.. 
+* use tables, heatmaps, filters.
 * number of audio streams in assets?
-
 
 ## Build and Run
 
@@ -25,22 +23,18 @@ pipenv install --pre --python $(pyenv which python)
 ## Export data from mongo into json
 
 ```sh
+# to manually export the data
 mongosh "mongodb://root:rootpassword@0.0.0.0:27017/"
 use ffprobe  
 load("./data/mongosh_imports_by_month.js");
 
 var out = tool.getImportsPerMonth()
 jsonsaver.saveJsonFile("./data/imports_by_month.json", out)
-var out = tool.getImportsPerMonthCodecs()
-jsonsaver.saveJsonFile("./data/imports_by_month_codecs.json", out)
-var out = tool.getImportsPerMonthDurationGroup()
-jsonsaver.saveJsonFile("./data/imports_by_month_durationgroups.json", out)
-var out = tool.getImportsAudioRates()
-jsonsaver.saveJsonFile("./data/imports_audio_bitrates.json", out)
-var out = tool.getImportsAudioRatesBuckets()
-jsonsaver.saveJsonFile("./data/imports_audio_bitrates_buckets.json", out)
-var out = tool.getImportsAudioRatesBucketsYear()
-jsonsaver.saveJsonFile("./data/imports_audio_bitrates_buckets_year.json", out)
+```
+
+```sh
+# script will run and export data using mongosh and some scripts 
+./export-dash-data.sh   
 ```
 
 ## Render the dash chart
@@ -51,6 +45,13 @@ code .
 
 # in terminal inside vscode
 . ./.venv/bin/activate    
+```
+
+### Multi Page
+
+```sh
+# an example multipage app
+python ./index.py
 ```
 
 ### Single Pages
@@ -71,13 +72,6 @@ python ./singlepages/imports-codec-bubble-bootstrap.py
 python ./singlepages/imports-audiobitrates-heatmap.py 
 ```
 
-### Multi Page
-
-```sh
-python ./index.py
-```
-
-
 ## Resources
 
 * [pyenv](https://github.com/pyenv/pyenv)  
@@ -89,7 +83,6 @@ python ./index.py
 * Dash Bootstrap Components [here](https://dash-bootstrap-components.opensource.faculty.ai/)  
 * Coding-with-Adam/Dash-by-Plotly [repo](https://github.com/Coding-with-Adam/Dash-by-Plotly)  
 * Multi-Page Apps and URL Support [here](https://dash.plotly.com/urls)  
-https://stackoverflow.com/questions/68368745/logarithmic-heatmap-in-plotly
-- https://plotly.com/python/2D-Histogram/
-- https://plotly.com/python/heatmaps/
-
+* Logarithmic heatmap in Plotly [here](https://stackoverflow.com/questions/68368745/logarithmic-heatmap-in-plotly)  
+* 2D Histograms in Python [here](https://plotly.com/python/2D-Histogram/)  
+* Heatmaps in Python [here](https://plotly.com/python/heatmaps/)  
