@@ -9,6 +9,7 @@ Steps [README.md](./01_mern/README.md)
 
 ## Example 3 - ffprobe
 
+Create a small application that can be used to query ffprobe data  
 Steps [README.md](./03_ffprobe/README.md)  
 
 ## Example 6 - Visualising with dash
