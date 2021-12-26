@@ -64,7 +64,7 @@ app.layout = dbc.Container([
         id='year-slider',
         min=df['year'].min(),
         max=df['year'].max(),
-        value=df['year'].min(),
+        value=df['year'].max(),
         marks={str(year): str(year) for year in df['year'].unique()},
         step=None
     )

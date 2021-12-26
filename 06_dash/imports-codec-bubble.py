@@ -26,38 +26,48 @@ app.layout = html.Div([
     html.H1(children='Imported Codec Popularity'),
 
     html.Div(children='''Uses probe data to determine types of codec - you can multi-select codec types and codec used'''),
-
+    html.Div(children=''' '''),
     html.Div([
         html.Div([
             html.Label([
-        "type",dcc.Dropdown(
-                id='codecs-types-filter',
-                options=[{'label': i, 'value': i} for i in codecs_type],
-                multi=True,
-                searchable=True
-            ),]),
+                "type",
+                    dcc.Dropdown(
+                    id='codecs-types-filter',
+                    options=[{'label': i, 'value': i} for i in codecs_type],
+                    multi=True,
+                    searchable=True
+                ),
+            ]),
         ], style={'width': '48%', 'display': 'inline-block'}),
         html.Div([
             html.Label([
-        "codec",dcc.Dropdown(
-                id='codecs-filter',
-                options=[{'label': i, 'value': i} for i in codecs],
-                multi=True,
-                searchable=True
-            ),]),
+                "codec",
+                    dcc.Dropdown(
+                    id='codecs-filter',
+                    options=[{'label': i, 'value': i} for i in codecs],
+                    multi=True,
+                    searchable=True
+                ),
+            ]),
         ], style={'width': '48%', 'float': 'right', 'display': 'inline-block'}),
 
     ]),
 
-    dcc.Graph(id='graph-with-slider'),
-    dcc.Slider(
-        id='year-slider',
-        min=df['year'].min(),
-        max=df['year'].max(),
-        value=df['year'].min(),
-        marks={str(year): str(year) for year in df['year'].unique()},
-        step=None
-    )
+    html.Div([
+        html.Div([
+            dcc.Graph(id='graph-with-slider'),
+        ]),
+            html.Div([
+            dcc.Slider(
+                id='year-slider',
+                min=df['year'].min(),
+                max=df['year'].max(),
+                value=df['year'].max(),
+                marks={str(year): str(year) for year in df['year'].unique()},
+                step=None
+            )
+        ])
+    ])
 ])
 
 @app.callback(

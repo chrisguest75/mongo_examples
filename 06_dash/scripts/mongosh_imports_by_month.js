@@ -1,7 +1,4 @@
-/*```csv
-codec,year,month,imports,type,duration
-AAC,2020,Dec,600,Audio,900
-```*/
+
 var tool = (function () {
     return {
         getImportsPerMonth: function () {

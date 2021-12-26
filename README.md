@@ -2,10 +2,22 @@
 
 A repository for showing examples of working with Mongo
 
+TODO:
+
+* performance monitoring
+* multi node mongo cluster
+* transaction example
+* analysis size of documents 
+
 ## Example 1 - MERN
 
 Demonstrate an example of using MERN stack  
 Steps [README.md](./01_mern/README.md)  
+
+## Example 2 - Mongosh
+
+Demonstrate management commands through `mongosh`  
+Steps [README.md](./02_mongosh/README.md)  
 
 ## Example 3 - ffprobe
 
