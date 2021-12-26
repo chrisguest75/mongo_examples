@@ -4,10 +4,16 @@ Demonstrate how to connect `dash` to `mongo`
 
 TODO:
 
+* Convert it all to bootstrap
 * Add a month select split to the heatmap.  
 * data has to be faked.  
-* use tables, heatmaps, filters.
+* use tables, filters.
 * number of audio streams in assets?
+* Resolutions? 
+* Frame rates?
+* pix_fmt?
+* profile
+
 
 ## Build and Run
 
