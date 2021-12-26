@@ -6,13 +6,8 @@ TODO:
  
 * Add an index with a few different dashboards.  
 * Add a month select split to the heatmap.  
-
 * data has to be faked.  
 * use tables, heatmaps, filters.. 
-
-* heatmaps for sample and bitrate 
-- https://plotly.com/python/2D-Histogram/
-- https://plotly.com/python/heatmaps/
 * number of audio streams in assets?
 
 
@@ -56,21 +51,32 @@ code .
 
 # in terminal inside vscode
 . ./.venv/bin/activate    
+```
 
-python ./imports-bubble.py     
+### Single Pages
 
-python ./imports-codec-bubble.py       
+```sh
+python ./singlepages/imports-bubble.py     
 
-python ./imports-duration-bubble.py       
+python ./singlepages/imports-codec-bubble.py       
 
-python ./imports-duration-stacked.py
+python ./singlepages/imports-duration-bubble.py       
+
+python ./singlepages/imports-duration-stacked.py
 
 # use the bootstrap version of the codec bubble up
-python ./imports-codec-bubble-bootstrap.py
+python ./singlepages/imports-codec-bubble-bootstrap.py
 
 # needs a bit of work
-python ./imports-audiobitrates-heatmap.py 
+python ./singlepages/imports-audiobitrates-heatmap.py 
 ```
+
+### Multi Page
+
+```sh
+python ./index.py
+```
+
 
 ## Resources
 
@@ -82,5 +88,8 @@ python ./imports-audiobitrates-heatmap.py
 * plotly/jupyter-dash [repo](https://github.com/plotly/jupyter-dash)  
 * Dash Bootstrap Components [here](https://dash-bootstrap-components.opensource.faculty.ai/)  
 * Coding-with-Adam/Dash-by-Plotly [repo](https://github.com/Coding-with-Adam/Dash-by-Plotly)  
-
+* Multi-Page Apps and URL Support [here](https://dash.plotly.com/urls)  
 https://stackoverflow.com/questions/68368745/logarithmic-heatmap-in-plotly
+- https://plotly.com/python/2D-Histogram/
+- https://plotly.com/python/heatmaps/
+

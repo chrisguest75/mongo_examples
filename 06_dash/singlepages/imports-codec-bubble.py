@@ -26,7 +26,7 @@ app.layout = html.Div([
     html.H1(children='Imported Codec Popularity'),
 
     html.Div(children='''Uses probe data to determine types of codec - you can multi-select codec types and codec used'''),
-    html.Div(children=''' '''),
+    html.Br(),
     html.Div([
         html.Div([
             html.Label([
