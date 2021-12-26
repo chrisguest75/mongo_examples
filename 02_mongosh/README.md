@@ -6,7 +6,6 @@ Startup a new mongodb with a userdb.
 
 TODO:  
 
-* create a new db with collections and users.  
 * add data to collections  
 * query and export data.  
 * processing mongosh scripts from shell
@@ -72,23 +71,15 @@ show users
 ## Create a new db
 
 ```js
-
-
-
+mongosh "mongodb://root:rootpassword@0.0.0.0:27017" ./scripts/initialise_db.js
+mongosh "mongodb://newdb:newdbpassword@0.0.0.0:27017/newdb"    
+show collections
 ```
 
+## Load db
 
 ```js
 
-db.getCollection('ffprobe').find({})
-db.getCollection('ffprobe').createIndex(
-  {
-      "md5": 1
-  },
-  {
-      unique: true
-  }
-)
 ```
 
 ## Cleanup
@@ -100,3 +91,4 @@ docker-compose --profile backend down --volumes
 
 ## Resources
 
+* Database Commands [here](https://docs.mongodb.com/manual/reference/command/)
