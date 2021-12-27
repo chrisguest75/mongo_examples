@@ -8,11 +8,8 @@ from app import app
 
 def dashboard():
     layout = dbc.Container([
-        dbc.Row(
-            dbc.Col(html.H1("ffprobe Dashboard",
-                            className='text-primary mb-4'),
-                    width=12)
-        ),
+        dbc.Row(dbc.Col(html.H3("FFProbe Analysis", className='mb-4'), width=12),),
+        dbc.Row(dbc.Col(html.P("A set of dashboards that can be used to analyse ffprobe data for input assets", className='mb-4'), width=12),),
 
         dbc.Row([
 

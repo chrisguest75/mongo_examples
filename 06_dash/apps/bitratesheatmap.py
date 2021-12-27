@@ -27,12 +27,8 @@ print(bitrates)
 # zdata = { 'z': data }
 def dashboard():
     layout = dbc.Container([
-
-        dbc.Row(
-            dbc.Col(html.H1("Bitrates Heatmap (grouped - logplot)",
-                            className='text-center text-primary mb-4'),
-                    width=12),
-        ),
+        dbc.Row(dbc.Col(html.H3("Bitrates Heatmap (grouped - logplot)", className='mb-4'), width=12),),
+        dbc.Row(dbc.Col(html.P("Use the heatmap to determine how often we are getting sample and bit rates outside of 16khz band.", className='mb-4'), width=12),),
 
         dbc.Row([
         dcc.Graph(id='app1-graph-with-slider'),
@@ -47,9 +43,6 @@ def dashboard():
             step=None
         )
         ], align="center"),  # Vertical: start, center, end
-        dbc.Row([
-            dcc.Link('Go to Root', href='/')
-        ], align="center"),
     ], fluid=True)
     return layout
 

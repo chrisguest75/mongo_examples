@@ -14,12 +14,8 @@ df = pd.read_json('./data/imports_by_month_durationgroups.json')
 
 def dashboard():
     layout = dbc.Container([
-
-        dbc.Row(
-            dbc.Col(html.H1("Imported Asset Durations (grouped)",
-                            className='text-center text-primary mb-4'),
-                    width=12),
-        ),
+        dbc.Row(dbc.Col(html.H3("Imported Asset Durations (grouped)", className='mb-4'), width=12),),
+        dbc.Row(dbc.Col(html.P("Shows what our most popular durations are over time", className='mb-4'), width=12),),
 
         dbc.Row([
         dcc.Graph(id='app3-graph-with-slider'),
@@ -34,9 +30,7 @@ def dashboard():
             step=None
         )
         ], align="center"),  # Vertical: start, center, end
-        dbc.Row([
-            dcc.Link('Go to Root', href='/')
-        ], align="center"),
+
     ], fluid=True)
     return layout
 

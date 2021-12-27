@@ -19,16 +19,12 @@ codecs.sort()
 
 def dashboard():
     layout = dbc.Container([
-
-        dbc.Row(
-            dbc.Col(html.H1("Imported Codec Popularity",
-                            className='text-center text-primary mb-4'),
-                    width=12)
-        ),
-
+        dbc.Row(dbc.Col(html.H3("Imported Codec Popularity", className='mb-4'), width=12),),
+        dbc.Row(dbc.Col(html.P("Select Codec type and names to compare popularity over time.  Use to determine when the last time a codec was used.", className='mb-4'), width=12),),
+        
         dbc.Row([
-
             dbc.Col([
+                dbc.Label("Type"),
                 dcc.Dropdown(
                     id='app2-codecs-types-filter',
                     options=[{'label': i, 'value': i} for i in codecs_type],
@@ -36,9 +32,10 @@ def dashboard():
                     searchable=True
                 ),
                 ],# width={'size':5, 'offset':1, 'order':1},
-            xs=12, sm=12, md=12, lg=5, xl=5
+            xs=12, sm=12, md=12, lg=6, xl=6
             ),
             dbc.Col([
+                dbc.Label("Codec"),
                 dcc.Dropdown(
                     id='app2-codecs-filter',
                     options=[{'label': i, 'value': i} for i in codecs],
@@ -46,12 +43,10 @@ def dashboard():
                     searchable=True
                 ),
                 ],# width={'size':5, 'offset':1, 'order':1},
-            xs=12, sm=12, md=12, lg=5, xl=5
+            xs=12, sm=12, md=12, lg=6, xl=6
             ),
 
         ], justify='start'),  # Horizontal:start,center,end,between,around
-        dbc.Row([
-        ]),
 
         dbc.Row([
         dcc.Graph(id='app2-graph-with-slider'),
@@ -66,9 +61,6 @@ def dashboard():
             step=None
         )
         ], align="center"),  # Vertical: start, center, end
-        dbc.Row([
-            dcc.Link('Go to Root', href='/')
-        ], align="center"),
     ], fluid=True)
     return layout
 
