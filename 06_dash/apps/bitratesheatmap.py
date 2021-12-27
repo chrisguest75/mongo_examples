@@ -2,6 +2,7 @@ import dash
 from dash import dcc
 from dash import html
 from dash.dependencies import Input, Output
+import dash_bootstrap_components as dbc
 import plotly.express as px
 
 import pandas as pd
@@ -24,30 +25,32 @@ print(bitrates)
 
 # zdata = { 'z': data }
 
-layout = html.Div([
-    html.H1(children='Bitrates Heatmap (grouped - logplot)'),
+layout = dbc.Container([
 
-    html.Div(children='''Show most common bitrates and samplerates (log plot)'''),
+    dbc.Row(
+        dbc.Col(html.H1("Bitrates Heatmap (grouped - logplot)",
+                        className='text-center text-primary mb-4'),
+                width=12),
+    ),
 
-    html.Div([
-        html.Div([
-            dcc.Graph(id='app1-graph-with-slider'),
-        ]),
-            html.Div([
-                dcc.Slider(
-                    id='app1-year-slider',
-                    min=df['year'].min(),
-                    max=df['year'].max(),
-                    value=df['year'].max(),
-                    marks={str(year): str(year) for year in df['year'].unique()},
-                    step=None
-                )
-        ]),
-        html.Div([
-            dcc.Link('Go to Root', href='/')
-        ]),
-    ])    
-])
+    dbc.Row([
+    dcc.Graph(id='app1-graph-with-slider'),
+    ], align="center"),  # Vertical: start, center, end
+    dbc.Row([
+    dcc.Slider(
+        id='app1-year-slider',
+        min=df['year'].min(),
+        max=df['year'].max(),
+        value=df['year'].max(),
+        marks={str(year): str(year) for year in df['year'].unique()},
+        step=None
+    )
+    ], align="center"),  # Vertical: start, center, end
+    dbc.Row([
+         dcc.Link('Go to Root', href='/')
+    ], align="center"),
+], fluid=True)
+
 
 
 @app.callback(

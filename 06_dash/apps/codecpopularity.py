@@ -1,9 +1,9 @@
 import dash
 from dash import dcc
 from dash import html
+import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 import plotly.express as px
-
 import pandas as pd
 
 from app import app
@@ -16,56 +16,60 @@ codecs = df[pd.notnull(df.codec_long_name)]
 codecs = codecs['codec_long_name'].unique()
 codecs.sort()
 
-layout = html.Div([
-    html.H1(children='Imported Codec Popularity'),
+layout = dbc.Container([
 
-    html.Div(children='''Uses probe data to determine types of codec - you can multi-select codec types and codec used'''),
-    html.Br(),
-    html.Div([
-        html.Div([
-            html.Label([
-                "type",
-                    dcc.Dropdown(
-                    id='app2-codecs-types-filter',
-                    options=[{'label': i, 'value': i} for i in codecs_type],
-                    multi=True,
-                    searchable=True
-                ),
-            ]),
-        ], style={'width': '48%', 'display': 'inline-block'}),
-        html.Div([
-            html.Label([
-                "codec",
-                    dcc.Dropdown(
-                    id='app2-codecs-filter',
-                    options=[{'label': i, 'value': i} for i in codecs],
-                    multi=True,
-                    searchable=True
-                ),
-            ]),
-        ], style={'width': '48%', 'float': 'right', 'display': 'inline-block'}),
+    dbc.Row(
+        dbc.Col(html.H1("Imported Codec Popularity",
+                        className='text-center text-primary mb-4'),
+                width=12)
+    ),
 
+    dbc.Row([
+
+        dbc.Col([
+            dcc.Dropdown(
+                id='app2-codecs-types-filter',
+                options=[{'label': i, 'value': i} for i in codecs_type],
+                multi=True,
+                searchable=True
+            ),
+             ],# width={'size':5, 'offset':1, 'order':1},
+           xs=12, sm=12, md=12, lg=5, xl=5
+        ),
+        dbc.Col([
+            dcc.Dropdown(
+                id='app2-codecs-filter',
+                options=[{'label': i, 'value': i} for i in codecs],
+                multi=True,
+                searchable=True
+            ),
+             ],# width={'size':5, 'offset':1, 'order':1},
+           xs=12, sm=12, md=12, lg=5, xl=5
+        ),
+
+    ], justify='start'),  # Horizontal:start,center,end,between,around
+    dbc.Row([
     ]),
 
-    html.Div([
-        html.Div([
-            dcc.Graph(id='app2-graph-with-slider'),
-        ]),
-        html.Div([
-            dcc.Slider(
-                id='app2-year-slider',
-                min=df['year'].min(),
-                max=df['year'].max(),
-                value=df['year'].max(),
-                marks={str(year): str(year) for year in df['year'].unique()},
-                step=None
-            )
-        ]),
-        html.Div([
-            dcc.Link('Go to Root', href='/')
-        ]),
-    ])
-])
+    dbc.Row([
+    dcc.Graph(id='app2-graph-with-slider'),
+    ], align="center"),  # Vertical: start, center, end
+    dbc.Row([
+    dcc.Slider(
+        id='app2-year-slider',
+        min=df['year'].min(),
+        max=df['year'].max(),
+        value=df['year'].max(),
+        marks={str(year): str(year) for year in df['year'].unique()},
+        step=None
+    )
+    ], align="center"),  # Vertical: start, center, end
+    dbc.Row([
+         dcc.Link('Go to Root', href='/')
+    ], align="center"),
+], fluid=True)
+
+
 
 @app.callback(
     dash.dependencies.Output('app2-codecs-filter', 'options'),

@@ -78,6 +78,12 @@ python ./singlepages/imports-codec-bubble-bootstrap.py
 python ./singlepages/imports-audiobitrates-heatmap.py 
 ```
 
+## Create ico file
+
+```sh
+magick -density 128x128 -background none ./assets/favicon.png -resize 128x128 ./assets/favicon.ico
+```
+
 ## Resources
 
 * [pyenv](https://github.com/pyenv/pyenv)  
@@ -92,3 +98,8 @@ python ./singlepages/imports-audiobitrates-heatmap.py
 * Logarithmic heatmap in Plotly [here](https://stackoverflow.com/questions/68368745/logarithmic-heatmap-in-plotly)  
 * 2D Histograms in Python [here](https://plotly.com/python/2D-Histogram/)  
 * Heatmaps in Python [here](https://plotly.com/python/heatmaps/)  
+
+
+https://realpython.com/python-dash/
+
+
