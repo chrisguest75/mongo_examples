@@ -98,8 +98,5 @@ magick -density 128x128 -background none ./assets/favicon.png -resize 128x128 ./
 * Logarithmic heatmap in Plotly [here](https://stackoverflow.com/questions/68368745/logarithmic-heatmap-in-plotly)  
 * 2D Histograms in Python [here](https://plotly.com/python/2D-Histogram/)  
 * Heatmaps in Python [here](https://plotly.com/python/heatmaps/)  
-
-
-https://realpython.com/python-dash/
-
-
+* Develop Data Visualization Interfaces in Python With Dash [here](https://realpython.com/python-dash/)
+* How to Create a Multipage Dash App [here](https://medium.com/@mcmanus_data_works/how-to-create-a-multipage-dash-app-75c2ddb79315)
