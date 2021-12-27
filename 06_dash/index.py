@@ -16,13 +16,13 @@ app.layout = html.Div([
               Input('url', 'pathname'))
 def display_page(pathname):
     if pathname == '/apps/codecpopularity':
-        return codecpopularity.layout
+        return codecpopularity.page()
     elif pathname == '/apps/bitratesheatmap':
-        return bitratesheatmap.layout
+        return bitratesheatmap.page()
     elif pathname == '/apps/durationsstacked':
-        return durationsstacked.layout
+        return durationsstacked.page()
     else:
-        return root.layout
+        return root.page()
 
 if __name__ == '__main__':
     app.run_server(debug=True)

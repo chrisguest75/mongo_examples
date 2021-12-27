@@ -8,6 +8,7 @@ import plotly.express as px
 import pandas as pd
 import numpy as np
 from app import app
+from apps import navbar
 
 viridis = px.colors.sequential.Viridis
 
@@ -24,33 +25,41 @@ print(samplerates)
 print(bitrates)
 
 # zdata = { 'z': data }
+def dashboard():
+    layout = dbc.Container([
 
-layout = dbc.Container([
+        dbc.Row(
+            dbc.Col(html.H1("Bitrates Heatmap (grouped - logplot)",
+                            className='text-center text-primary mb-4'),
+                    width=12),
+        ),
 
-    dbc.Row(
-        dbc.Col(html.H1("Bitrates Heatmap (grouped - logplot)",
-                        className='text-center text-primary mb-4'),
-                width=12),
-    ),
+        dbc.Row([
+        dcc.Graph(id='app1-graph-with-slider'),
+        ], align="center"),  # Vertical: start, center, end
+        dbc.Row([
+        dcc.Slider(
+            id='app1-year-slider',
+            min=df['year'].min(),
+            max=df['year'].max(),
+            value=df['year'].max(),
+            marks={str(year): str(year) for year in df['year'].unique()},
+            step=None
+        )
+        ], align="center"),  # Vertical: start, center, end
+        dbc.Row([
+            dcc.Link('Go to Root', href='/')
+        ], align="center"),
+    ], fluid=True)
+    return layout
 
-    dbc.Row([
-    dcc.Graph(id='app1-graph-with-slider'),
-    ], align="center"),  # Vertical: start, center, end
-    dbc.Row([
-    dcc.Slider(
-        id='app1-year-slider',
-        min=df['year'].min(),
-        max=df['year'].max(),
-        value=df['year'].max(),
-        marks={str(year): str(year) for year in df['year'].unique()},
-        step=None
-    )
-    ], align="center"),  # Vertical: start, center, end
-    dbc.Row([
-         dcc.Link('Go to Root', href='/')
-    ], align="center"),
-], fluid=True)
+def page():
+    layout = dbc.Container([
+        navbar.create_navbar(),
+        dashboard(),
+    ])
 
+    return layout
 
 
 @app.callback(

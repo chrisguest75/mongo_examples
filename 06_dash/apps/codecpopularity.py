@@ -7,6 +7,7 @@ import plotly.express as px
 import pandas as pd
 
 from app import app
+from apps import navbar
 
 df = pd.read_json('./data/imports_by_month_codecs.json')
 codecs_type = df[pd.notnull(df.codec_type)]
@@ -16,60 +17,68 @@ codecs = df[pd.notnull(df.codec_long_name)]
 codecs = codecs['codec_long_name'].unique()
 codecs.sort()
 
-layout = dbc.Container([
+def dashboard():
+    layout = dbc.Container([
 
-    dbc.Row(
-        dbc.Col(html.H1("Imported Codec Popularity",
-                        className='text-center text-primary mb-4'),
-                width=12)
-    ),
-
-    dbc.Row([
-
-        dbc.Col([
-            dcc.Dropdown(
-                id='app2-codecs-types-filter',
-                options=[{'label': i, 'value': i} for i in codecs_type],
-                multi=True,
-                searchable=True
-            ),
-             ],# width={'size':5, 'offset':1, 'order':1},
-           xs=12, sm=12, md=12, lg=5, xl=5
-        ),
-        dbc.Col([
-            dcc.Dropdown(
-                id='app2-codecs-filter',
-                options=[{'label': i, 'value': i} for i in codecs],
-                multi=True,
-                searchable=True
-            ),
-             ],# width={'size':5, 'offset':1, 'order':1},
-           xs=12, sm=12, md=12, lg=5, xl=5
+        dbc.Row(
+            dbc.Col(html.H1("Imported Codec Popularity",
+                            className='text-center text-primary mb-4'),
+                    width=12)
         ),
 
-    ], justify='start'),  # Horizontal:start,center,end,between,around
-    dbc.Row([
-    ]),
+        dbc.Row([
 
-    dbc.Row([
-    dcc.Graph(id='app2-graph-with-slider'),
-    ], align="center"),  # Vertical: start, center, end
-    dbc.Row([
-    dcc.Slider(
-        id='app2-year-slider',
-        min=df['year'].min(),
-        max=df['year'].max(),
-        value=df['year'].max(),
-        marks={str(year): str(year) for year in df['year'].unique()},
-        step=None
-    )
-    ], align="center"),  # Vertical: start, center, end
-    dbc.Row([
-         dcc.Link('Go to Root', href='/')
-    ], align="center"),
-], fluid=True)
+            dbc.Col([
+                dcc.Dropdown(
+                    id='app2-codecs-types-filter',
+                    options=[{'label': i, 'value': i} for i in codecs_type],
+                    multi=True,
+                    searchable=True
+                ),
+                ],# width={'size':5, 'offset':1, 'order':1},
+            xs=12, sm=12, md=12, lg=5, xl=5
+            ),
+            dbc.Col([
+                dcc.Dropdown(
+                    id='app2-codecs-filter',
+                    options=[{'label': i, 'value': i} for i in codecs],
+                    multi=True,
+                    searchable=True
+                ),
+                ],# width={'size':5, 'offset':1, 'order':1},
+            xs=12, sm=12, md=12, lg=5, xl=5
+            ),
 
+        ], justify='start'),  # Horizontal:start,center,end,between,around
+        dbc.Row([
+        ]),
 
+        dbc.Row([
+        dcc.Graph(id='app2-graph-with-slider'),
+        ], align="center"),  # Vertical: start, center, end
+        dbc.Row([
+        dcc.Slider(
+            id='app2-year-slider',
+            min=df['year'].min(),
+            max=df['year'].max(),
+            value=df['year'].max(),
+            marks={str(year): str(year) for year in df['year'].unique()},
+            step=None
+        )
+        ], align="center"),  # Vertical: start, center, end
+        dbc.Row([
+            dcc.Link('Go to Root', href='/')
+        ], align="center"),
+    ], fluid=True)
+    return layout
+
+def page():
+    layout = dbc.Container([
+        navbar.create_navbar(),
+        dashboard(),
+    ])
+
+    return layout
 
 @app.callback(
     dash.dependencies.Output('app2-codecs-filter', 'options'),
