@@ -12,6 +12,23 @@ from apps import navbar
 
 df = pd.read_json('./data/imports_by_month_durationgroups.json')
 
+def card():
+    card = dbc.Card(
+    [
+        dbc.CardImg(src=app.get_asset_url('durations.png'), top=True),
+        dbc.CardBody(
+            [
+                html.H4("Durations", className="card-title"),
+                html.P("Shows what our most popular durations are over time",
+                    className="card-text",
+                ),
+                dcc.Link(dbc.Button("Show", color="primary"), href='/apps/durationsstacked'),
+            ]
+        ),
+    ],
+    style={"width": "18rem"},)
+    return card
+
 def dashboard():
     layout = dbc.Container([
         dbc.Row(dbc.Col(html.H3("Imported Asset Durations (grouped)", className='mb-4'), width=12),),

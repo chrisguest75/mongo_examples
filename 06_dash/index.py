@@ -22,7 +22,7 @@ def display_page(pathname):
     elif pathname == '/apps/durationsstacked':
         return durationsstacked.page()
     else:
-        return root.page()
+        return root.page([codecpopularity.card(), durationsstacked.card(), bitratesheatmap.card()])
 
 if __name__ == '__main__':
     app.run_server(debug=True)

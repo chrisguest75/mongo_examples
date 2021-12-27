@@ -6,33 +6,38 @@ from apps import navbar
 
 from app import app
 
-def dashboard():
+
+def dashboard(cards):
     layout = dbc.Container([
         dbc.Row(dbc.Col(html.H3("FFProbe Analysis", className='mb-4'), width=12),),
         dbc.Row(dbc.Col(html.P("A set of dashboards that can be used to analyse ffprobe data for input assets", className='mb-4'), width=12),),
 
         dbc.Row([
-
             dbc.Col([
-                    dcc.Link('Go to Codec Popularity', href='/apps/codecpopularity'),
-                    html.Br(),
-                    dcc.Link('Go to Bitrates Heatmap', href='/apps/bitratesheatmap'),
-                    html.Br(),
-                    dcc.Link('Go to Duration Stacked', href='/apps/durationsstacked')
+                    cards[0]
                 ],# width={'size':5, 'offset':1, 'order':1},
-            xs=12, sm=12, md=12, lg=5, xl=5
+            xs=6, sm=6, md=6, lg=4, xl=4
             ),
-
+            dbc.Col([
+                    cards[1]
+                ],# width={'size':5, 'offset':1, 'order':1},
+            xs=6, sm=6, md=6, lg=4, xl=4
+            ),
+            dbc.Col([
+                    cards[2]
+                ],# width={'size':5, 'offset':1, 'order':1},
+            xs=6, sm=6, md=6, lg=4, xl=4
+            ),
         ], justify='start'),  # Horizontal:start,center,end,between,around
 
     ], fluid=True)
 
     return layout
 
-def page():
+def page(cards):
     layout = dbc.Container([
         navbar.create_navbar(),
-        dashboard(),
+        dashboard(cards),
     ])
 
     return layout

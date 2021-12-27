@@ -24,6 +24,23 @@ samplerates.sort()
 print(samplerates)
 print(bitrates)
 
+def card():
+    card = dbc.Card(
+    [
+        dbc.CardImg(src=app.get_asset_url('bitrates.png'), top=True),
+        dbc.CardBody(
+            [
+                html.H4("Bitrates", className="card-title"),
+                html.P("Use the heatmap to determine how often we are getting sample and bit rates outside of 16khz band.",
+                    className="card-text",
+                ),
+                dcc.Link(dbc.Button("Show", color="primary"), href='/apps/bitratesheatmap'),
+            ]
+        ),
+    ],
+    style={"width": "18rem"},)
+    return card
+
 # zdata = { 'z': data }
 def dashboard():
     layout = dbc.Container([

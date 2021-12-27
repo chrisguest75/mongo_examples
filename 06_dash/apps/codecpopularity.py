@@ -17,6 +17,24 @@ codecs = df[pd.notnull(df.codec_long_name)]
 codecs = codecs['codec_long_name'].unique()
 codecs.sort()
 
+def card():
+    card = dbc.Card(
+    [
+        dbc.CardImg(src=app.get_asset_url('codecs.png'), top=True),
+        dbc.CardBody(
+            [
+                html.H4("Codecs", className="card-title"),
+                html.P("Select Codec type and names to compare popularity over time.  Use to determine when the last time a codec was used.",
+                    className="card-text",
+                ),
+                dcc.Link(dbc.Button("Show", color="primary"), href='/apps/codecpopularity'),
+            ]
+        ),
+    ],
+    style={"width": "18rem"},)
+    return card
+
+
 def dashboard():
     layout = dbc.Container([
         dbc.Row(dbc.Col(html.H3("Imported Codec Popularity", className='mb-4'), width=12),),
