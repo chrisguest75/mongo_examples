@@ -3,17 +3,16 @@
 Demonstrate how to connect `dash` to `mongo`
 
 TODO:
- 
-* Add an index with a few different dashboards.  
+
+* Convert it all to bootstrap
 * Add a month select split to the heatmap.  
-
 * data has to be faked.  
-* use tables, heatmaps, filters.. 
-
-* heatmaps for sample and bitrate 
-- https://plotly.com/python/2D-Histogram/
-- https://plotly.com/python/heatmaps/
+* use tables, filters.
 * number of audio streams in assets?
+* Resolutions? 
+* Frame rates?
+* pix_fmt?
+* profile
 
 
 ## Build and Run
@@ -27,27 +26,6 @@ export PIPENV_VENV_IN_PROJECT=1
 pipenv install --pre --python $(pyenv which python)
 ```
 
-## Export data from mongo into json
-
-```sh
-mongosh "mongodb://root:rootpassword@0.0.0.0:27017/"
-use ffprobe  
-load("./data/mongosh_imports_by_month.js");
-
-var out = tool.getImportsPerMonth()
-jsonsaver.saveJsonFile("./data/imports_by_month.json", out)
-var out = tool.getImportsPerMonthCodecs()
-jsonsaver.saveJsonFile("./data/imports_by_month_codecs.json", out)
-var out = tool.getImportsPerMonthDurationGroup()
-jsonsaver.saveJsonFile("./data/imports_by_month_durationgroups.json", out)
-var out = tool.getImportsAudioRates()
-jsonsaver.saveJsonFile("./data/imports_audio_bitrates.json", out)
-var out = tool.getImportsAudioRatesBuckets()
-jsonsaver.saveJsonFile("./data/imports_audio_bitrates_buckets.json", out)
-var out = tool.getImportsAudioRatesBucketsYear()
-jsonsaver.saveJsonFile("./data/imports_audio_bitrates_buckets_year.json", out)
-```
-
 ## Render the dash chart
 
 ```sh
@@ -57,19 +35,58 @@ code .
 # in terminal inside vscode
 . ./.venv/bin/activate    
 
-python ./imports-bubble.py     
+# an example multipage app
+python ./index.py
+```
 
-python ./imports-codec-bubble.py       
+## Multipage code
 
-python ./imports-duration-bubble.py       
+All dashboards have a very similar structure.  
 
-python ./imports-duration-stacked.py
+Code is structured with a untyped interface.  Each module has a card() and page() used for creating markup.  
+card() is used for the index page and the page() is used to render the dashboard itself.  
+
+### Single Pages
+
+```sh
+python ./singlepages/imports-bubble.py     
+
+python ./singlepages/imports-codec-bubble.py       
+
+python ./singlepages/imports-duration-bubble.py       
+
+python ./singlepages/imports-duration-stacked.py
 
 # use the bootstrap version of the codec bubble up
-python ./imports-codec-bubble-bootstrap.py
+python ./singlepages/imports-codec-bubble-bootstrap.py
 
 # needs a bit of work
-python ./imports-audiobitrates-heatmap.py 
+python ./singlepages/imports-audiobitrates-heatmap.py 
+```
+
+## Export data from mongo into json
+
+Data is created by the `ffprobe` example [here](../03_ffprobe/README.md)  
+
+```sh
+# to manually export the data
+mongosh "mongodb://root:rootpassword@0.0.0.0:27017/"
+use ffprobe  
+load("./data/mongosh_imports_by_month.js");
+
+var out = tool.getImportsPerMonth()
+jsonsaver.saveJsonFile("./data/imports_by_month.json", out)
+```
+
+```sh
+# script will run and export data using mongosh and some scripts 
+./export-dash-data.sh   
+```
+
+## Create ico file
+
+```sh
+magick -density 128x128 -background none ./assets/favicon.png -resize 128x128 ./assets/favicon.ico
 ```
 
 ## Resources
@@ -82,5 +99,10 @@ python ./imports-audiobitrates-heatmap.py
 * plotly/jupyter-dash [repo](https://github.com/plotly/jupyter-dash)  
 * Dash Bootstrap Components [here](https://dash-bootstrap-components.opensource.faculty.ai/)  
 * Coding-with-Adam/Dash-by-Plotly [repo](https://github.com/Coding-with-Adam/Dash-by-Plotly)  
-
-https://stackoverflow.com/questions/68368745/logarithmic-heatmap-in-plotly
+* Multi-Page Apps and URL Support [here](https://dash.plotly.com/urls)  
+* Logarithmic heatmap in Plotly [here](https://stackoverflow.com/questions/68368745/logarithmic-heatmap-in-plotly)  
+* 2D Histograms in Python [here](https://plotly.com/python/2D-Histogram/)  
+* Heatmaps in Python [here](https://plotly.com/python/heatmaps/)  
+* Develop Data Visualization Interfaces in Python With Dash [here](https://realpython.com/python-dash/)
+* How to Create a Multipage Dash App [here](https://medium.com/@mcmanus_data_works/how-to-create-a-multipage-dash-app-75c2ddb79315)
+* dash-bootstrap-components Themes [here](https://dash-bootstrap-components.opensource.faculty.ai/docs/themes/)

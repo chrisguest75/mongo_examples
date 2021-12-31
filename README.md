@@ -7,7 +7,10 @@ TODO:
 * performance monitoring
 * multi node mongo cluster
 * transaction example
-* analysis size of documents 
+* analysis size of documents
+* Live querying against mongo ORM?
+* Data sampling for tests
+* go through the slides
 
 ## Example 1 - MERN
 
