@@ -34,7 +34,7 @@ def card():
         dbc.CardImg(src=app.get_asset_url('bitrates.png'), top=True),
         dbc.CardBody(
             [
-                html.H4("Bitrates", className="card-title"),
+                html.H4("Audio Bitrates", className="card-title"),
                 html.P("Use the heatmap to determine how often we are getting sample and bit rates outside of 16khz band.",
                     className="card-text",
                 ),
@@ -48,7 +48,7 @@ def card():
 # zdata = { 'z': data }
 def dashboard():
     layout = dbc.Container([
-        dbc.Row(dbc.Col(html.H3("Bitrates Heatmap (grouped - logplot)", className='mb-4'), width=12),),
+        dbc.Row(dbc.Col(html.H3("Audio Bitrates Heatmap (grouped - logplot)", className='mb-4'), width=12),),
         dbc.Row(dbc.Col(html.P("Use the heatmap to determine how often we are getting sample and bit rates outside of 16khz band.", className='mb-4'), width=12),),
 
         dbc.Row([

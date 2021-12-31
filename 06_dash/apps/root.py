@@ -6,6 +6,8 @@ from apps import navbar
 
 from app import app
 
+## TODO:
+## Fill the columns in dynamically
 
 def dashboard(cards):
     layout = dbc.Container([
@@ -35,6 +37,12 @@ def dashboard(cards):
                 ],# width={'size':5, 'offset':1, 'order':1},
             xs=6, sm=6, md=6, lg=4, xl=4
             ),
+            dbc.Col([
+                    cards[4]
+                ],# width={'size':5, 'offset':1, 'order':1},
+            xs=6, sm=6, md=6, lg=4, xl=4
+            ),
+
         ], justify='start'),  # Horizontal:start,center,end,between,around
     ], fluid=True)
 

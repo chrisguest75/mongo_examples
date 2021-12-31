@@ -24,3 +24,8 @@ print('getImportsAudioRatesBucketsYear()\n==============================\n');
 var out = tool.getImportsAudioRatesBucketsYear()
 jsonsaver.saveJsonFile("./data/imports_audio_bitrates_buckets_year.json", out)
 
+print('getImportsResolutionsYear()\n==============================\n');
+var out = tool.getImportsResolutionsYear()
+jsonsaver.saveJsonFile("./data/imports_resolutions_year.json", out)
+
+
