@@ -14,6 +14,7 @@ def create_navbar():
                     dbc.DropdownMenuItem(divider=True),
                     dbc.DropdownMenuItem("Codecs", href='/apps/codecpopularity'),
                     dbc.DropdownMenuItem("Bitrates", href='/apps/bitratesheatmap'),
+                    dbc.DropdownMenuItem("Resolutions", href='/apps/resolutions'),
                     dbc.DropdownMenuItem("Durations ", href='/apps/durationsstacked'),
                 ],
             ),

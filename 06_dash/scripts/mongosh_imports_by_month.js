@@ -321,7 +321,90 @@ var tool = (function () {
         //printjson(importsArray);
             return importsArray            
         },
-
+        getImportsResolutionsYear: function () {
+            print('\nImports\n==============================');
+            var importsArray = db.getCollection('prod').aggregate([
+                { $project : { probe: 1, created: { $ifNull: [ "$created", new Date("2000-01-01T00:00:00Z") ] } } },
+                { $project : { probe: 1, month_num : {$month : { $toDate: "$created"  }}, year : {$year :  { $toDate: "$created"  }},}},
+                { $project : { 
+                    month: {
+                        $let: {
+                            vars: {
+                                monthsInString: [, 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                            },
+                            in: {
+                                $arrayElemAt: ['$$monthsInString', '$month_num']
+                            }
+                        }
+                    }, 
+                    year: 1,
+                    month_num: 1,
+                    probe: 1,
+                } },    
+            
+                { $unwind: '$probe.streams' },
+                { $match: {'probe.streams.codec_type': 'video'} },
+                
+                { $project: { _id: 0, year: "$year", month: "$month", month_num:"$month_num", codec_long_name:{ $toString:"$probe.streams.codec_long_name" }, xresolution: {
+                        "$cond": [
+                            { "$lte": [ {$toDouble:"$probe.streams.width" }, 720 ] },
+                            "(1) SD",
+                                {"$cond": [
+                            { "$lte": [ {$toDouble:"$probe.streams.width"}, 1280 ] },
+                            "(2) HD",
+                            {"$cond": [
+                            { "$lte": [ {$toDouble:"$probe.streams.width"}, 1920 ] },
+                            "(3) Full-HD",
+                            {"$cond": [
+                            { "$lte": [ {$toDouble:"$probe.streams.width"}, 3840 ] },
+                            "(4) UHD",
+                            {"$cond": [
+                            { "$lte": [ {$toDouble:"$probe.streams.width"}, 4096 ] },
+                            "(5) 4K",
+                            {"$cond": [
+                            { "$lte": [ {$toDouble:"$probe.streams.width"}, 7680 ] },
+                            "(6) 8K",
+                            "(7) >8K"
+                        ]}
+                        ]}
+                        ]}                
+                        ]}
+                        ]}
+                      ]
+                    }, yresolution: {
+                        "$cond": [
+                            { "$lte": [ { $toDouble:"$probe.streams.height" } , 576 ] },
+                            "(1) SD",
+                                {"$cond": [
+                            { "$lte": [ {$toDouble:"$probe.streams.height"}, 720 ] },
+                            "(2) HD",
+                            {"$cond": [
+                            { "$lte": [ {$toDouble:"$probe.streams.height"}, 1080 ] },
+                            "(3) Full-HD",
+                            {"$cond": [
+                            { "$lte": [ {$toDouble:"$probe.streams.height"}, 2160 ] },
+                            "(4) UHD/4K",
+                            {"$cond": [
+                            { "$lte": [ {$toDouble:"$probe.streams.height"}, 4320 ] },
+                            "(5) 8K",
+                            "(6) >8K"
+                        ]}
+                        ]}                
+                        ]}
+                        ]}
+                      ]
+                    },
+                    },
+                },    
+                { $group : { _id :  { year: "$year", month: "$month", month_num:"$month_num",  codec_long_name: "$codec_long_name", xresolution: "$xresolution", yresolution: "$yresolution",}, total: { $sum : 1 } }},
+                { $group : { _id :  "$_id.year", months: { $push: { month:"$_id.month", month_num:"$_id.month_num", codec_long_name: "$_id.codec_long_name", xresolution: "$_id.xresolution", yresolution: "$_id.yresolution", total : "$total" }}}},
+                {$unwind:"$months"},
+                {$project: {year:"$_id", month:"$months.month", month_num:"$months.month_num", codec_long_name : "$months.codec_long_name", xresolution : "$months.xresolution", yresolution : "$months.yresolution", total:"$months.total"}}, 
+                  { $sort : { year : 1, month_num: 1}},                       
+        ]).toArray(); 
+        //printjson(importsArray);
+            return importsArray            
+        },
     }
 })();
 

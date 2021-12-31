@@ -26,23 +26,6 @@ export PIPENV_VENV_IN_PROJECT=1
 pipenv install --pre --python $(pyenv which python)
 ```
 
-## Export data from mongo into json
-
-```sh
-# to manually export the data
-mongosh "mongodb://root:rootpassword@0.0.0.0:27017/"
-use ffprobe  
-load("./data/mongosh_imports_by_month.js");
-
-var out = tool.getImportsPerMonth()
-jsonsaver.saveJsonFile("./data/imports_by_month.json", out)
-```
-
-```sh
-# script will run and export data using mongosh and some scripts 
-./export-dash-data.sh   
-```
-
 ## Render the dash chart
 
 ```sh
@@ -51,14 +34,17 @@ code .
 
 # in terminal inside vscode
 . ./.venv/bin/activate    
-```
 
-### Multi Page
-
-```sh
 # an example multipage app
 python ./index.py
 ```
+
+## Multipage code
+
+All dashboards have a very similar structure.  
+
+Code is structured with a untyped interface.  Each module has a card() and page() used for creating markup.  
+card() is used for the index page and the page() is used to render the dashboard itself.  
 
 ### Single Pages
 
@@ -76,6 +62,25 @@ python ./singlepages/imports-codec-bubble-bootstrap.py
 
 # needs a bit of work
 python ./singlepages/imports-audiobitrates-heatmap.py 
+```
+
+## Export data from mongo into json
+
+Data is created by the `ffprobe` example [here](../03_ffprobe/README.md)  
+
+```sh
+# to manually export the data
+mongosh "mongodb://root:rootpassword@0.0.0.0:27017/"
+use ffprobe  
+load("./data/mongosh_imports_by_month.js");
+
+var out = tool.getImportsPerMonth()
+jsonsaver.saveJsonFile("./data/imports_by_month.json", out)
+```
+
+```sh
+# script will run and export data using mongosh and some scripts 
+./export-dash-data.sh   
 ```
 
 ## Create ico file
