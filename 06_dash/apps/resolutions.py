@@ -27,7 +27,7 @@ print(heights)
 def card():
     card = dbc.Card(
     [
-        dbc.CardImg(src=app.get_asset_url('bitrates.png'), top=True),
+        dbc.CardImg(src=app.get_asset_url('resolutions.png'), top=True),
         dbc.CardBody(
             [
                 html.H4("Resolutions", className="card-title"),
