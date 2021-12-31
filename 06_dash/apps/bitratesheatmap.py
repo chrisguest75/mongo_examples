@@ -20,9 +20,13 @@ bitrates.sort()
 samplerates = df[pd.notnull(df.sample_rate)]
 samplerates = samplerates['sample_rate'].unique()
 samplerates.sort()
+codecs = df[pd.notnull(df.codec_long_name)]
+codecs = codecs['codec_long_name'].unique()
+codecs.sort()
 
 print(samplerates)
 print(bitrates)
+print(codecs)
 
 def card():
     card = dbc.Card(
@@ -48,6 +52,21 @@ def dashboard():
         dbc.Row(dbc.Col(html.P("Use the heatmap to determine how often we are getting sample and bit rates outside of 16khz band.", className='mb-4'), width=12),),
 
         dbc.Row([
+            dbc.Col([
+                dbc.Label("Codec"),
+                dcc.Dropdown(
+                    id='app1-codecs-filter',
+                    options=[{'label': 'Select All', 'value': 'all_values'}] + [{'label': i, 'value': i} for i in codecs],
+                    multi=True,
+                    searchable=True
+                ),
+                ],# width={'size':5, 'offset':1, 'order':1},
+            xs=12, sm=12, md=12, lg=6, xl=6
+            ),
+
+        ], justify='start'),  # Horizontal:start,center,end,between,around
+
+        dbc.Row([
         dcc.Graph(id='app1-graph-with-slider'),
         ], align="center"),  # Vertical: start, center, end
         dbc.Row([
@@ -71,12 +90,21 @@ def page():
 
     return layout
 
-
 @app.callback(
     Output('app1-graph-with-slider', 'figure'),
-    Input('app1-year-slider', 'value'))
-def update_figure(selected_year):
+    Input('app1-year-slider', 'value'),
+    Input('app1-codecs-filter', 'value'))
+def update_figure(selected_year, codecs_filter):
     filtered_df = df[df.year == selected_year]
+    print(codecs_filter)
+    if codecs_filter is None:
+        codecs_filter = []
+    boolean_series = filtered_df.codec_long_name.isin(codecs_filter)
+    codecfiltered_df = filtered_df[boolean_series]
+
+    if codecs_filter == ['all_values']:
+        codecfiltered_df = filtered_df
+
     colorscale = [
             [0, viridis[0]],
             [1./1000000, viridis[2]],
@@ -92,7 +120,7 @@ def update_figure(selected_year):
             row.append(0)
         data.append(row)
 
-    for index, row in filtered_df.iterrows():
+    for index, row in codecfiltered_df.iterrows():
         x = np.where(bitrates == row['bit_rate'])[0].min()
         y = np.where(samplerates == row['sample_rate'])[0].min()
         data[y][x] += int(row['total'])

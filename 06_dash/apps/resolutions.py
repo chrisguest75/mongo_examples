@@ -20,9 +20,13 @@ widths.sort()
 heights = df[pd.notnull(df.yresolution)]
 heights = heights['yresolution'].unique()
 heights.sort()
+codecs = df[pd.notnull(df.codec_long_name)]
+codecs = codecs['codec_long_name'].unique()
+codecs.sort()
 
 print(widths)
 print(heights)
+print(codecs)
 
 def card():
     card = dbc.Card(
@@ -45,7 +49,22 @@ def card():
 def dashboard():
     layout = dbc.Container([
         dbc.Row(dbc.Col(html.H3("Resolutions Heatmap", className='mb-4'), width=12),),
-        dbc.Row(dbc.Col(html.P("Use the heatmap ", className='mb-4'), width=12),),
+        dbc.Row(dbc.Col(html.P("Use the heatmap to see bandings of resolutions SD (720x576), HD (1280x720), Full-HD (1920x1080), UHD (3840x2160), 4K (4096x2160), 8K (7680×4320)", className='mb-4'), width=12),),
+
+        dbc.Row([
+            dbc.Col([
+                dbc.Label("Codec"),
+                dcc.Dropdown(
+                    id='app4-codecs-filter',
+                    options=[{'label': 'Select All', 'value': 'all_values'}] + [{'label': i, 'value': i} for i in codecs],
+                    multi=True,
+                    searchable=True
+                ),
+                ],# width={'size':5, 'offset':1, 'order':1},
+            xs=12, sm=12, md=12, lg=6, xl=6
+            ),
+
+        ], justify='start'),  # Horizontal:start,center,end,between,around
 
         dbc.Row([
         dcc.Graph(id='app4-graph-with-slider'),
@@ -74,9 +93,19 @@ def page():
 
 @app.callback(
     Output('app4-graph-with-slider', 'figure'),
-    Input('app4-year-slider', 'value'))
-def update_figure(selected_year):
+    Input('app4-year-slider', 'value'),
+    Input('app4-codecs-filter', 'value'))
+def update_figure(selected_year, codecs_filter):
     filtered_df = df[df.year == selected_year]
+    print(codecs_filter)
+    if codecs_filter is None:
+        codecs_filter = []
+    boolean_series = filtered_df.codec_long_name.isin(codecs_filter)
+    codecfiltered_df = filtered_df[boolean_series]
+
+    if codecs_filter == ['all_values']:
+        codecfiltered_df = filtered_df
+
     colorscale = [
             [0, viridis[0]],
             [1./1000000, viridis[2]],
@@ -92,7 +121,7 @@ def update_figure(selected_year):
             row.append(0)
         data.append(row)
 
-    for index, row in filtered_df.iterrows():
+    for index, row in codecfiltered_df.iterrows():
         x = np.where(widths == row['xresolution'])[0].min()
         y = np.where(heights == row['yresolution'])[0].min()
         data[y][x] += int(row['total'])

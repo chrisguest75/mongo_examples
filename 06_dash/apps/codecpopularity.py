@@ -45,7 +45,7 @@ def dashboard():
                 dbc.Label("Type"),
                 dcc.Dropdown(
                     id='app2-codecs-types-filter',
-                    options=[{'label': i, 'value': i} for i in codecs_type],
+                    options=[{'label': 'Select All', 'value': 'all_values'}] + [{'label': i, 'value': i} for i in codecs_type],
                     multi=True,
                     searchable=True
                 ),
@@ -56,7 +56,7 @@ def dashboard():
                 dbc.Label("Codec"),
                 dcc.Dropdown(
                     id='app2-codecs-filter',
-                    options=[{'label': i, 'value': i} for i in codecs],
+                    options=[{'label': 'Select All', 'value': 'all_values'}] + [{'label': i, 'value': i} for i in codecs],
                     multi=True,
                     searchable=True
                 ),
@@ -97,14 +97,17 @@ def set_codecs_options(selected_types):
     if selected_types is not None:
         codecs = df[pd.notnull(df.codec_long_name)]
 
-        # filter codecs on selected types
-        filtered_df = codecs.loc[(codecs['codec_type'].isin(selected_types))]
+        if selected_types == ['all_values']:
+            filtered_df = codecs
+        else:
+            # filter codecs on selected types
+            filtered_df = codecs.loc[(codecs['codec_type'].isin(selected_types))]
 
         codecs = filtered_df['codec_long_name'].unique()
         codecs.sort()
     else:
         codecs = []
-    return [{'label': i, 'value': i} for i in codecs]
+    return [{'label': 'Select All', 'value': 'all_values'}] + [{'label': i, 'value': i} for i in codecs]
 
 
 @app.callback(
@@ -119,6 +122,9 @@ def update_figure(selected_year, codecs_filter):
     boolean_series = filtered_df.codec_long_name.isin(codecs_filter)
     codecfiltered_df = filtered_df[boolean_series]
 
+    if codecs_filter == ['all_values']:
+        codecfiltered_df = filtered_df
+        
     fig = px.scatter(codecfiltered_df, x="month", y="total",
                     size="total", color="codec_long_name", hover_name="total",
                     log_x=False, size_max=55)
