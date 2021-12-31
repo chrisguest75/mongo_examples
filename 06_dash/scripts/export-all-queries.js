@@ -28,4 +28,12 @@ print('getImportsResolutionsYear()\n==============================\n');
 var out = tool.getImportsResolutionsYear()
 jsonsaver.saveJsonFile("./data/imports_resolutions_year.json", out)
 
+print('getImportsPixelFormatsYear()\n==============================\n');
+var out = tool.getImportsPixelFormatsYear()
+jsonsaver.saveJsonFile("./data/imports_by_month_pixelformats.json", out)
+
+print('getImportsProfilesYear()\n==============================\n');
+var out = tool.getImportsProfilesYear()
+jsonsaver.saveJsonFile("./data/imports_by_month_profiles.json", out)
+
 

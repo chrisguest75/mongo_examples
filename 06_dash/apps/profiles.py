@@ -10,7 +10,7 @@ import numpy as np
 from app import app
 from apps import navbar
 
-df = pd.read_json('./data/imports_by_month_pixelformats.json')
+df = pd.read_json('./data/imports_by_month_profiles.json')
 codecs = df[pd.notnull(df.codec_long_name)]
 codecs = codecs['codec_long_name'].unique()
 codecs.sort()
@@ -18,14 +18,14 @@ codecs.sort()
 def card():
     card = dbc.Card(
     [
-        dbc.CardImg(src=app.get_asset_url('pixelformats.png'), top=True),
+        dbc.CardImg(src=app.get_asset_url('profiles.png'), top=True),
         dbc.CardBody(
             [
-                html.H4("Pixel Formats", className="card-title"),
-                html.P("Shows what our most pixel formats are over time",
+                html.H4("Profiles", className="card-title"),
+                html.P("Investigate the most common profiles and associated codecs",
                     className="card-text",
                 ),
-                dcc.Link(dbc.Button("Show", color="primary"), href='/apps/pixelformats'),
+                dcc.Link(dbc.Button("Show", color="primary"), href='/apps/profiles'),
             ]
         ),
     ],
@@ -34,14 +34,14 @@ def card():
 
 def dashboard():
     layout = dbc.Container([
-        dbc.Row(dbc.Col(html.H3("Imported Pixel Formats (grouped)", className='mb-4'), width=12),),
-        dbc.Row(dbc.Col(html.P("Shows what our most popular pixel formats are over time", className='mb-4'), width=12),),
+        dbc.Row(dbc.Col(html.H3("Imported Profiles (grouped)", className='mb-4'), width=12),),
+        dbc.Row(dbc.Col(html.P("Investigate the most common profiles and associated codecs", className='mb-4'), width=12),),
 
         dbc.Row([
             dbc.Col([
                 dbc.Label("Codec"),
                 dcc.Dropdown(
-                    id='app5-codecs-filter',
+                    id='app6-codecs-filter',
                     options=[{'label': 'Select All', 'value': 'all_values'}] + [{'label': i, 'value': i} for i in codecs],
                     multi=True,
                     searchable=True
@@ -53,11 +53,11 @@ def dashboard():
         ], justify='start'),  # Horizontal:start,center,end,between,around
 
         dbc.Row([
-        dcc.Graph(id='app5-graph-with-slider'),
+        dcc.Graph(id='app6-graph-with-slider'),
         ], align="center"),  # Vertical: start, center, end
         dbc.Row([
         dcc.Slider(
-            id='app5-year-slider',
+            id='app6-year-slider',
             min=df['year'].min(),
             max=df['year'].max(),
             value=df['year'].max(),
@@ -78,9 +78,9 @@ def page():
     return layout
 
 @app.callback(
-    Output('app5-graph-with-slider', 'figure'),
-    Input('app5-year-slider', 'value'),
-    Input('app5-codecs-filter', 'value'))
+    Output('app6-graph-with-slider', 'figure'),
+    Input('app6-year-slider', 'value'),
+    Input('app6-codecs-filter', 'value'))
 def update_figure(selected_year, codecs_filter):
     filtered_df = df[df.year == selected_year]
     print(codecs_filter)
@@ -92,8 +92,7 @@ def update_figure(selected_year, codecs_filter):
     if codecs_filter == ['all_values']:
         codecfiltered_df = filtered_df
 
-
-    fig = px.bar(codecfiltered_df, x="month", y="total", color="pixel_format")
+    fig = px.bar(codecfiltered_df, x="month", y="total", color="profile")
 
     fig.update_layout(transition_duration=500)
 
