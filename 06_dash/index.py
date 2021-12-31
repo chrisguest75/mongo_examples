@@ -3,7 +3,7 @@ from dash import html
 from dash.dependencies import Input, Output
 
 from app import app
-from apps import codecpopularity, bitratesheatmap, durationsstacked, resolutions, pixelformats, profiles, root
+from apps import codecpopularity, bitratesheatmap, durationsstacked, resolutions, pixelformats, profiles, framerates, root
 
 
 app.layout = html.Div([
@@ -26,9 +26,11 @@ def display_page(pathname):
     elif pathname == '/apps/pixelformats':
         return pixelformats.page()  
     elif pathname == '/apps/profiles':
-        return profiles.page()                        
+        return profiles.page()    
+    elif pathname == '/apps/framerates':
+        return framerates.page()                               
     else:
-        return root.page([codecpopularity.card(), durationsstacked.card(), bitratesheatmap.card(), resolutions.card(), pixelformats.card(), profiles.card()])
+        return root.page([codecpopularity.card(), durationsstacked.card(), bitratesheatmap.card(), resolutions.card(), pixelformats.card(), profiles.card(), framerates.card()])
 
 if __name__ == '__main__':
     app.run_server(debug=True)

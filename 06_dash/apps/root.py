@@ -48,6 +48,13 @@ def dashboard(cards):
             xs=6, sm=6, md=6, lg=4, xl=4
             ),
         ], justify='start'),  # Horizontal:start,center,end,between,around
+        dbc.Row([
+            dbc.Col([
+                    cards[6]
+                ],# width={'size':5, 'offset':1, 'order':1},
+            xs=6, sm=6, md=6, lg=4, xl=4
+            ),
+        ], justify='start'),  # Horizontal:start,center,end,between,around
     ], fluid=True)
 
     return layout

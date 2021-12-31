@@ -18,6 +18,7 @@ def create_navbar():
                     dbc.DropdownMenuItem("Durations ", href='/apps/durationsstacked'),
                     dbc.DropdownMenuItem("Pixel Formats", href='/apps/pixelformats'),
                     dbc.DropdownMenuItem("Profiles", href='/apps/profiles'),
+                    dbc.DropdownMenuItem("Framerates", href='/apps/framerates'),
                 ],
             ),
         ],
