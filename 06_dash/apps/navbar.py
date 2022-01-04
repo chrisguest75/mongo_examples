@@ -19,6 +19,7 @@ def create_navbar():
                     dbc.DropdownMenuItem("Pixel Formats", href='/apps/pixelformats'),
                     dbc.DropdownMenuItem("Profiles", href='/apps/profiles'),
                     dbc.DropdownMenuItem("Framerates", href='/apps/framerates'),
+                    dbc.DropdownMenuItem("Status", href='/apps/status'),
                 ],
             ),
         ],

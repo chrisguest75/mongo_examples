@@ -40,3 +40,10 @@ print('getImportsFrameRatesYear()\n==============================\n');
 var out = tool.getImportsFrameRatesYear()
 jsonsaver.saveJsonFile("./data/imports_by_month_framerates.json", out)
 
+print('getImportsFrameRatesYear()\n==============================\n');
+var out = tool.getImportsFrameRatesYear()
+jsonsaver.saveJsonFile("./data/imports_by_month_framerates.json", out)
+
+print('getImportsStatusYear()\n==============================\n');
+var out = tool.getImportsStatusYear()
+jsonsaver.saveJsonFile("./data/imports_by_month_status.json", out)

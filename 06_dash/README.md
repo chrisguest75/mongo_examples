@@ -4,16 +4,10 @@ Demonstrate how to connect `dash` to `mongo`
 
 TODO:
 
-* Convert it all to bootstrap
-* Add a month select split to the heatmap.  
 * data has to be faked.  
 * use tables, filters.
 * number of audio streams in assets?
-* Resolutions? 
-* Frame rates?
-* pix_fmt?
-* profile
-
+* trancoding statuses by codec and time.  
 
 ## Build and Run
 
@@ -45,6 +39,16 @@ All dashboards have a very similar structure.
 
 Code is structured with a untyped interface.  Each module has a card() and page() used for creating markup.  
 card() is used for the index page and the page() is used to render the dashboard itself.  
+
+## Add a new dashboard
+
+1) Copy an existing dashbaord python file to a `new_dashboard.py`
+2) Add import and add a new card to the `index.py` file.  
+3) Add the aggregation query to the `./scripts/mongosh_imports_by_month.js` file in a function.  
+4) Add the route to the `./apps/navbar.py` file  
+5) Add a new card to the grid `./apps/root.py`. The array is passed into the root page from `index.py`
+6) In `new_dashboard.py` we need to ensure the labels for the controls are unique across the whole project.  
+
 
 ### Single Pages
 

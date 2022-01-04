@@ -54,6 +54,12 @@ def dashboard(cards):
                 ],# width={'size':5, 'offset':1, 'order':1},
             xs=6, sm=6, md=6, lg=4, xl=4
             ),
+            dbc.Col([
+                    cards[7]
+                ],# width={'size':5, 'offset':1, 'order':1},
+            xs=6, sm=6, md=6, lg=4, xl=4
+            ),
+
         ], justify='start'),  # Horizontal:start,center,end,between,around
     ], fluid=True)
 

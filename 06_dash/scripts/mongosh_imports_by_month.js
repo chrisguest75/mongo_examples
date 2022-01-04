@@ -497,6 +497,37 @@ var tool = (function () {
             ]).toArray(); 
             //printjson(importsArray);
             return importsArray            
+        },
+        getImportsStatusYear: function () {
+            print('\nImports\n==============================');
+            var importsArray = db.getCollection('prod').aggregate([
+                { $project : { probe: 1, status: 1, created: { $ifNull: [ "$created", new Date("2000-01-01T00:00:00Z") ] } } },
+                { $project : { probe: 1, status: 1, month_num : {$month : { $toDate: "$created"  }}, year : {$year :  { $toDate: "$created"  }},}},
+                { $project : { 
+                    month: {
+                        $let: {
+                            vars: {
+                                monthsInString: [, 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                            },
+                            in: {
+                                $arrayElemAt: ['$$monthsInString', '$month_num']
+                            }
+                        }
+                    }, 
+                    year: 1,
+                    month_num: 1,
+                    probe: 1,
+                    status: 1, 
+                } },    
+                { $unwind: '$probe.streams' },
+                { $group : { _id :  { year: "$year", month: "$month", month_num:"$month_num", status : "$status", codec_long_name : "$probe.streams.codec_long_name"}, total: { $sum : 1 } }},
+                { $group : { _id :  "$_id.year", months: { $push: { month:"$_id.month", month_num:"$_id.month_num", status : "$_id.status", codec_long_name : "$_id.codec_long_name", total : "$total" }}}},
+                {$unwind:"$months"},
+                {$project: {year:"$_id", month:"$months.month", month_num:"$months.month_num", status : "$months.status", codec_long_name : "$months.codec_long_name", total:"$months.total"}}, 
+                  { $sort : { year : 1, month_num: 1}},
+             ]).toArray(); 
+        //printjson(importsArray);
+        return importsArray            
     },
 
     }
