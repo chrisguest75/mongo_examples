@@ -26,10 +26,10 @@ def card():
             [
                 html.H4("Status by codec", className="card-title"),
                 html.P("Investigate correlations in codec to success",
-                    className="card-text",
+                    className="card-text mb-4 h-100",
                 ),
-                dcc.Link(dbc.Button("Show", color="primary"), href='/apps/status'),
-            ]
+                dcc.Link(dbc.Button("Show", color="primary", outline=True, class_name="w-100 mt-auto align-self-end"), href='/apps/status'),
+            ], class_name="d-flex flex-column",
         ),
     ],
     style={"width": "18rem"},)

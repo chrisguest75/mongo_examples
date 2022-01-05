@@ -23,10 +23,10 @@ def card():
             [
                 html.H4("Profiles", className="card-title"),
                 html.P("Investigate the most common profiles and associated codecs",
-                    className="card-text",
+                    className="card-text mb-4 h-100",
                 ),
-                dcc.Link(dbc.Button("Show", color="primary"), href='/apps/profiles'),
-            ]
+                dcc.Link(dbc.Button("Show", color="primary", outline=True, class_name="w-100 mt-auto align-self-start"), href='/apps/profiles'),
+            ], class_name="d-flex flex-column",
         ),
     ],
     style={"width": "18rem"},)

@@ -23,10 +23,10 @@ def card():
             [
                 html.H4("Pixel Formats", className="card-title"),
                 html.P("Shows what our most pixel formats are over time",
-                    className="card-text",
+                    className="card-text mb-4 h-100",
                 ),
-                dcc.Link(dbc.Button("Show", color="primary"), href='/apps/pixelformats'),
-            ]
+                dcc.Link(dbc.Button("Show", color="primary", outline=True, class_name="w-100 mt-auto align-self-start"), href='/apps/pixelformats'),
+            ], class_name="d-flex flex-column",
         ),
     ],
     style={"width": "18rem"},)

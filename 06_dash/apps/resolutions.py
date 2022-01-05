@@ -36,10 +36,10 @@ def card():
             [
                 html.H4("Resolutions", className="card-title"),
                 html.P("What are the most common resolutions?",
-                    className="card-text",
+                    className="card-text mb-4 h-100",
                 ),
-                dcc.Link(dbc.Button("Show", color="primary"), href='/apps/resolutions'),
-            ]
+                dcc.Link(dbc.Button("Show", color="primary", outline=True, class_name="w-100 mt-auto align-self-start"), href='/apps/resolutions'),
+            ], class_name="d-flex flex-column",
         ),
     ],
     style={"width": "18rem"},)

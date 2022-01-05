@@ -36,10 +36,10 @@ def card():
             [
                 html.H4("Audio Bitrates", className="card-title"),
                 html.P("Use the heatmap to determine how often we are getting sample and bit rates outside of 16khz band.",
-                    className="card-text",
+                    className="card-text mb-4 h-100",
                 ),
-                dcc.Link(dbc.Button("Show", color="primary"), href='/apps/bitratesheatmap'),
-            ]
+                dcc.Link(dbc.Button("Show", color="primary", outline=True, class_name="w-100 mt-auto align-self-start"), href='/apps/bitratesheatmap'),
+            ], class_name="d-flex flex-column",
         ),
     ],
     style={"width": "18rem"},)

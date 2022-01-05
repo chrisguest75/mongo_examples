@@ -25,10 +25,10 @@ def card():
             [
                 html.H4("Codecs", className="card-title"),
                 html.P("Select Codec type and names to compare popularity over time.  Use to determine when the last time a codec was used.",
-                    className="card-text",
+                    className="card-text mb-4 h-100",
                 ),
-                dcc.Link(dbc.Button("Show", color="primary"), href='/apps/codecpopularity'),
-            ]
+                dcc.Link(dbc.Button("Show", color="primary", outline=True, class_name="w-100 mt-auto align-self-start"), href='/apps/codecpopularity'),
+            ], class_name="d-flex flex-column",
         ),
     ],
     style={"width": "18rem"},)

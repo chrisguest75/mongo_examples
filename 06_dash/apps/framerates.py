@@ -23,10 +23,10 @@ def card():
             [
                 html.H4("Framerates", className="card-title"),
                 html.P("Investigate the most common framerates and associated codecs",
-                    className="card-text",
+                    className="card-text mb-4 h-100",
                 ),
-                dcc.Link(dbc.Button("Show", color="primary"), href='/apps/framerates'),
-            ]
+                dcc.Link(dbc.Button("Show", color="primary", outline=True, class_name="w-100 mt-auto align-self-start"), href='/apps/framerates'),
+            ], class_name="d-flex flex-column",
         ),
     ],
     style={"width": "18rem"},)

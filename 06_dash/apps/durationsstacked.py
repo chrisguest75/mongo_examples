@@ -20,10 +20,10 @@ def card():
             [
                 html.H4("Durations", className="card-title"),
                 html.P("Shows what our most popular durations are over time",
-                    className="card-text",
+                    className="card-text mb-4 h-100",
                 ),
-                dcc.Link(dbc.Button("Show", color="primary"), href='/apps/durationsstacked'),
-            ]
+                dcc.Link(dbc.Button("Show", color="primary", outline=True, class_name="w-100 mt-auto align-self-start"), href='/apps/durationsstacked'),
+            ], class_name="d-flex flex-column",
         ),
     ],
     style={"width": "18rem"},)
