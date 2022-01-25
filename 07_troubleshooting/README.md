@@ -6,6 +6,18 @@ TODO:
 
 * logs
 * journal
+Symptoms 
+	• Very slow queries
+	• Response time degradation
+	• Application pauses
+	• High disk IO
+	• Incorrect filesystem configuration
+	• Incorrect MongoDB configuration
+		○ Write concerns
+	• Application driver misconfiguration
+	• Connectivity issues
+	• Cluster configuration issues
+Replica sets on sharded clusters
 
 ## Connect to DB
 
@@ -98,7 +110,31 @@ Db.oplog.find().pretty()
 
 db.MyLogs.ensureIndex({'timecode' : 1})
 
+mongostat
+mongotop
+mongoreplay - monitor record and replay network traffic
+mongosh
+database profiler - 
+compass - 
+mtools - martiin rueckstiess - tools to parse and visualise the log files.  
 
+Server logs:
+	• Queries are taking a long time to answer - first place to look.  
+	This is the first thing support asks for.  
+	
+Time, Sev, Component, Context, Message
+
+ACCESS
+COMMND
+CONTROL
+GEO
+INDEX
+QUERY
+REPL
+SHARDING 
+STORAGE
+JOURNAL
+WRITE
 
 
 
