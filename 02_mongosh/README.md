@@ -6,29 +6,28 @@ Startup a new mongodb with a userdb.
 
 TODO:  
 
-* add data to collections  
+* the date range queries are failing because of them being strings. 
 * query and export data.  
-* processing mongosh scripts from shell
 
 ## Startup
 
 ```sh
 # list profiles
-docker compose config --profiles               
+docker compose config --profiles
 
 # start mongo (profiles not working at the mo')
 # It is working in compose: Docker Compose (Docker Inc., v2.0.0-beta.6) - Docker Desktop 3.5.2
 docker compose --profile backend up -d 
 
 # quick test
-docker logs $(docker ps --filter name=02_mongosh-mongodb-1 -q)
+docker compose logs mongodb          
 ```
 
 ## Rebuild backend and run
 
 ```sh
 # if changes are made to backend rerun
-docker-compose --profile backend up -d --build
+docker compose --profile backend up -d --build
 ```
 
 ## Connect to mongosh as admin
@@ -78,15 +77,45 @@ show collections
 
 ## Load db
 
-```js
+```sh
+# import the data
+mongoimport -c files --file ./data/file.json "mongodb://root:rootpassword@0.0.0.0:27017/db1" --authenticationDatabase admin -vvv 
 
+#--fields="size.int32(),id.string(),file.string(),deleted.boolean(),email.string(),name.string(),created.date(2021-11-05T06:32:52.474Z),updateed.date(2021-11-05T06:32:52.474Z)"
+```
+
+## Query the data in mongosh
+
+```sh
+mongosh "mongodb://root:rootpassword@0.0.0.0:27017/admin"
+
+# switch into db
+use db1 
+
+# find documents
+db.files.find()
+
+db.files.explain().find()
+
+# drop collection
+db.files.drop()
+```
+
+## Query the data using scripts
+
+```sh
+# list the deleted files
+mongosh --quiet "mongodb://root:rootpassword@0.0.0.0:27017" ./scripts/find_deleted_files.js | jq .
+
+# daterange (not working because of the date field type)
+mongosh --quiet "mongodb://root:rootpassword@0.0.0.0:27017" ./scripts/find_daterange_files.js | jq .
 ```
 
 ## Cleanup
 
 ```sh
 # bring it down and delete the volume
-docker-compose --profile backend down --volumes
+docker compose --profile backend down --volumes
 ```
 
 ## Resources
