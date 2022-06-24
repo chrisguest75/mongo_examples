@@ -2,11 +2,12 @@
 
 Demonstrate management commands through `mongosh`  
 
-Startup a new mongodb with a userdb.  
+Startup a new mongodb with a userdb and also demonstrate importing.  
+
+Ref: 23_faking_json_data [here](https://github.com/chrisguest75/typescript_examples/tree/master/23_faking_json_data)  
 
 TODO:  
 
-* the date range queries are failing because of them being strings. 
 * query and export data.  
 
 ## Startup
@@ -97,6 +98,13 @@ db.files.find()
 
 db.files.explain().find()
 
+# show type for created field
+db.files.aggregate( 
+    [ 
+        { "$project": { "fieldType": {  "$type": "$created"  } } } 
+    ]
+)
+
 # drop collection
 db.files.drop()
 ```
@@ -120,4 +128,6 @@ docker compose --profile backend down --volumes
 
 ## Resources
 
-* Database Commands [here](https://docs.mongodb.com/manual/reference/command/)
+* Database Commands [here](https://docs.mongodb.com/manual/reference/command/)  
+* mongodb-extended-json [here](https://www.mongodb.com/docs/manual/reference/mongodb-extended-json/)  
+* bson npm package [here](https://www.npmjs.com/package/bson)  
