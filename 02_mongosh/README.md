@@ -2,33 +2,33 @@
 
 Demonstrate management commands through `mongosh`  
 
-Startup a new mongodb with a userdb.  
+Startup a new mongodb with a userdb and also demonstrate importing.  
+
+Ref: 23_faking_json_data [here](https://github.com/chrisguest75/typescript_examples/tree/master/23_faking_json_data)  
 
 TODO:  
 
-* add data to collections  
 * query and export data.  
-* processing mongosh scripts from shell
 
 ## Startup
 
 ```sh
 # list profiles
-docker compose config --profiles               
+docker compose config --profiles
 
 # start mongo (profiles not working at the mo')
 # It is working in compose: Docker Compose (Docker Inc., v2.0.0-beta.6) - Docker Desktop 3.5.2
 docker compose --profile backend up -d 
 
 # quick test
-docker logs $(docker ps --filter name=02_mongosh-mongodb-1 -q)
+docker compose logs mongodb          
 ```
 
 ## Rebuild backend and run
 
 ```sh
 # if changes are made to backend rerun
-docker-compose --profile backend up -d --build
+docker compose --profile backend up -d --build
 ```
 
 ## Connect to mongosh as admin
@@ -78,17 +78,69 @@ show collections
 
 ## Load db
 
-```js
+```sh
+# import the data
+mongoimport -c files --file ./data/file.json "mongodb://root:rootpassword@0.0.0.0:27017/db1" --authenticationDatabase admin -vvv 
 
+#--fields="size.int32(),id.string(),file.string(),deleted.boolean(),email.string(),name.string(),created.date(2021-11-05T06:32:52.474Z),updateed.date(2021-11-05T06:32:52.474Z)"
+```
+
+## Query the data in mongosh
+
+```sh
+mongosh "mongodb://root:rootpassword@0.0.0.0:27017/admin"
+
+# switch into db
+use db1 
+
+# find documents
+db.files.find()
+
+db.files.explain().find()
+
+# show type for created field
+db.files.aggregate( 
+    [ 
+        { "$project": { "fieldType": {  "$type": "$created"  } } } 
+    ]
+)
+
+# drop collection
+db.files.drop()
+```
+
+## Query the data using scripts
+
+```sh
+# list the deleted files
+mongosh --quiet "mongodb://root:rootpassword@0.0.0.0:27017" ./scripts/find_deleted_files.js | jq .
+
+# daterange (not working because of the date field type)
+mongosh --quiet "mongodb://root:rootpassword@0.0.0.0:27017" ./scripts/find_daterange_files.js | jq .
+```
+
+## Docker simple test
+
+```sh
+# build image
+docker build -t mongosh . 
+
+# docker run
+docker run -it --network=02_mongosh_service_bridge -v $(pwd)/../scripts:/scripts mongosh "mongodb://root:rootpassword@mongodb:27017" /scripts/find_daterange_files.js
+
+# or 
+docker compose logs mongosh
 ```
 
 ## Cleanup
 
 ```sh
 # bring it down and delete the volume
-docker-compose --profile backend down --volumes
+docker compose --profile backend down --volumes
 ```
 
 ## Resources
 
-* Database Commands [here](https://docs.mongodb.com/manual/reference/command/)
+* Database Commands [here](https://docs.mongodb.com/manual/reference/command/)  
+* mongodb-extended-json [here](https://www.mongodb.com/docs/manual/reference/mongodb-extended-json/)  
+* bson npm package [here](https://www.npmjs.com/package/bson)  
