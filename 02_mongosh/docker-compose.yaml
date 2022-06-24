@@ -13,7 +13,16 @@ services:
         networks:
             - service_bridge    
         profiles: [backend]            
-    
+
+    mongosh:
+        build: ./mongosh
+        command: "'mongodb://root:rootpassword@mongodb:27017' /scripts/find_daterange_files.js"
+        volumes:
+            - ./scripts:/scripts
+        networks:
+            - service_bridge    
+        profiles: [backend]    
+
 volumes:
     02_mongosh_data_container:
 

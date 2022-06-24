@@ -119,6 +119,19 @@ mongosh --quiet "mongodb://root:rootpassword@0.0.0.0:27017" ./scripts/find_delet
 mongosh --quiet "mongodb://root:rootpassword@0.0.0.0:27017" ./scripts/find_daterange_files.js | jq .
 ```
 
+## Docker simple test
+
+```sh
+# build image
+docker build -t mongosh . 
+
+# docker run
+docker run -it --network=02_mongosh_service_bridge -v $(pwd)/../scripts:/scripts mongosh "mongodb://root:rootpassword@mongodb:27017" /scripts/find_daterange_files.js
+
+# or 
+docker compose logs mongosh
+```
+
 ## Cleanup
 
 ```sh
