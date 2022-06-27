@@ -23,25 +23,30 @@ Read Preference Modes
 https://github.com/rueckstiess/mtools
 Slave delay
 
-## Example 1 - MERN
+## 01 - MERN
 
 Demonstrate an example of using MERN stack  
 Steps [README.md](./01_mern/README.md)  
 
-## Example 2 - Mongosh
+## 02 - Mongosh
 
 Demonstrate management commands through `mongosh`  
 Steps [README.md](./02_mongosh/README.md)  
 
-## Example 3 - ffprobe
+## 03 - ffprobe
 
 Create a small application that can be used to query ffprobe data  
 Steps [README.md](./03_ffprobe/README.md)  
 
-## Example 6 - Visualising with dash
+## 06 - Visualising with dash
 
 Demonstrate how to connect `dash` to `mongo`  
 Steps [README.md](./06_dash/README.md)  
+
+## 07 - Troubleshooting
+
+Walkthrough some examples of how to troubleshoot mongodb databases and collections.  
+Steps [README.md](./07_troubleshooting/README.md)  
 
 ## Resources
 
