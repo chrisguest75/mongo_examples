@@ -128,7 +128,7 @@ docker build -t mongosh .
 # docker run
 docker run -it --network=02_mongosh_service_bridge -v $(pwd)/../scripts:/scripts mongosh "mongodb://root:rootpassword@mongodb:27017" /scripts/find_daterange_files.js
 
-# or 
+# or show logs 
 docker compose logs mongosh
 ```
 
