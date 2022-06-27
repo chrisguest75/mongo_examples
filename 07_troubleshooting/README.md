@@ -1,23 +1,31 @@
 # README
 
-Walkthrough some examples of how to troubleshoot mongodb databases and collections.  
+Walkthrough some examples of how to troubleshoot `mongodb` databases and collections.  
 
 TODO:
 
 * logs
 * journal
+  * db.oplog.find().pretty()
 * Symptoms
-    * Very slow queries
-	  * Response time degradation
-	  * Application pauses
-	  * High disk IO
-	  * Incorrect filesystem configuration
-	  * Incorrect MongoDB configuration
-		  * Write concerns
-	  * Application driver misconfiguration
-	  * Connectivity issues
-	  * Cluster configuration issues
-    * Replica sets on sharded clusters
+  * Very slow queries
+  * Response time degradation
+  * Application pauses
+  * High disk IO
+  * Incorrect filesystem configuration
+  * Incorrect MongoDB configuration
+    * Write concerns
+  * Application driver misconfiguration
+  * Connectivity issues
+  * Cluster configuration issues
+  * Replica sets on sharded clusters
+* database profiler, compass - 
+* mtools - martiin rueckstiess - tools to parse and visualise the log files.  
+
+## Setup
+
+* 02_mongosh [here](../02_mongosh/README.md)
+* 07_ffprobe [here](../07_ffprobe/README.md)
 
 ## List of tools
 
@@ -60,13 +68,26 @@ config.system.sessions      0ms     0ms      0ms
 
 ```sh
 mongosh "mongodb://root:rootpassword@0.0.0.0:27017/"
-docker exec -it $(docker ps --filter name=03_ffprobe-mongodb-1 -q) /bin/bash
 
 # logs
-docker logs $(docker ps --filter name=03_ffprobe-mongodb-1 -q) 
+docker compose logs mongodb
+
+# enter the container
+docker compose exec -it mongodb /bin/bash
+
+cat /etc/mongod.conf.orig 
+ls /data/db/journal/
 ```
 
-## Get versions
+### Logs
+
+Server logs:
+
+* Queries are taking a long time to answer - first place to look. This is the first thing support asks for.  
+* Time, Sev, Component, Context, Message
+  * ACCESS, COMMND, CONTROL, GEO, INDEX, QUERY, REPL, SHARDING, STORAGE, JOURNAL, WRITE
+
+### Get versions
 
 ```js
 // returns the server version
@@ -75,7 +96,7 @@ db.version()
 db.serverBuildInfo()
 ```
 
-## DB statistics
+### DB statistics
 
 ```js
 use <db>
@@ -106,7 +127,7 @@ db.[collection name].stats()
 db.printCollectionStats()
 ```
 
-## Profiling
+### Profiling
 
 ```js
 // get the current profiling status
@@ -118,12 +139,17 @@ db.setProfilingLevel(2,{slowms: 200})
 db.system.profile.find({millis: {$gt: 1000}}).pretty()
 ```
 
-## Document Sizes
+### Document Sizes
 
 ```js
-Object.bsonsize(db.getCollection('prod').findOne({_id:"111111111"}))
+use db1
 
-db.getCollection('prod').aggregate([
+// NOTE: This doesn't seem to work in mongosh
+db.getCollection('files').find()
+Object.bsonSize(db.getCollection('files').findOne({_id:"62ba06184668a159085123ef"}))
+
+// aggregation framework bsonsize
+db.getCollection('files').aggregate([
   {
     "$project": {
       "_id_": 1,
@@ -133,7 +159,7 @@ db.getCollection('prod').aggregate([
 ])
 ```
 
-## Field Types
+### Field Types
 
 ```sh
 # show type for created field
@@ -144,9 +170,10 @@ db.files.aggregate(
 )
 ```
 
-## Explain
+### Explain
 
 ```sh
+# explain a collection
 db.files.explain().find()
 ```
 
@@ -186,10 +213,38 @@ db.files.explain().find()
 }
 ```
 
-## Validate
+### Indexing
+
+Using indices and explain.  
 
 ```sh
- db.files.validate()
+db.files.explain().find({
+  created: {
+    $gte: ISODate("2022-03-01T00:00:00.000Z"),
+    $lt: ISODate("2022-03-10T00:00:00.000Z")
+  }}, {file:1})
+
+# create index
+db.db1.createIndex({'created' : 1, 'file' : 1})
+db.db1.getIndexes()
+
+# NOTE: This doesn't seem to use the index
+db.files.explain().find({
+  created: {
+    $gte: ISODate("2022-03-01T00:00:00.000Z"),
+    $lt: ISODate("2022-03-10T00:00:00.000Z")
+  }}, {file:1})
+
+db.db1.dropIndex('created_1')
+db.db1.dropIndex('created_1_file_1')
+```
+
+### Validate
+
+```sh
+# validate a collection
+db.files.validate()
+
 {
   ns: 'db1.files',
   nInvalidDocuments: 0,
@@ -211,35 +266,8 @@ db.files.explain().find()
 ## Resources  
 
 * How to Use the MongoDB Profiler and explain() to Find Slow Queries [here](https://studio3t.com/knowledge-base/articles/mongodb-query-performance/)
-
-https://docs.mongodb.com/manual/reference/operator/aggregation/bsonSize/
-
+* $bsonSize (aggregation) [here](https://docs.mongodb.com/manual/reference/operator/aggregation/bsonSize/)
+* How to Calculate MongoDB Document Size in Node.js [here](https://betterprogramming.pub/how-to-calculate-mongodb-document-size-in-node-js-f463b8457f27)
+* mongosh-snippets [here](https://github.com/mongodb-labs/mongosh-snippets)
+* ObjectID [here](http://docs.mongodb.org/manual/reference/object-id/)
 http://docs.mongodb.org/meta-driver/latest/legacy/mongodb-wire-protocol/
-
-mongoreplay - monitor record and replay network traffic
-database profiler - 
-compass - 
-mtools - martiin rueckstiess - tools to parse and visualise the log files.  
-
-ObjectID - http://docs.mongodb.org/manual/reference/object-id/
-
-db.oplog.find().pretty()
-db.MyLogs.ensureIndex({'timecode' : 1})
-
-Server logs:
-	• Queries are taking a long time to answer - first place to look.  
-	This is the first thing support asks for.  
-	
-Time, Sev, Component, Context, Message
-
-ACCESS
-COMMND
-CONTROL
-GEO
-INDEX
-QUERY
-REPL
-SHARDING 
-STORAGE
-JOURNAL
-WRITE
