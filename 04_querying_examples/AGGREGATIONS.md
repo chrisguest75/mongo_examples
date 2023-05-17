@@ -99,3 +99,49 @@ Have to use ISODate for ranges.
   },
 ]
 ```
+
+## Aggregate by day
+
+```sh
+[
+  {
+    $match: {
+      created: {
+        $gt: ISODate("2023-05-1"),
+        $lt: ISODate("2023-05-19"),
+      },
+    },
+  },
+  {
+    $project: {
+      day: {
+        $dayOfMonth: { $toDate: "$created" },
+      },
+      month_num: {
+        $month: { $toDate: "$created" },
+      },
+      year: { $year: { $toDate: "$created" } },
+    },
+  },
+  {
+    $group: {
+      _id: {
+        year: "$year",
+        month: "$month",
+        month_num: "$month_num",
+        day: "$day",
+      },
+      total: { $sum: 1 },
+    },
+  },
+  {
+    $project: {
+      year: "$_id.year",
+      month: "$_id.month_num",
+      day: "$_id.day",
+      total: "$total",
+    },
+  },
+  { $sort: { year: 1, month_num: 1, day: 1 } },
+]
+```
