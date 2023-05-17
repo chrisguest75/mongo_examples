@@ -11,7 +11,7 @@ Read Preference Modes
 5 modes
  - primary only - default
  - primaryPreferred (always read from primary, unless during elections)
- - secondary 
+ - secondary
  - secondaryPreferred
 
  - Nearest
@@ -22,6 +22,11 @@ Read Preference Modes
 * go through the slides
 https://github.com/rueckstiess/mtools
 Slave delay
+
+## 00 - Cheatsheet
+
+A cheatsheet for Mongo.  
+Steps [README.md](./00_cheatsheet/README.md)  
 
 ## 01 - MERN
 
@@ -37,6 +42,11 @@ Steps [README.md](./02_mongosh/README.md)
 
 Create a small application that can be used to query ffprobe data  
 Steps [README.md](./03_ffprobe/README.md)  
+
+## 04 - Querying Examples
+
+Show some querying examples.  
+Steps [README.md](./04_querying_examples/README.md)  
 
 ## 06 - Visualising with dash
 
