@@ -1,5 +1,9 @@
 # AGGREGATIONS
 
+TODO:
+
+* How do I join with a date dimension to zero out days with no data?  https://www.mongodb.com/blog/post/introducing-gap-filling-time-series-data-mongodb-5-3
+
 ## Unique values
 
 Unique values in a field.
@@ -22,7 +26,7 @@ Unique values in a field.
 
 ## Count documents in date range
 
-Have to use ISODate for ranges.  
+Match documents then count. Have to use [ISODate](https://en.wikipedia.org/wiki/ISO_8601) for ranges.  
 
 ```json
 [
