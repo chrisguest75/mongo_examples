@@ -6,6 +6,10 @@ TODO:
 
 * Show a mongosh aggregation framework script 02_mongosh/README.md
 
+NOTES:
+
+* You cannot perform aggregation framework queries with mongoexport.  
+
 ## Tools
 
 ```sh
@@ -19,10 +23,6 @@ brew info mongosh
 ## Exporting
 
 It's best to use Read-Only credentials and a secondary when exporting data from mongo.
-
-NOTES:
-
-* You cannot perform aggregation framework queries with mongoexport.  
 
 ```sh
 # try with limit to test connection

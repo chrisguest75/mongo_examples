@@ -37,6 +37,11 @@ Steps [README.md](./06_dash/README.md)
 Walkthrough some examples of how to troubleshoot `mongodb` databases and collections.  
 Steps [README.md](./07_troubleshooting/README.md)  
 
+## 09 - Exporting
+
+Demonstrate exporting data from mongo.  
+Steps [README.md](./09_exporting/README.md)  
+
 ## Resources
 
 * Some other querying examples in docker_examples [here](https://github.com/chrisguest75/docker_examples/tree/master/45_docker_scan_process_mongo)
