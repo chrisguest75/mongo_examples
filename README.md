@@ -2,6 +2,8 @@
 
 A repository for showing examples of working with Mongo
 
+Python example REF:[chrisguest75/python_examples/14_mongo](https://github.com/chrisguest75/python_examples/tree/main/14_mongo)  
+
 ## 00 - Cheatsheet
 
 A cheatsheet for Mongo.  
