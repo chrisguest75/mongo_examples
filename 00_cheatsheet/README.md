@@ -4,6 +4,10 @@ A cheatsheet for Mongo.
 
 * Querying Examples [here](../04_querying_examples/README.md)  
 
+TODO:
+
+* Why is mongo export broken on ubuntu tap install?
+
 ## VSCode
 
 ```sh
@@ -11,6 +15,8 @@ code --install-extension mongodb.mongodb-vscode
 ```
 
 ## Tools
+
+NOTE: This also work on linuxbrew for `mongosh`. 
 
 ```sh
 brew tap mongodb/brew

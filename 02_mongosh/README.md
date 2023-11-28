@@ -6,6 +6,8 @@ Startup a new mongodb with a userdb and also demonstrate importing.
 
 Ref: 23_faking_json_data [here](https://github.com/chrisguest75/typescript_examples/tree/master/23_faking_json_data)  
 
+Ref: Installing mongosh here [chrisguest75/mongo_examples/00_cheatsheet/README.md#tools](https://github.com/chrisguest75/mongo_examples/blob/main/00_cheatsheet/README.md#tools)  
+
 TODO:  
 
 * query and export data.  
