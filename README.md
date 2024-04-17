@@ -1,6 +1,23 @@
 # MongoDB Examples and Demos
 
-A repository for showing examples of working with Mongo
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org) [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)  
+
+A repository for showing examples of working with Mongo  
+
+## Conventional Commits
+
+NOTE: This repo has switched to [conventional commits](https://www.conventionalcommits.org/en/v1.0.0). It requires `pre-commit` and `commitizen` to help with controlling this.  
+
+```sh
+# install pre-commmit (prerequisite for commitizen)
+brew install pre-commit
+brew install commitizen
+# conventional commits extension
+code --install-extension vivaxy.vscode-conventional-commits
+
+# install hooks
+pre-commit install --install-hooks --overwrite --config .pre-commit-config.yaml
+```
 
 Python example REF:[chrisguest75/python_examples/14_mongo](https://github.com/chrisguest75/python_examples/tree/main/14_mongo)  
 

@@ -4,6 +4,16 @@ TODO:
 
 * How do I join with a date dimension to zero out days with no data?  https://www.mongodb.com/blog/post/introducing-gap-filling-time-series-data-mongodb-5-3
 
+## Contents
+
+- [AGGREGATIONS](#aggregations)
+  - [Contents](#contents)
+  - [Unique values](#unique-values)
+  - [Count documents in date range](#count-documents-in-date-range)
+  - [Where a field exists and is set](#where-a-field-exists-and-is-set)
+  - [Difference between created and updated](#difference-between-created-and-updated)
+  - [Aggregate by day](#aggregate-by-day)
+
 ## Unique values
 
 Unique values in a field.
