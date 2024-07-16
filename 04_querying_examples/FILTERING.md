@@ -1,4 +1,4 @@
-# Filtering Examples
+# FILTERING
 
 Working with query filtering.  
 

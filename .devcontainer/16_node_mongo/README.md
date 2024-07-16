@@ -13,5 +13,9 @@ Use the Remote Containers extension and select "Reopen in Container" or...
 mongosh mongodb://root:password@0.0.0.0:27017/admin
 ```
 
+## Troubleshooting
+
+If you have trouble connecting try cleaning out the docker images and volumes and rebuilding without cache.  
+
 ## Resources
 

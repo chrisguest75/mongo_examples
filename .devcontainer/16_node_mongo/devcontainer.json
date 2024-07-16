@@ -4,7 +4,7 @@
 	"name": "16_node_mongo",
 	"dockerComposeFile": "docker-compose.yaml",
 	"service": "app",
-	//"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"workspaceFolder": "/workspaces",
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
