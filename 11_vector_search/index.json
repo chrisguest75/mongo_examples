@@ -1,0 +1,15 @@
+{
+  "fields": [
+    {
+      "type": "vector",
+      "path": "plot_embedding",
+      "numDimensions": 1536,
+      "similarity": "cosine",
+      "quantization": "none"
+    },
+    {
+      "type": "filter",
+      "path": "year"
+    }
+  ]
+}
